@@ -4,7 +4,7 @@ Moduł: `server/favorites.mjs`. Montowanie przez `registerFavorites(app, {db,get
 
 ## Kontrakt
 
-Konto jest wymagane. Cookie sesji i Bearer używają tej samej listy. Zapisane adresy są prywatne dla konta; odpowiedzi nie zawierają identyfikatora właściciela i mają `Cache-Control: no-store`.
+Konto jest wymagane. Web i Android używają tej samej listy po weryfikacji sesji Clerk. Zapisane adresy są prywatne dla konta; odpowiedzi nie zawierają identyfikatora właściciela i mają `Cache-Control: no-store`.
 
 - `GET /api/favorites` → 200 `{favorites:[Favorite]}`, kolejność od najstarszego zapisu.
 - `POST /api/favorites` z `{label,point,expectedUserId?}` → 201 `Favorite`. Dokładny duplikat zwraca 200 i dotychczasowy rekord bez zmiany danych lub daty.
@@ -41,12 +41,12 @@ Limit: 30 zapisów na konto, 409 `FAVORITE_LIMIT` przy próbie dodania nowego po
 
 Lista gościa pozostaje odpowiedzialnością klienta, osobno od konta. Logowanie nie importuje automatycznie lokalnych zapisów. Po zmianie konta klient powinien odrzucić poprzednie odpowiedzi, wyczyścić widok i pobrać nową listę.
 
-## Weryfikacja
+## Testowanie
 
 ```powershell
 node --test tests/backend/favorites.test.mjs
 ```
 
-Testy korzystają z prawdziwej obsługi kont i sesji, osobnych portów przydzielonych przez system oraz SQLite w pamięci lub pliku tymczasowym. Sprawdzają prywatność kont, fałszowanie właściciela, cookie/Bearer, usuwanie, duplikaty bez nadpisania, aliasy i zmienione punkty, limit i zwolnienie miejsca, walidację, odrzucenie pól dodatkowych, zmianę konta oraz trwałość po ponownym otwarciu bazy. Nie zapisują testowych adresów w działającej bazie.
+Testy używają osobnego adaptera tożsamości, portów przydzielonych przez system i SQLite w pamięci lub pliku tymczasowym. Nie potwierdzają rzeczywistego logowania OAuth. Sprawdzają prywatność kont, fałszowanie właściciela, cookie/Bearer, usuwanie, duplikaty bez nadpisania, aliasy i zmienione punkty, limit i zwolnienie miejsca, walidację, odrzucenie pól dodatkowych, zmianę konta oraz trwałość po ponownym otwarciu bazy. Nie zapisują testowych adresów w działającej bazie.
 
 Publiczne zgłoszenia mają dodatkowo `canResolve`: true tylko dla aktywnego zgłoszenia anonimowego lub własnego. Klient powinien na tej podstawie pokazywać przycisk rozwiązania i odświeżać zgłoszenia po zmianie konta. Serwer nadal sam sprawdza uprawnienia.

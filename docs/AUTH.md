@@ -4,7 +4,7 @@ Web i Android używają tej samej aplikacji Clerk. Web otwiera gotowe komponenty
 
 ## Konfiguracja
 
-Instancja developerska skonfigurowana 3 października 2026: **Miasto w zasięgu**, osobna demonstracyjna aplikacja i instancja Clerk. Włączone są Google OAuth i alternatywne logowanie kodem e-mail; hasła są wyłączone. Native API jest aktywne, a Android `pl.przejscie.app` jest zarejestrowany. Klucze są w lokalnym `psst`, poza repozytorium. To instancja developerska, nie konfiguracja produkcyjna.
+Konfiguracja demonstracyjna używa instancji developerskiej Clerk z Google OAuth i alternatywnym kodem e-mail. Hasła są wyłączone. Własne wdrożenie wymaga kluczy i ustawień własnej instancji oraz weryfikacji logowania web i Android. Klucze przechowuj poza repozytorium.
 
 1. Dla nowej instalacji utwórz aplikację Clerk dla Miasta w zasięgu. W Social connections włącz Google dla rejestracji i logowania, wyłącz hasła i pozostaw kod e-mail jako alternatywę. Ustawienia są w `config/clerk-development.json`; można je zastosować przez `clerk config patch --app <applicationId> --instance dev --file config/clerk-development.json`. W produkcji skonfiguruj własny klient OAuth i adres przekierowania pokazany przez Clerk.
 2. W `psst` zapisz dwa klucze tej samej instancji. Poniższe komendy pytają o wartość interaktywnie, bez umieszczania jej w historii poleceń:
@@ -25,7 +25,7 @@ Instancja developerska skonfigurowana 3 października 2026: **Miasto w zasięgu*
 4. Domyślne dozwolone strony to `http://localhost:5173`, `http://127.0.0.1:5173`, `http://localhost:4173` i `http://127.0.0.1:4173`. Przy wdrożeniu ustaw `CLERK_AUTHORIZED_PARTIES` na rozdzieloną przecinkami listę dokładnych originów HTTPS. Bez ścieżek, ukośnika na końcu i wildcardów. Frontend powinien kierować `/api` do tego samego serwera przez reverse proxy. `CLERK_JWT_KEY` jest opcjonalnym publicznym kluczem PEM do weryfikacji bez pobierania JWKS.
 5. Dla Androida w Clerk włącz Native API i dodaj aplikację: namespace Digital Asset Links `android_app`, package name `pl.przejscie.app` (zapis w `config/clerk-android.json`). Namespace Kotlina `pl.przejscie.phone` jest inną wartością i nie trafia do tego pola Clerk. SDK rejestruje callback `clerk://pl.przejscie.app.callback`. Ustaw backend dostępny z telefonu przez istniejące `-PbackendUrl=...`; w publicznym wdrożeniu użyj HTTPS. Nie trzeba osadzać klucza w APK. Ta integracja używa logowania w przeglądarce, bez passkeys i bez odcisków certyfikatu aplikacji.
 
-Samo `configured: true` oznacza obecność kluczy, a nie poprawne wykonanie OAuth. W konfiguracji odczytanej z Clerk potwierdzono włączone Google, wyłączone hasła i aktywne Native API. Użytkownik potwierdził skuteczne logowanie przez Google w web, a odczyt SQLite potwierdził synchronizację konta przez backend. Logowanie na telefonie wymaga oddzielnej weryfikacji.
+Samo `configured: true` oznacza obecność kluczy, a nie wykonanie OAuth. Pełne logowanie, odnowienie sesji i wylogowanie należy sprawdzić oddzielnie dla webu i telefonu.
 
 ## Sesje i dane
 
@@ -48,9 +48,7 @@ Samo `configured: true` oznacza obecność kluczy, a nie poprawne wykonanie OAut
 
 `node scripts/verify-clerk-ui.mjs [adres-aplikacji]` to jawny test rzeczywistej instancji: mobilne formularze, brak pola hasła, AXE i przekierowanie do Google. Nie wpisuje danych logowania i nie tworzy kont. Domyślnie używa `http://127.0.0.1:5173`; zrzuty zapisuje w `artifacts/auth-clerk-*.png`.
 
-Wykonane 3 października: 9/9 testów backendu Clerk, 5/5 testów interfejsu z izolowanym API, test synchronizacji profilu i wylogowania w dwóch przeglądarkach oraz test prawdziwych formularzy Clerk na szerokości 390 px. Formularz logowania ma 0 naruszeń AXE; jest dostępne przekierowanie do Google. Pełne logowanie web potwierdził użytkownik. Kompilacja web oraz Android `assembleDebug` i testy jednostkowe zakończyły się powodzeniem. Nie sprawdzono jeszcze czytnika ekranu ani rzeczywistego OAuth na telefonie. Osobny istniejący test adresów w `accounts.test.mjs` oczekuje 3 wyników „Rynek Główny 1”, a obecny katalog zwraca 6; nie jest to test uwierzytelniania.
-
-Przed publicznym uruchomieniem rozszerz rzeczywisty scenariusz Google o odświeżenie strony, profil na drugim urządzeniu, OAuth w Androidzie i wylogowanie z realnej sesji. Potrzebna jest też ręczna ocena czytnikiem ekranu. Zrzuty, AXE i kompilacja nie potwierdzają tych punktów. Dawne raporty testów haseł opisują historyczny interfejs, nie aktualny Clerk.
+Testy automatyczne nie zastępują rzeczywistego scenariusza Google obejmującego odświeżenie strony, profil na drugim urządzeniu i wylogowanie. Ręczna ocena czytnikiem ekranu i OAuth w Androidzie wymagają osobnego przebiegu.
 
 ## Dokumentacja dostawcy
 
@@ -58,4 +56,4 @@ Przed publicznym uruchomieniem rozszerz rzeczywisty scenariusz Google o odświe�
 - [Weryfikacja sesji](https://clerk.com/docs/guides/sessions/manual-jwt-verification)
 - [Android Quickstart i logowanie w przeglądarce](https://clerk.com/docs/android/getting-started/quickstart)
 
-Clerk jest zewnętrznym operatorem tożsamości. Utrzymanie i koszty zależą od planu i liczby użytkowników; nie zostały oszacowane ani wykupione w tej zmianie. Dane domenowe pozostają przenośne w SQLite, a wymiana dostawcy wymaga migracji identyfikatorów kont. Polityka prywatności wdrożenia musi uwzględniać Clerk i wybranych dostawców OAuth.
+Clerk jest zewnętrznym operatorem tożsamości. Utrzymanie i koszty zależą od planu i liczby użytkowników; budżet pilotażu opisuje [model utrzymania](OPERATIONS-AND-BUSINESS.md). Dane domenowe pozostają przenośne w SQLite, a wymiana dostawcy wymaga migracji identyfikatorów kont. Polityka prywatności wdrożenia musi uwzględniać Clerk i wybranych dostawców OAuth.

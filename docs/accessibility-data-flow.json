@@ -10,14 +10,13 @@
         "Dopiero kliknięcie przy danym kroku pobiera konfigurację /api/integrations/maps i otwiera iframe Maps Embed API w trybie streetview.",
         "Jednocześnie otwarty jest jeden podgląd. Zmiana trasy zamyka poprzedni widok."
       ],
-      "configuration": "Istniejący PRZEJSCIE_GOOGLE_MAPS_BROWSER_KEY w psst, ograniczony do miastowzasiegu.pl i www.miastowzasiegu.pl, wymaga dodatkowo maps-embed-backend.googleapis.com. scripts/enable-street-view.mjs dodaje wyłącznie tę usługę i zachowuje pozostałe ograniczenia oraz limity.",
+      "configuration": "PRZEJSCIE_GOOGLE_MAPS_BROWSER_KEY w menedżerze sekretów, ograniczony do domen danej instalacji; wymaga włączonego Maps Embed API oraz tej usługi w ograniczeniach klucza.",
       "cost": "Maps Embed API jest bezpłatne według dokumentacji sprawdzonej 2026-10-03: https://developers.google.com/maps/documentation/embed/usage-and-billing. Nie używamy płatnego Dynamic Street View ani Street View Static API.",
       "privacy": "Przed otwarciem opisujemy połączenie z Google i przekazanie wybranego punktu. Google otrzymuje współrzędne i kierunek podglądu oraz dane połączenia przeglądarki; nie przekazujemy profilu potrzeb ani danych konta. Zdjęcia są ładowane bezpośrednio w iframe Google; aplikacja ich nie pobiera, nie zapisuje i nie analizuje.",
       "refresh": "Zdjęcia aktualizuje Google. Ich datę użytkownik sprawdza w panoramie; aplikacja nie zna daty audytu terenowego i nie nadaje zdjęciom statusu potwierdzonej dostępności.",
       "presentation": "Osobna ramka z oznaczeniem Google Street View, zachowaną atrybucją dostawcy, opisem pochodzenia trasy i odnośnikami do warunków oraz prywatności Google. Wymaga sprawdzenia właściwego wariantu warunków Google przy przenoszeniu usługi poza konto rozliczeniowe EOG.",
       "failure": "Brak punktu, klucza, internetu lub błąd konfiguracji pozostawia tekstową instrukcję. Podgląd ma zawsze link do Google Maps. Błędów i braku pokrycia wewnątrz obcej ramki nie traktujemy jako automatycznie wykrytego stanu; użytkownik może przejść do linku.",
-      "limitations": "Google dobiera najbliższą panoramę, która może przedstawiać sąsiedni punkt, wnętrze, jezdnię lub inną stronę ulicy. Data zdjęcia nie potwierdza obecnego stanu. Podgląd służy samodzielnej ocenie, nie wyznacza ani nie zmienia trasy.",
-      "validation": "2026-10-03 18:23 CEST: potwierdzono publiczny podgląd kroku trasy Długa 12 do Rynek Główny 1 przy szerokościach 1440 i 390 px. Szczegóły: artifacts/street-view/real-route-verification.json. Osobny punkt przy Sukiennicach pokazał wnętrze, co opisano jako ograniczenie."
+      "limitations": "Google dobiera najbliższą panoramę, która może przedstawiać sąsiedni punkt, wnętrze, jezdnię lub inną stronę ulicy. Data zdjęcia nie potwierdza obecnego stanu. Podgląd służy samodzielnej ocenie, nie wyznacza ani nie zmienia trasy."
     },
     {
       "name": "Zdjęcie zgłaszającego i propozycja AI",
@@ -39,7 +38,6 @@
       "url": "https://download.geofabrik.de/europe/poland/malopolskie.html",
       "terms": "https://www.openstreetmap.org/copyright",
       "license": "ODbL-1.0, wymagane oznaczenie autorstwa i przestrzeganie warunków dla pochodnej bazy",
-      "snapshot": "2026-10-01T20:22:06Z",
       "pipeline": [
         "Pobrany plik PBF",
         "scripts/import-accessibility.py",
@@ -82,14 +80,12 @@
       "name": "Google Places UI Kit",
       "documentation": "https://developers.google.com/maps/documentation/javascript/places-ui-kit/overview",
       "termsContext": "https://developers.google.com/maps/comms/eea/places",
-      "configuration": "Osobny PRZEJSCIE_GOOGLE_MAPS_BROWSER_KEY w psst; tylko https://miastowzasiegu.pl/* i https://www.miastowzasiegu.pl/*; API maps-backend.googleapis.com oraz placewidgets.googleapis.com.",
+      "configuration": "PRZEJSCIE_GOOGLE_MAPS_BROWSER_KEY ograniczony do domen danej instalacji; API maps-backend.googleapis.com oraz placewidgets.googleapis.com.",
       "presentation": "Osadzony komponent Google uruchamiany przyciskiem. Użytkownik wybiera zgodny obiekt z wyników Google. Aplikacja nie zapisuje danych Google w swojej bazie i nie przetwarza Street View na zbiór krawężników.",
       "failure": "Przy braku konfiguracji lub awarii dostępny jest zwykły odnośnik do Google Maps.",
-      "validation": "2026-10-03: na publicznej stronie sprawdzono wyszukanie Rynku Podziemnego, wybór zgodnego obiektu oraz informacje Google o wejściu, toalecie i miejscach dla osób na wózkach. Zrzut: artifacts/accessibility/google-accessibility.png.",
-      "project": "gen-lang-client-0911453279 (General). Nowy projekt miasto-w-zasiegu nie mógł zostać podłączony do rozliczeń z powodu limitu pięciu projektów na koncie. Przed konfiguracją usługi Maps w General były wyłączone.",
-      "limits": "100 zapytań Places UI Kit dziennie na projekt. Nieużywane sesje Autocomplete, zapytania Advanced, pełne mapy 2D/3D i Maps Grounding Widget mają limit 0. Nie zmieniano kluczy ani usług innych aplikacji."
+      "limits": "Operator ustala własne limity dzienne i budżet dla używanych API. Limit demonstracyjnej konfiguracji nie jest automatycznie przenoszony do nowej instalacji."
     }
   ],
   "expansion": "Nowe miasto wymaga nowych danych PBF, granic walidacji, przebudowy grafu ORS, licencji i pomiaru pokrycia. Nowa kategoria wymaga walidacji danych, opisu dla użytkownika oraz jawnej decyzji o wpływie na trasę. Nowe źródło powinno mieć oddzielny importer i metadane pochodzenia.",
-  "operations": "Operator aplikacji utrzymuje hosting i kopie SQLite, importy, obsługę konfliktów, klucze i limity kosztów. Nie zakładamy obsługi naszej bazy przez Miasto."
+  "operations": "Operator odpowiada za hosting, kopie SQLite, importy, konflikty, sekrety i limity kosztów. Proponowany model stałego pilotażu: docs/OPERATIONS-AND-BUSINESS.md. Nie zakładamy obsługi naszej bazy przez Miasto."
 }

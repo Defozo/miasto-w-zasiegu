@@ -1,88 +1,43 @@
 # Płatności i reklamy Miasta w zasięgu
 
-Uzgodniony cennik: Premium 10 zł/miesiąc, reklama jednego obiektu na mapie
+Cennik zapisany w aplikacji: Premium 10 zł/miesiąc, reklama jednego obiektu na mapie
 49 zł/miesiąc, mapa i sponsorowane wyniki 99 zł/miesiąc. Jednorazowe wsparcie
-5–1000 zł nie odnawia się i nie nadaje Premium. Wszystkie kwoty są w PLN.
+5-1000 zł nie odnawia się i nie nadaje Premium. Wszystkie kwoty są w PLN.
 Strona `/cennik` jest również dostępna pod `/pricing`.
 
-## Plan Stripe i stan integracji
+## Integracja Stripe
 
 Prototyp integruje Stripe w trybie testowym. Nowa instalacja wymaga własnego konta, katalogu cen, konfiguracji portalu i webhooka.
 
 Przyjęty wariant to hostowany Checkout, Billing dla abonamentów, jednorazowy
-Checkout dla wsparcia oraz Customer Portal. Plan zaleca też Smart Retries
-i ustawienia odzyskiwania nieudanych płatności w panelu Stripe. Nie zostały
-one jeszcze skonfigurowane na koncie.
+Checkout dla wsparcia oraz Customer Portal. Obsługę odzyskiwania nieudanych płatności, w tym Smart Retries, operator
+konfiguruje osobno w panelu Stripe; nie jest ona automatycznie włączana przez aplikację.
 
-OAuth MCP nie jest kluczem uruchomieniowym aplikacji. Bez klucza API i sekretu
+Bez klucza API i sekretu
 webhooka strona pokazuje ceny i informację „Płatności wkrótce”, a serwer
 odrzuca zakup.
 
-## Zweryfikowana konfiguracja 3 października 2026
+## Konfiguracja własnego trybu testowego
 
-Klucze dostarczone w psst wskazują tryb testowy konta „Miasto w zasięgu”
-(`<identyfikator własnego środowiska>`). To inne środowisko niż osobny sandbox połączony
-z MCP (`<identyfikator własnego środowiska>`). Katalog, webhook, portal i aplikacja korzystają
-konsekwentnie z konta wskazanego przez klucze. Nie należy mieszać obiektów
-ani sekretów tych środowisk.
+1. Przygotuj testowe konto Stripe i klucz API. Przekaż go jako `MIASTO_W_ZASIEGU_STRIPE_SECRET_KEY` albo zgodnościową nazwę `MIASTOWZASIEGU_STRIPE_SECRET_KEY`. Pierwsza nazwa ma pierwszeństwo. Klucz przechowuj w menedżerze sekretów, nie w repozytorium, APK ani historii poleceń.
+2. Utwórz przez Stripe API lub własny skrypt produkty i ceny zgodne z kontraktem w `server/billing.mjs`. Same nazwy wyświetlane w panelu nie wystarczają: serwer sprawdza identyfikator produktu, kwotę, walutę, okres i `lookup_key`.
 
-Utworzono cztery produkty, trzy ceny miesięczne 10/49/99 PLN, webhook
-z 11 rodzajami zdarzeń i wersją API `2026-09-30.endive` oraz portal klienta
-z historią faktur, aktualizacją metody płatności i anulowaniem na koniec okresu.
-Sekret webhooka i identyfikator konfiguracji portalu są w psst.
+| Oferta | Identyfikator produktu | Cena w groszach | `lookup_key` ceny |
+| --- | --- | ---: | --- |
+| Premium | `miastowzasiegu_premium_v1` | 1000 | `mwz_v1_premium_pln_1000_month` |
+| Mapa | `miastowzasiegu_map_v1` | 4900 | `mwz_v1_map_pln_4900_month` |
+| Sponsorowane wyniki | `miastowzasiegu_sponsored_v1` | 9900 | `mwz_v1_sponsored_pln_9900_month` |
+| Wsparcie | `miastowzasiegu_donation_v1` | wybór 500-100000 | bez stałej ceny |
 
-Aplikacja na izolowanej bazie w pamięci utworzyła rzeczywiste testowe Checkout
-dla wszystkich czterech ofert oraz sesję portalu. Ponowienie żądania użyło
-tej samej sesji; nieukończone Checkout nie nadało Premium. Sesje wygaszono,
-a utworzonego klienta testowego usunięto. Nie wykonano płatności, także
-symulowanej płatności kartą. Odnowienia, zwroty i nadanie opłaconego dostępu
-są dotąd sprawdzone testami z atrapami Stripe.
+Trzy stałe ceny muszą być aktywne, w `pln`, z okresem `month` i `interval_count: 1`. Wsparcie używa indywidualnej ceny jednorazowej Checkout, bez subskrypcji.
 
-Cztery zdarzenia `checkout.session.expired` dotarły ze Stripe pod publiczny
-adres HTTPS i zostały zapisane w `billing_events` po weryfikacji podpisu.
-Stripe potwierdził dla nich `pending_webhooks: 0`. To potwierdza zewnętrzne
-dostarczenie webhooków, poza samym sprawdzeniem lokalnego serwera.
-Cennik opublikowano pod `https://miastowzasiegu.pl/cennik`; publiczny endpoint
-`/api/billing/state` zwraca `enabled: true` i `mode: test`.
-Raporty bez wartości kluczy są w `artifacts/billing-fixes/stripe-*-result.json`.
+3. Utwórz endpoint webhooka `https://twoja-domena/api/billing/webhook` z rodzajami zdarzeń eksportowanymi jako `STRIPE_EVENTS` w `server/billing.mjs`. Sekret podpisu przekaż jako `MIASTOWZASIEGU_STRIPE_WEBHOOK_SECRET`. Skonfiguruj Customer Portal, m.in. historię, metodę płatności i zasady anulowania, oraz jego identyfikator w `MIASTOWZASIEGU_STRIPE_PORTAL_CONFIG`.
+4. Ustaw `BILLING_PUBLIC_URL` na dokładny origin HTTPS własnej aplikacji, bez końcowego ukośnika. Zrestartuj proces API po zmianie środowiska i sprawdź `/api/billing/state`: `enabled: true`, `mode: test`. Ten odczyt nie potwierdza jeszcze wykonania płatności.
+5. W odrębnym środowisku testowym sprawdź Checkout i portal, potwierdzenie płatności, odnowienie, błąd, anulowanie, zwrot i ponowienie webhooka. Testowy zakup nie może korzystać z prawdziwej karty ani tworzyć fikcyjnej obserwacji w zwykłej bazie.
 
-## Uruchomienie trybu testowego
+Przygotowanie katalogu wymaga odpowiednich uprawnień do Products, Prices, Webhook Endpoints i Billing Portal Configurations. Działająca aplikacja potrzebuje uprawnień do klientów, Checkout, sesji portalu oraz odczytów cen, subskrypcji, faktur, płatności, obciążeń i sporów. Po konfiguracji ogranicz klucz do faktycznie potrzebnego zakresu.
 
-1. Umieść klucz testowy w globalnym psst jako
-   `MIASTO_W_ZASIEGU_STRIPE_SECRET_KEY`. Dla zgodności działa również poprzednia
-   nazwa `MIASTOWZASIEGU_STRIPE_SECRET_KEY`; nowa ma pierwszeństwo.
-   Preferowany jest ograniczony klucz
-   `rk_test_`. Nie zapisuj wartości w repozytorium, argumentach poleceń ani czacie.
-2. Uruchom przygotowanie katalogu i webhooka:
-
-   ```powershell
-   psst --global MIASTO_W_ZASIEGU_STRIPE_SECRET_KEY -- node scripts/configure-stripe.mjs
-   ```
-
-   Skrypt tworzy lub odczytuje cztery produkty o stabilnych identyfikatorach
-   `miastowzasiegu_{premium,map,sponsored,donation}_v1`. Tworzy trzy stałe ceny
-   miesięczne, sprawdzając kwotę, PLN i okres. Nie zmienia istniejącej błędnej
-   ceny i nie wykonuje płatności. Wsparcie używa tego samego produktu oraz
-   indywidualnej kwoty Checkout.
-3. Skrypt rejestruje `/api/billing/webhook` i zapisuje nowy sekret podpisu do
-   `MIASTOWZASIEGU_STRIPE_WEBHOOK_SECRET` przez stdin psst. Istniejący endpoint
-   zachowuje pierwotny sekret; nie można odczytać go ponownie z API.
-   Konfiguracja portalu trafia do `MIASTOWZASIEGU_STRIPE_PORTAL_CONFIG`.
-4. Zrestartuj wyłącznie API tego projektu. Skrypty startowe wczytują z psst
-   tylko jawnie wymienione nazwy. Sprawdź `/api/billing/state`: `mode: test`.
-5. Na własnym koncie testowym sprawdź Checkout i portal, odnowienie, błąd
-   płatności, anulowanie, zwrot i ponowienie webhooka. Nie używaj rzeczywistych
-   danych kart ani fikcyjnych obserwacji w zwykłej bazie.
-
-Klucz użyty do przygotowania potrzebuje zapisu Products, Prices, Webhook
-Endpoints i Billing Portal Configurations. Uruchomienie aplikacji potrzebuje
-zapisu Customers i Checkout Sessions, tworzenia sesji Billing Portal oraz
-odczytu Prices, Subscriptions, Invoices, Invoice Payments, Charges i Disputes.
-Po przygotowaniu można ograniczyć klucz do uprawnień uruchomieniowych.
-
-Tryb live wymaga osobnego klucza, katalogu, sekretu webhooka i konfiguracji
-portalu. Skrypt dodatkowo wymaga wtedy `--live`. Baza rozdziela klientów
-i uprawnienia według trybu, więc zakup testowy nie nadaje uprawnień live.
+Tryb live wymaga osobnego katalogu i kluczy, sekretu webhooka oraz konfiguracji portalu. Baza oddziela klientów i uprawnienia według trybu. Nie traktuj danych ani zakupów testowych jako danych live.
 
 ## Przepływ i zabezpieczenia
 
@@ -106,8 +61,12 @@ i uprawnienia według trybu, więc zakup testowy nie nadaje uprawnień live.
   `cancel_at_period_end`, jak i `cancel_at`. Spór lub zbyt mała pozostała
   zapłata wyłącza uprawnienie z danej faktury.
 - Reklamy są wyznaczane po filtrach miejsca, kategorii i dostępności.
-  Maksymalnie pięć miejsc może otrzymać wyróżnienie mapy, a dwa sponsorowany
-  priorytet. Dodatkowe pinezki mają tekstowy odpowiednik w liście. Premium
+  Funkcja `promote` wyróżnia najwyżej pięć miejsc w przekazanym zestawie
+  wyników. Podczas wyszukiwania lub wyboru kategorii najwyżej dwa z nich
+  mogą uzyskać sponsorowany priorytet. Liczniki zerują się przy każdym
+  wywołaniu: API oblicza promocje listy i opcjonalnego zbioru mapy osobno.
+  Nie jest to globalny limit kampanii ani gwarancja wyświetlenia reklamy
+  w każdym zapytaniu. Dodatkowe pinezki mają tekstowy odpowiednik w liście. Premium
   usuwa wyróżnienia i płatną kolejność, zachowując same miejsca.
 - Płatne wyróżnienia nie trafiają do lokalnej kopii offline. Odświeżenie
   lub powrót do karty ponownie ustala widoczność z API.
@@ -121,19 +80,6 @@ Invoice Payments, oddzielenie test/live, reklamy i wpłaty jednorazowe.
 AXE, logowanie, zgody, formularze i ponowienie potwierdzenia. Testy przeglądarki
 uruchamiają się na izolowanym API; dane Stripe są atrapami i nie wychodzą
 do dostawcy. Nie wykonano testu czytnikiem ekranu.
-
-Zweryfikowano 17 testów modułu płatności, 10 testów filtrów i serwera oraz
-5 testów przeglądarki. Kompilacja TypeScript/Vite i generator service workera
-zakończyły się powodzeniem. Pełny zestaw regresji backendu
-został przerwany podczas tego zadania i nie jest objęty tym wynikiem.
-Kompilacja do publikacji powstała w `artifacts/billing-deploy-dist`.
-Po pięciu testach przeglądarki skopiowano ją do `dist`, zachowując poprzednie
-zasoby. Odpowiedź publicznego `/cennik` porównano z opublikowanym `index.html`.
-Środowisko zwykłych testów E2E jawnie wyłącza integrację Stripe, niezależnie
-od kluczy odziedziczonych z otoczenia procesu.
-Dodatkowy test publicznej strony potwierdził widoczny komunikat trybu testowego,
-układ mobilny i desktopowy, przejście do logowania oraz odrzucenie anonimowego
-zakupu (401) i nieprawidłowego podpisu webhooka (400).
 
 Przed pobieraniem prawdziwych opłat trzeba potwierdzić dane sprzedawcy,
 zasady reklamacji i zwrotów, prezentację cen oraz obowiązki podatkowe.
@@ -152,3 +98,5 @@ klienta, kopie zapasowe bazy i okresowe uzgadnianie stanu ze Stripe.
 [Customer Portal](https://docs.stripe.com/customer-management/integrate-customer-portal),
 [Revenue Recovery](https://docs.stripe.com/billing/revenue-recovery),
 [Stripe Tax](https://docs.stripe.com/tax/set-up).
+
+Podział obowiązków, budżet i proponowane źródła finansowania: [utrzymanie i model biznesowy](OPERATIONS-AND-BUSINESS.md).

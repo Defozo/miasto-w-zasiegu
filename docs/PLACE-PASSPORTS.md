@@ -18,7 +18,7 @@ Widget nie wymaga logowania. Publiczne żądania mają `credentials: omit`, nie 
 
 Przycisk planowania otwiera `/app?place=…&entrance=…` w nowej karcie. Aplikacja zachowuje potrzeby użytkownika i ustawia cel; wyznaczenie trasy wymaga osobnego uruchomienia. Wejście bez współrzędnych nie udaje dokładnego celu. Ogólny punkt obiektu może być środkiem budynku.
 
-Kod skopiowany z `127.0.0.1` działa tylko lokalnie. Do publicznego osadzenia potrzebne są adres HTTPS aplikacji, działające API i nowy kod iframe. Przy wdrożeniu należy zezwolić na osadzanie publicznej ścieżki widgetu i osobno ograniczyć strony konta. Ta zmiana nie publikuje serwisu w internecie.
+Kod skopiowany z `127.0.0.1` działa tylko lokalnie. Do publicznego osadzenia potrzebne są adres HTTPS aplikacji, działające API i nowy kod iframe. Przy wdrożeniu należy zezwolić na osadzanie publicznej ścieżki widgetu i osobno ograniczyć strony konta.
 
 ## Dane i źródła
 
@@ -42,14 +42,12 @@ Pobieranie ogranicza protokół i port, sprawdza wszystkie zwrócone adresy DNS,
 - Prywatne odczyty i mutacje sprawdzają `expectedUserId`; zapis i publikacja dodatkowo oczekiwane wersje.
 - Body paszportu: do 128 KiB, maksymalnie 8 wejść, ograniczenia długości i typów. Pozostałe trasy zachowują 16 KiB.
 
-Prywatny klient korzysta z bieżącego uwierzytelniania aplikacji i pobiera token dla żądania. Testy wstrzykują osobny adapter, bez zewnętrznych kont i zwykłej bazy. Operator musi utrzymywać hosting HTTPS, kopie bazy, aktualizację źródeł oraz obsługę korekt i nadużyć. Otwarta publikacja wymaga takiej obsługi przed publicznym udostępnieniem.
+Prywatny klient korzysta z bieżącego uwierzytelniania aplikacji i pobiera token dla żądania. Testy wstrzykują osobny adapter, bez zewnętrznych kont i zwykłej bazy. Operator musi utrzymywać hosting HTTPS, kopie bazy, aktualizację źródeł oraz obsługę korekt i nadużyć. Pełne zaplecze moderacji i procedurę obsługi opisano jako element stałego pilotażu w [modelu utrzymania](OPERATIONS-AND-BUSINESS.md).
 
 Paszport i widget mogą być podstawą płatnej obsługi obiektów: osadzenia widgetu, pomocy w pozyskaniu pomiarów i utrzymania aktualności. To hipoteza biznesowa, nie pozyskani klienci; potwierdzenie domeny nie jest certyfikatem dostępności.
 
-## Zakres walidacji
+## Testy i ograniczenia
 
-[Wykonane testy i wynik odbioru](PLACE-PASSPORTS-VERIFICATION.md): build PASS, 125 testów backendu PASS (2 SKIP), 22 E2E PASS.
+Testy obejmują prywatność, konflikty, import/restart, widoczność nowych miejsc, pochodzenie danych i bezpieczny odczyt strony. E2E sprawdza publikację, izolację widgetu, odświeżanie, błędy, mały ekran i klawiaturę. Fikstury używają baz w pamięci lub plików tymczasowych. [Uruchamianie testów](TESTING.md).
 
-Testy obejmują prywatność, konflikty, import/restart, widoczność nowych miejsc, pochodzenie danych i bezpieczny odczyt strony. E2E sprawdza publikację, izolację widgetu, odświeżanie/błędy, 320 px, klawiaturę i AXE. Fikstury używają baz w pamięci albo plików tymczasowych. Wyniki uruchomień zapisujemy w `artifacts`.
-
-To nie jest audyt WCAG 2.2 AA. Nie wykonano pełnego badania czytnikiem ekranu ani testów terenowych wejść. Publiczne logowanie, osadzenie na rzeczywistej cudzej domenie HTTPS i potwierdzenie kontrolowanej domeny wymagają odpowiedniego środowiska. Sam test transportu HTTPS nie oznacza potwierdzenia domeny.
+Pełna zgodność WCAG 2.2 AA i terenowa dostępność wejść nie zostały potwierdzone. Osadzenie na zewnętrznej domenie oraz potwierdzenie kontroli strony wymagają próby w docelowym środowisku HTTPS. Test transportu nie oznacza potwierdzenia domeny.

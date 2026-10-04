@@ -11,6 +11,6 @@ Starszy format bez właściciela i zakresu pozostaje ukryty. Nie przypisujemy go
 
 Ochrona interfejsu przed pomieszaniem kont nie jest szyfrowaniem localStorage ani zabezpieczeniem przed osobą mającą bezpośredni dostęp do plików przeglądarki lub narzędzi deweloperskich. Prywatny zapis offline z lokalnym odblokowaniem wymaga osobnego mechanizmu i nie jest zaimplementowany.
 
-Odtworzony plan pokazuje potrzeby zapisane przy jego obliczeniu. Zmiana początku, celu, przystanków, profilu lub omijania przeszkód unieważnia stary wynik i wraca do obecnych potrzeb. Samo oglądanie miejsca w zakładce Odkrywaj zachowuje trasę. Nowy cel zostaje wybrany dopiero po „Zaplanuj przejście”.
+Odtworzony plan pokazuje potrzeby zapisane przy jego obliczeniu. Zmiana początku, celu, przystanków, profilu lub omijania przeszkód unieważnia stary wynik i wraca do obecnych potrzeb. Samo oglądanie miejsca na mapie zachowuje trasę. Nowy cel zostaje wybrany dopiero po „Zaplanuj przejście”.
 
-Widoczność zapisów i odpowiedzi asynchronicznych jest sprawdzana w `saved-plan-privacy.spec.ts`; rzeczywiste wyniki przebiegów zapisujemy w [VERIFICATION.md](VERIFICATION.md). Testy używają odrębnej bazy w pamięci, nie kont użytkowników.
+Widoczność zapisów i odpowiedzi asynchronicznych jest sprawdzana w `saved-plan-privacy.spec.ts`; sposób uruchomienia opisuje [TESTING.md](TESTING.md). Testy używają odrębnej bazy w pamięci, nie kont użytkowników.

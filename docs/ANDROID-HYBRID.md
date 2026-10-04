@@ -1,6 +1,6 @@
 # Android i Wear OS: wspólny interfejs, natywne prowadzenie
 
-Decyzja użytkownika z 3 października 2026: Android współdzieli ekrany webowe; GPS, głos i przekazywanie instrukcji do zegarka pozostają natywne. Wear OS zachowuje osobny interfejs przeznaczony do szybkiego odczytu na okrągłym ekranie.
+Android współdzieli ekrany webowe; GPS, głos i przekazywanie instrukcji do zegarka pozostają natywne. Wear OS zachowuje osobny interfejs przeznaczony do szybkiego odczytu na okrągłym ekranie.
 
 ## Podział
 
@@ -77,34 +77,10 @@ npx playwright test --config playwright.hybrid.config.ts
 
 `tests/android/hybrid_watch_smoke.py` wykonuje osobny przebieg na okrągłym emulatorze Wear OS `emulator-5580` z walidacyjnym APK zegarka. Pokaz i kontrolowana ramka testowa pozostają lokalne. Skrypt przywraca rozmiar tekstu i usuwa dane osobnego pakietu po próbie.
 
-## Wyniki z 3 października 2026
-
-- TypeScript, budowanie webu oraz oba APK: poprawnie.
-- JVM: **46/46** testów. Dziewięć sprawdza granicę web/Android; pięć kolejnych ważność pozycji na mapie oraz uruchamianie i wyciszanie głosu.
-- Lint końcowych plików: **0 błędów**, 44 ostrzeżenia telefonu i 4 zegarka. Osobny wariant walidacyjny telefonu zgłosił 46 ostrzeżeń. Ostrzeżenia nie są traktowane jako zaliczony audyt dostępności.
-- Przeglądarka: **4/4** scenariusze, obejmujące wspólny interfejs, kontrakt mostu i widoczny błąd szerokości zestawu z przeniesieniem fokusu oraz poprawieniem wartości. Most logowania jest w tych testach atrapą; nie jest to rzeczywiste OAuth.
-- Telefon z rzeczywistym WebView na emulatorze: **17/17** kontroli. Wyszukiwanie i trasa ORS, błąd szerokości, mapa z geometrią i znacznikiem GPS, cała trasa i śledzenie pozycji, przesuwanie kamery, mały przełącznik głosu, odmowa uprawnienia, utrata i odzyskanie GPS, wygaszenie i wybudzenie ekranu, powrót do tego samego planu, zatrzymanie usługi, blokada wysłania symulowanego przejazdu i brak wyjątków JavaScript.
-- Okrągły Wear OS 192 dp: **6/6** kontroli. Oczekiwanie, oznaczony pokaz, zmiana manewru, wyjście z pokazu, ukrycie zapisanej instrukcji bez połączenia i tekst powiększony do 130%.
-- W APK sprawdzono pakiet `pl.przejscie.app`, backend telefonu `https://miastowzasiegu.pl`, zgodne podpisy i identyczne pliki interfejsu webowego w testowanym i docelowym wariancie.
-
-Końcowy przebieg telefonu obejmuje nową mapę, głos i obsługę powrotu z zablokowanego ekranu. W trakcie próby wykryto ANR w oczekiwaniu `SurfaceView.onWindowResize`; mapa używa teraz `TextureView` z limitem 30 klatek/s. Powtórzony pełny przebieg zakończył się bez tego błędu. Nie zastępuje to próby wydajności i baterii na fizycznym urządzeniu. Reguła otwierania płatności dopuszcza wyłącznie HTTPS do `checkout.stripe.com` i `billing.stripe.com`; transakcji nie wykonywano.
-
-Wcześniejszy niezależny audyt webu wskazał niewidoczny błąd szerokości zestawu. Komunikat przeniesiono pod pole, z fokusem i przewinięciem; poprawienie wartości oraz zapis sprawdzono w przeglądarce i rzeczywistym WebView. Ten cykl został przerwany poleceniem przebudowy nawigacji; jego zapis pozostaje w `artifacts/hybrid/ux-audit/interrupted.json`.
-
-Po zakończeniu przebudowy nawigacji wykonano dwa nowe, niezależne audyty wspólnego interfejsu, każdy bez historii i pamięci. Oba objęły `/app`, `/gra`, `/sign-in`, `/sign-up` i `/cennik` i nie potwierdziły usterek wymagających poprawy. Między audytami ponowiono cztery testy przeglądarkowe: **4/4**. Nie wdrażano dodatkowych zmian interfejsu. Wszystkie 76 plików podglądu pozostało identycznych przed i po audytach oraz zgodnych z dostarczonym APK, mimo równoległych zmian źródeł w repozytorium.
-
-Ocena niezależnych audytów jest **częściowa**: obejmuje próbki interakcji webowych, a nie natywną mapę i Wear OS. Nie sprawdzono czytnika ekranu, rzeczywistego powiększenia 200%, pełnego planowania trasy, rzeczywistego logowania ani płatności. Izolowane API udostępniało dla kont tylko stan niedostępności. Raporty i zakres: [`podsumowanie audytu`](../artifacts/hybrid/ux-audit/navigation/final-review.json), [`pierwszy raport`](../artifacts/hybrid/ux-audit/navigation/report-1.json), [`drugi raport`](../artifacts/hybrid/ux-audit/navigation/report-2.json). Wynik nie stanowi potwierdzenia pełnej zgodności z WCAG.
-
-Dowody: [`verification.json`](../artifacts/hybrid/verification.json), [`telefon`](../artifacts/hybrid/phone/results.json), [`zegarek`](../artifacts/hybrid/wear/results.json), [`przeglądarka`](../artifacts/hybrid/browser-results.json). Zrzuty pokazują [natywny manewr telefonu](../artifacts/hybrid/phone/gps.png) i [oznaczony pokaz zegarka](../artifacts/hybrid/wear/demo-right.png), a nie sparowaną sesję.
-
-Wersje testowe do instalacji są w `artifacts/releases/miasto-hybrid-2026-10-03`. Każdy APK należy zainstalować na odpowiednim urządzeniu; mają ten sam identyfikator pakietu. Są podpisane kluczem debug. Publiczna strona nie była wdrażana w ramach tej zmiany.
-
 ## Ograniczenia
 
-Interfejs uruchamia się z APK, lecz mapy podkładowe, wyszukiwanie i nowe trasy nadal wymagają internetu. Pozostają dotychczasowe ograniczenia silnika prowadzenia: brak automatycznego przeliczenia po zejściu z trasy i brak terenowej gwarancji dostępności.
+Interfejs uruchamia się z APK, ale podkład mapy, wyszukiwanie i nowe trasy wymagają internetu. Nie ma automatycznego przeliczania po zejściu z trasy ani gwarancji dostępności terenowej.
 
-Zegarek odrzuca instrukcje starsze niż 30 sekund i ukrywa manewr po utracie połączenia. Lokalny pokaz jest stale oznaczony jako przykład bez GPS. Osobne uruchomienie obu emulatorów nie potwierdza sparowania ani rzeczywistej transmisji Data Layer.
+Zegarek odrzuca instrukcje starsze niż 30 sekund i ukrywa manewr po utracie połączenia. Lokalny pokaz jest stale oznaczony jako przykład bez GPS. Osobne uruchomienie emulatorów nie potwierdza sparowania ani rzeczywistej transmisji Data Layer.
 
-Wyniki tej iteracji i ich ograniczenia są zapisywane w `artifacts/hybrid`. Wcześniejsze audyty TalkBack dotyczą poprzedniego interfejsu; nowy WebView wymaga osobnego testu czytnika i próby na fizycznym telefonie oraz zegarku.
-
-W tej iteracji nie wykonano rzeczywistego logowania OAuth, odsłuchu instrukcji, pełnego audytu TalkBack, sparowania telefonu z zegarkiem ani terenowego przejścia trasy. Nie sprawdzano na urządzeniu aparatu, wyboru pliku i drukowania. Krótka próba z wygaszonym ekranem potwierdza ciągłość usługi w tym przebiegu, nie wielogodzinną pracę w trybach oszczędzania baterii.
+Pełny przebieg z czytnikiem ekranu, OAuth, aparatem, wydrukiem i sparowanym zegarkiem wymaga osobnej kontroli na docelowych urządzeniach. Krótka próba emulatora nie potwierdza wielogodzinnego działania, zużycia baterii, odbioru wibracji ani akustycznego odsłuchu. [Zasady testowania](TESTING.md).

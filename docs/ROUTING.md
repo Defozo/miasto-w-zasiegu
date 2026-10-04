@@ -22,13 +22,8 @@ Przy wyłączonej preferencji utwardzenia wysyłamy `surface_type: any`, bez dod
 
 Semantykę zweryfikowano w źródłach wersji 10.0.1: [kodowanie powierzchni](https://github.com/GIScience/openrouteservice/blob/v10.0.1/ors-engine/src/main/java/org/heigit/ors/routing/graphhopper/extensions/WheelchairTypesEncoder.java), [warunki odrzucania odcinków](https://github.com/GIScience/openrouteservice/blob/v10.0.1/ors-engine/src/main/java/org/heigit/ors/routing/graphhopper/extensions/edgefilters/WheelchairEdgeFilter.java), [domyślne parametry](https://github.com/GIScience/openrouteservice/blob/v10.0.1/ors-engine/src/main/java/org/heigit/ors/routing/parameters/WheelchairParameters.java). Filtr powierzchni odrzuca wartości większe od progu; filtr klasy drogi odrzuca wartości równe progowi lub większe. Stąd `grade1` nie byłoby poprawnym progiem dopuszczenia klasy 1.
 
-## Dowody i ograniczenia
+## Testowanie i ograniczenia
 
-Po zmianie geometrii uruchomiono testy `api`, `accessibility`, `routing-regressions` i `site-verification` z `RUN_ORS_TESTS=1`: **41/41 PASS, bez pominięć**. Bazy testowe są izolowane od głównej bazy. Regresje obejmują pomiary, przekroczenie krawężnika i ruch wzdłuż niego, trwałość, sprzeczności, odległe raporty, przystanki, dodatkowe raporty na objazdach, limity i awarię kolejnej próby. Miejskie dane opisowe nie zmieniają grafu ORS.
+Testy `api`, `accessibility` i `routing-regressions` obejmują pomiary, przekroczenie krawężnika i ruch wzdłuż niego, trwałość, sprzeczności, odległe raporty, przystanki, dodatkowe raporty na objazdach, limity i awarię kolejnej próby. Część testów używa kontrolowanego zegara lub odpowiedzi silnika; rzeczywisty ORS wymaga osobnego uruchomienia. [Instrukcja testowania](TESTING.md).
 
-Pakiet `routing-regressions.test.mjs` przeszedł **11/11**. Dwa testy używają kontrolowanego zegara: potwierdzają limity kolejnych odczytów 15 s, 15 s i 4 s oraz odmowę zwrócenia spóźnionej odpowiedzi. Nie czekają rzeczywistych 30 sekund.
-
-Rzeczywisty ORS: trasa Floriańską 306 m, po dodaniu testowej przeszkody 482,2 m, po rozwiązaniu zgłoszenia ponownie 306 m. Ta trasa z preferencją utwardzenia zwróciła HTTP 200. Przejazd przez wskazany przystanek: 306,1 m i 4 kroki. To dowód działania API i danych grafu, nie terenowej przejezdności.
-
-Brak silnika, limit czasu, niepoprawna odpowiedź i brak trasy zwracają jawny błąd bez zastępczej linii. Zapisany plan jest historycznym wynikiem. Dopiero ponowne obliczenie uwzględnia aktualny profil i odczyt zgłoszeń; wygaśnięcie raportu nie zmienia samodzielnie zapisanej geometrii.
-
+Brak silnika, limit czasu, niepoprawna odpowiedź i brak trasy zwracają jawny błąd bez zastępczej linii. Zapisany plan jest historycznym wynikiem. Dopiero ponowne obliczenie uwzględnia aktualny profil i odczyt zgłoszeń; wygaśnięcie raportu nie zmienia samodzielnie zapisanej geometrii. Miejskie opisy nie zmieniają grafu ORS, a prawidłowe obliczenie nie potwierdza terenowej przejezdności.

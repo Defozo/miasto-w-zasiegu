@@ -1,6 +1,6 @@
 # Iskry Miasta
 
-Stan implementacji: 3 października 2026. Osobna gra pod `/gra`, powiązana ze wspólnym kontem Miasta w zasięgu. Nie wymaga podawania informacji medycznych.
+Ten dokument opisuje ogród i trening dostępne pod `/gra?tryb=ogrod`, powiązane ze wspólnym kontem Miasta w zasięgu. Główny widok `/gra` przedstawia [misje i osiągnięcia odkrywców](ISKRY-EXPLORER.md). Gra nie wymaga podawania informacji medycznych.
 
 ## Pętla gry
 
@@ -41,7 +41,7 @@ W mieście wspólnie dla przeszkód i dobrych odkryć obowiązuje limit pięciu 
 
 ## API i integracja
 
-Moduł `server/game.mjs` eksportuje nazwany i domyślny `registerGameRoutes(app, context)`. Kontekst zawiera `db`, `store`, synchroniczne `getUser(req)` i opcjonalny zegar `now` dla testów. `registerObservationRoutes(app, context)` z `server/observations.mjs` rejestruje osobne API dobrych odkryć i korzysta z tej samej bazy oraz sesji. Rejestracja następuje przed obsługą 404. Gra używa tej samej sesji cookie co Miasto w zasięgu.
+Moduł `server/game.mjs` eksportuje nazwany i domyślny `registerGameRoutes(app, context)`. Kontekst zawiera `db`, `store`, synchroniczne `getUser(req)` i opcjonalny zegar `now` dla testów. `registerObservationRoutes(app, context)` z `server/observations.mjs` rejestruje osobne API dobrych odkryć i korzysta z tej samej bazy oraz sesji. Rejestracja następuje przed obsługą 404. Gra używa tego samego uwierzytelniania Clerk co Miasto w zasięgu.
 
 | Endpoint | Funkcja |
 | --- | --- |
@@ -66,9 +66,9 @@ Serwer sprawdza własność raportu, aktywny status, wiek do 24 godzin, zgodnoś
 
 Identyfikator raportu lub dobrego odkrycia jest kluczem głównym w odpowiedniej tabeli nagród. Powtórzenie tego samego `claim` zwraca zero nowych iskier. Nowy identyfikator raportu nie omija blokady tej samej misji, skopiowanego opisu ani kolejnej obserwacji tego samego rodzaju w promieniu 35 metrów. Ograniczenia duplikatów dotyczą jednego konta. Serwer nie przyjmuje salda ani liczby punktów od klienta. Przyznanie nagrody i zakup korzystają z transakcji SQLite i unikalnego odblokowania dla konta oraz ozdoby.
 
-`expectedUserId` chroni zapis przed zmianą sesji w drugiej karcie: niezgodność zwraca `409 ACCOUNT_CHANGED`. Nie jest metodą autoryzacji; rzeczywiste uprawnienia wynikają z cookie i własności raportu. Po odzyskaniu fokusu gra odświeża konto i stan miejski, zachowując osobny lokalny trening.
+`expectedUserId` chroni zapis przed zmianą sesji w drugiej karcie: niezgodność zwraca `409 ACCOUNT_CHANGED`. Nie jest metodą autoryzacji; rzeczywiste uprawnienia wynikają ze zweryfikowanej sesji Clerk i własności raportu. Po odzyskaniu fokusu gra odświeża konto i stan miejski, zachowując osobny lokalny trening.
 
-**Walidacja zapisu nie jest terenową weryfikacją prawdziwości.** Prototyp nie potwierdza obecności gracza w miejscu i nie ma moderacji, dowodów fotograficznych, odporności na wiele kont ani wykrywania wszystkich parafraz duplikatów. Samo zaznaczenie potwierdzenia obserwacji nie jest dowodem. Raport lub dobre odkrycie może pozostać publiczne, nawet jeśli serwer odmówi przyznania punktów. Przyznane wcześniej iskry nie znikają po rozwiązaniu bariery lub wycofaniu dobrego odkrycia. Wycofanie jest korektą informacji, a nie sposobem wyzerowania historii duplikatów. Przed szerokim publicznym uruchomieniem potrzebne są moderacja, obsługa nadużyć i zasady korekty danych.
+**Walidacja zapisu nie jest terenową weryfikacją prawdziwości.** Prototyp nie potwierdza obecności gracza w miejscu i nie ma pełnego zaplecza moderacji, trwałych dowodów fotograficznych ani odporności na wiele kont ani wykrywania wszystkich parafraz duplikatów. Samo zaznaczenie potwierdzenia obserwacji nie jest dowodem. Raport lub dobre odkrycie może pozostać publiczne, nawet jeśli serwer odmówi przyznania punktów. Przyznane wcześniej iskry nie znikają po rozwiązaniu bariery lub wycofaniu dobrego odkrycia. Wycofanie jest korektą informacji, a nie sposobem wyzerowania historii duplikatów. Przed szerokim publicznym uruchomieniem potrzebne są moderacja, obsługa nadużyć i zasady korekty danych.
 
 ## Wybór punktu bez GPS
 
@@ -106,19 +106,12 @@ Zapis, usunięcie i zastąpienie nie wywołują API. Usunięcie oraz zastąpieni
 
 Zmiana konta lub trybu od razu wymienia komponent albumu wraz z formularzem i podglądem. Miejski album pozostaje ukryty podczas ponownego sprawdzania sesji i po nieudanym sprawdzeniu; spóźniona odpowiedź wcześniejszego odświeżenia nie przywraca starszego kontekstu. Trening pozostaje osobny. Po sześciu zagadkach zaproszenie prowadzi do komponowania i zachowania ogrodu, z jasną informacją o odrębnym ogrodzie miejskim. Nie ma nagród za częstotliwość zapisu ani obowiązku nowych obserwacji.
 
-`tests/e2e/game-album.spec.ts` dodaje trzy scenariusze: limit, podgląd z klawiatury, zastąpienie/usunięcie i trwałość bez zmian nagród; rozdzielenie kont oraz treningu; uszkodzone dane i odmowa zapisu lokalnego. Wszystkie trzy scenariusze przeszły we wspólnym przebiegu 32/32 z 3 października 2026. Sprawdzono TypeScript oraz ręcznie desktop i telefon 390 px w osobnej sesji przeglądarki, wyłącznie z lokalnym treningiem. Brak błędów JavaScript i poziomego przepełnienia na telefonie. Materiały: `artifacts/game-album-desktop.png`, `artifacts/game-album-postcard.png`, `artifacts/game-album-mobile.png`.
+`tests/e2e/game-album.spec.ts` sprawdza limit, podgląd z klawiatury, zastąpienie/usunięcie i trwałość bez zmian nagród, rozdzielenie kont oraz treningu, uszkodzone dane i odmowę zapisu lokalnego. Testy są odseparowane od publicznej bazy.
 
 Przyciski są dostępne z klawiatury, grupy mają nazwy, zmiany wyniku są ogłaszane przez `role="status"`, a błędy przez `role="alert"`. Każda ilustracja zagadki ma opis tekstowy. Nie trzeba oceniać obrazu wzrokiem, aby ją rozwiązać. Po wyborze misji fokus przechodzi na jej nagłówek; na telefonie widok przewija się do rozgrywki. Przycisk startowy pozwala od razu zacząć zagadkę.
 
-`web/public/iskry.webmanifest` ma osobne `id`, `start_url` i `scope` równe `/gra`, nazwę Iskry Miasta oraz własne ikony SVG i PNG 192/512. Komponent gry ustawia manifest i tytuł strony. Odczyt HTTP potwierdził te pola manifestu oraz odpowiedź 200 i prawidłowy typ MIME wszystkich trzech ikon. To konfiguracja osobnej instalacji PWA; instalacja na fizycznym urządzeniu nie została jeszcze potwierdzona. Serwis worker i dystrybucja należą do wspólnej konfiguracji aplikacji.
+`web/public/iskry.webmanifest` ma osobne `id`, `start_url` i `scope` równe `/gra`, nazwę Iskry Miasta oraz własne ikony SVG i PNG 192/512. Komponent gry ustawia manifest i tytuł strony. Konfiguracja pozwala na osobną instalację PWA; działanie instalacji należy sprawdzić w docelowej przeglądarce i urządzeniu. Serwis worker i dystrybucja należą do wspólnej konfiguracji aplikacji.
 
-## Weryfikacja
+## Testowanie
 
-- `node --test tests/backend/game.test.mjs tests/backend/observations.test.mjs`: 16 testów PASS, w tym własność, replay, brak lub nieaktualność raportu, wymagania opisu i pomiaru, duplikaty, bonus, limity, saldo, transakcje zakupu, zmiana konta oraz wybór okolicy. Nowe testy sprawdzają rozdzielenie obserwacji i raportów, publiczną prywatność autorów, wycofanie, ważność typów, trwałe limity po ponownym otwarciu bazy, wspólną ekonomię i brak nagrody za wycofany lub wygasły wpis.
-- `npx tsc --noEmit`: PASS.
-- Ręczny test w przeglądarce: zagadki przeszkody, ławki i wejścia bez schodów, błędna odpowiedź z podpowiedzią, poprawna odpowiedź, widoczna zmiana ogrodu i zakup kwiatów; desktop 1440×900/950 i mobile 390×844. Brak błędów JavaScript. AXE ogrodu po dwóch pozytywnych zagadkach: zero naruszeń i zero wyników niepełnych.
-- AXE: zero naruszeń na ekranie startowym i w widoku dekorowania. Ilustracja szerokości wymaga ręcznego sprawdzenia dwóch tekstów SVG, ponieważ narzędzie nie ustala ich tła; obejrzano render i kolory. Ten wynik nie stanowi pełnego audytu zgodności WCAG.
-- `tests/e2e/game.spec.ts`: **5/5 PASS** we wspólnym przebiegu 32/32 z 3 października 2026. Zakres obejmuje trening bez zapisów do API, konto, misję, zatwierdzanie adresu, spóźniony GPS, nagrody i dekoracje oraz osobne dobre odkrycia i ich wycofanie. Album dodatkowo przeszedł **3/3**, a wspólne ustawienia czytelności **1/1**. Bieżący stan kolejnych przyrostów jest w [VERIFICATION.md](VERIFICATION.md).
-
-Materiały wizualne: `artifacts/game-desktop.png`, `artifacts/game-mobile-puzzle.png`, `artifacts/game-mobile-reward.png`, `artifacts/game-positive-rest.png`, `artifacts/game-positive-entry-mobile.png`, `artifacts/game-positive-garden-mobile.png`. Testy nie wysyłają danych do autorów map, instytucji ani innych zewnętrznych odbiorców.
-
+Testy ogrodu, albumu i obserwacji korzystają z izolowanych baz. Polecenia i ograniczenia oceny opisuje [TESTING.md](TESTING.md). Reguły nagród nie dowodzą prawdziwości obserwacji, a AXE nie zastępuje pełnego przebiegu czytnikiem ekranu.

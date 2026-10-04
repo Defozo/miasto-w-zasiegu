@@ -24,4 +24,4 @@ Format domyślny to A4 z marginesami. Ciemny tekst na białym tle, obramowania i
 
 `tests/e2e/print-plan.spec.ts` obejmuje ekran i emulację druku, wywołanie drukowania klawiaturą, długie adresy, dwa przystanki, wielostronicowy PDF, datę i potrzeby starszego planu oraz usunięcie wydruku po zablokowaniu prywatnego zapisu. Dane wydruku w pierwszym scenariuszu są kontrolowanymi przykładami testowymi. Testy nie używają fizycznej drukarki ani płatnych wyszukiwań.
 
-3 października 2026 wszystkie trzy scenariusze przeszły w Chromium na odizolowanym API; kontrola AXE ekranu nie wykazała naruszeń. Cztery strony `artifacts/print-plan-example.pdf` wyrenderowano przez Poppler i obejrzano osobno. Polskie znaki, pełne adresy, podział instrukcji oraz ostrzeżenia były czytelne, bez obcięć i bez elementów reszty aplikacji. Obrazy kontrolne to `artifacts/print-plan-page-1.png` do `print-plan-page-4.png`. Fizyczna drukarka i pozostałe przeglądarki nie były sprawdzane.
+Układ PDF, polskie znaki i podział stron należy sprawdzić w docelowej przeglądarce. Emulacja druku nie potwierdza fizycznego wydruku. [Testowanie](TESTING.md).

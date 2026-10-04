@@ -1,6 +1,6 @@
 # Filtry mapy
 
-Stan: 3 października 2026. Web/PWA. Przycisk „Filtry mapy” jest dostępny w górnej nawigacji, także na telefonie i w trakcie planowania trasy. W miejscu motta nad mapą znajduje się teraz liczba wyników i skrót do filtrów.
+Filtry działają w web/PWA i wspólnym interfejsie Androida. Przycisk „Filtry mapy” jest dostępny w górnej nawigacji, także na telefonie i w trakcie planowania trasy. Liczba wyników i skrót do filtrów są widoczne nad mapą.
 
 ## Zasady działania
 
@@ -31,11 +31,7 @@ Importer zachowuje jawne `toilets:wheelchair=yes/no/limited` przed ogólnym `whe
 
 ### Miasto Kraków
 
-Sprawdzono [miejski wykaz toalet](https://krakow.pl/bezbarier/turystyka_sport_kultura/2780,artykul,toalety-ogolnodostepne.html), aktualizowany 15 września 2025, oraz [jego wersję PDF](https://krakow.pl/getPdf?dok_id=2780). Wykaz 65 obiektów opisuje wejście z poziomu 0, platformy, windy, pochylnie i schodołazy. Te sposoby dostępu nie są równoważne dla samodzielnego użytkownika wózka.
-
-Sprawdzono też [konfigurację mapy MSIP](https://msip.um.krakow.pl/portal/sharing/rest/content/items/8274b2a015bc448ca27ad9e02e45d8eb/data?f=json). Warstwa `ZIW_WC_6227` deklaruje pola `nazwa`, `adres`, `typ`, `platnosc`, `godziny`, `przewij`, `dla_niep`, `udogodn`, `l_tt`, `rodzaj`, `data_imp`. Wskazany w niej endpoint rekordów `https://msip3.um.krakow.pl/server/rest/services/G_komunalna/ZIW_WC/MapServer/0` zwracał HTTP 404 podczas sprawdzania.
-
-Dlatego miejski wykaz posłużył do oceny semantyki filtrów. Nie jest automatycznie połączony z punktami OSM. Filtry poziomu 0, przewijaka i typu urządzenia nie są pokazywane bez danych dla konkretnych punktów. Rozbudowa wymaga importu z datą i źródłem oraz sprawdzonego powiązania obiektów.
+Przystanki i P+R ZTP dostarczają oddzielne fakty źródłowe. Miejskie wykazy toalet nie są obecnie automatycznie połączone z punktami OSM. Filtry poziomu wejścia, przewijaka i typu urządzenia wymagają danych dla konkretnych punktów; sama bliskość wpisów nie potwierdza tego samego wejścia. [Źródła, warunki i nowe adaptery](DATA-SOURCES.md).
 
 ## Kontrakt API
 

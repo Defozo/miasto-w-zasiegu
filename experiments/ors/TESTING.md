@@ -29,42 +29,15 @@ Punkty testowe są orientacyjnymi punktami na ulicach lub dojściach: Rynek/Flor
 - Osobny wariant `--case blocked-start` obejmuje punkt startowy kwadratem o boku około 140 m, blokując cały promień snappingu 30 m. Warunkiem zaliczenia jest HTTP 404 i ORS 2009 albo 2010. Nie ma zmiany punktów, promienia ani wymagań i nie ma fallbacku. Ten wariant nie uruchamia ponownie trzech tras ani objazdu.
 - Wynik `PASS` oznacza działanie API i geometrii. Nie dowodzi aktualności wszystkich tagów, poprawności przejść, dostępności wejścia, bezpiecznej nawigacji ani działania GPS w telefonie. `surface_quality_known` nie wymaga pełnego zestawu danych o wszystkich barierach.
 
-## Wykonanie 3 października 2026
+## Interpretacja odpowiedzi
 
-Wynik udanego uruchomienia: `results/20261003T004132.150748Z/summary.json`. ORS 10.0.1, OSM z 1 października 2026 20:22:06 UTC, profil `wheelchair`, health `ready`.
+W ORS 10.0.1 filtr szerokości sprawdza zapisane wartości większe od zera; zero oznacza brak danych. Odcinek bez atrybutów wheelchair może zostać dopuszczony przed sprawdzeniem `surface_quality_known`. Dlatego nawet odpowiedź na diagnostyczne żądanie 10 m nie potwierdza takiej szerokości. Wynik trzeba porównać z danymi konkretnej krawędzi OSM.
 
-| Trasa | Bazowa | Ścisła |
-| --- | ---: | ---: |
-| Rynek / Floriańska | 306,0 m | 306,0 m |
-| Grodzka | 369,4 m | 369,4 m |
-| Kazimierz | 270,4 m | 665,6 m |
+Ostrzeżenie o niedostępnym `roadaccessrestrictions` dotyczy dodatkowej informacji w odpowiedzi. Test zachowuje je, zamiast ukrywać. Samo ostrzeżenie nie dowodzi ani wyłączenia wszystkich filtrów dostępu, ani ich skuteczności w terenie. Zmiana danych zapisanych w grafie wymaga jego kontrolowanej przebudowy; zwykły restart nie uzupełnia brakujących atrybutów.
 
-Wszystkie sześć odpowiedzi przeszło walidację geometrii i instrukcji. Sztuczna przeszkoda na Floriańskiej zmieniła trasę z 306,0 m na 481,8 m. Bazowa geometria przecina polygon, geometria objazdu go nie przecina.
+Dla endpointu GeoJSON skrypt wysyła `Accept: application/geo+json`. Błąd parametrów lub nagłówka pozostaje błędem testu, bez poluzowania wymagań routingu. Wygenerowany `summary.json` opisuje wyłącznie dane uruchomienie i nie jest stałym wynikiem repozytorium.
 
-Diagnostyczne wymaganie szerokości 10 m zwróciło tę samą trasę 306,0 m. Nie oznacza to potwierdzenia takiej szerokości. W kodzie ORS 10.0.1 filtr szerokości sprawdza tylko wartości większe od zera; zero oznacza brak danych. Ponadto `accept()` dopuszcza krawędź bez jakichkolwiek atrybutów wheelchair przed sprawdzeniem `surface_quality_known`. Źródło: [WheelchairEdgeFilter](https://github.com/GIScience/openrouteservice/blob/v10.0.1/ors-engine/src/main/java/org/heigit/ors/routing/graphhopper/extensions/edgefilters/WheelchairEdgeFilter.java), metody `accept`, `checkMinimumWidth`, `checkSurfaceQualityKnown`.
-
-Osobny test zablokowanego startu (`results/20261003T004323.832555Z/summary.json`) zakończył się `PASS`: HTTP 404, kod 2010, komunikat o braku routowalnego punktu w promieniu 30 m dla punktu startowego. Dokładny request, polygon i odpowiedź są zachowane w tym samym katalogu.
-
-Każda odpowiedź z trasą zawierała warning 4 o niedostępnej informacji `roadaccessrestrictions`. Test zapisuje to ostrzeżenie i go nie tłumi. W ORS 10.0.1 `ExtraInfoProcessor` automatycznie żąda tego extra, gdy `suppress_warnings=false`; brak encoded value `AccessRestriction.KEY` powoduje zapisanie brakującego extra. Dotyczy to dodatkowej informacji o ograniczeniach dostępu i generowania związanych z nią ostrzeżeń. `WheelchairFlagEncoder.getAccess()` nadal osobno sprawdza dostęp do dróg, a `WheelchairEdgeFilter` sprawdza parametry wheelchair. Sam warning nie dowodzi wyłączenia tych filtrów ani ich skuteczności w terenie.
-
-Proponowana poprawka konfiguracji przy kolejnej kontrolowanej przebudowie grafu, niewykonana w tym teście:
-
-```yaml
-ors:
-  engine:
-    profiles:
-      wheelchair:
-        build:
-          ext_storages:
-            RoadAccessRestrictions:
-              use_for_warnings: true
-```
-
-Należy dopisać ten wpis do istniejącej konfiguracji, zachowując pozostałe storage. W kodzie 10.0.1 `BuildProperties.initializeExtStorages()` obsługuje tę nazwę i `handleAccessRestrictions()` włącza `encodedValues.setAccessRestriction(true)`. To nadal obsługiwany alias konfiguracji, chociaż implementacja danych przeszła na encoded values. Sam restart z istniejącym grafem nie uzupełni brakujących danych. Po przebudowie trzeba ponownie sprawdzić status, trasę z `extra_info=["roadaccessrestrictions"]` oraz zniknięcie warning 4. Nie testowano tej poprawki na działającym grafie.
-
-Pierwsza próba (`results/20261003T004110.648418Z`) ujawniła błąd nagłówka klienta: `Accept: application/json` przy endpointzie GeoJSON powodował HTTP 406 / ORS 2007. Skrypt poprawiono na `Accept: application/geo+json`. Dowody nieudanej próby zachowano; żadnych ograniczeń routingu nie poluzowano.
-
-## Źródła sprawdzone przed implementacją
+## Dokumentacja użytych interfejsów
 
 - [ORS requests / GeoJSON / steps](https://giscience.github.io/openrouteservice/api-reference/endpoints/directions/requests-and-return-types)
 - [ORS routing options / avoid_polygons / wheelchair](https://giscience.github.io/openrouteservice/api-reference/endpoints/directions/routing-options)
