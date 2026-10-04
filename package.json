@@ -1,0 +1,45 @@
+{
+  "name": "przejscie",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"node --watch server/index.mjs\" \"vite --host 127.0.0.1\"",
+    "dev:web": "vite --host 127.0.0.1",
+    "dev:api": "node --watch server/index.mjs",
+    "build": "tsc --noEmit && vite build && node scripts/build-sw.mjs",
+    "build:android": "tsc --noEmit && vite build --outDir ../android/web-bundle",
+    "preview": "vite preview --host 127.0.0.1 --port 4173",
+    "test": "node --test tests/backend/*.test.mjs",
+    "test:e2e": "node scripts/e2e.mjs"
+  },
+  "dependencies": {
+    "@clerk/backend": "^3.22.0",
+    "@clerk/localizations": "^4.21.2",
+    "@clerk/react": "^6.17.5",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "exifr": "^7.1.3",
+    "express": "^5.2.1",
+    "lucide-react": "^1.50.0",
+    "maplibre-gl": "^6.11.2",
+    "motion": "^14.0.0",
+    "parse5": "^8.0.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "sharp": "^0.35.5",
+    "stripe": "^23.0.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "agent-browser": "^0.38.2",
+    "concurrently": "^10.0.5",
+    "prettier": "^3.9.9",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.2"
+  }
+}

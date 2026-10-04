@@ -1,0 +1,27 @@
+name: cracow-ors-drive
+services:
+  drive:
+    image: openrouteservice/openrouteservice:v10.0.1@sha256:b2f66b5e33949e86a279f3de654ef99e2964eb9112d16fb52788c6bb63ff941c
+    container_name: cracow-ors-drive
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:18083:8082"
+    mem_limit: 6g
+    cpus: 3
+    environment:
+      REBUILD_GRAPHS: "False"
+      XMS: 1g
+      XMX: 4g
+      ORS_CONFIG_LOCATION: /home/ors/config/drive-config.yml
+    volumes:
+      - ./input:/home/ors/files:ro
+      - ./config:/home/ors/config:ro
+      - drive-graphs:/home/ors/graphs
+      - drive-logs:/home/ors/logs
+volumes:
+  drive-graphs:
+  drive-logs:
+networks:
+  default:
+    external: true
+    name: cracow-ors-spike_default

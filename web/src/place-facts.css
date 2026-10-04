@@ -1,0 +1,50 @@
+.place-facts {
+  margin: 22px 0;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.place-facts h2 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.place-facts dl {
+  margin: 0;
+}
+.place-facts dl > div {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.place-facts dt {
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+.place-facts dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+.place-facts .place-facts-restricted {
+  padding-left: 12px;
+  border-left: 3px solid currentColor;
+}
+.place-facts .place-facts-note,
+.place-facts .place-facts-position {
+  margin: 12px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.65;
+}
+.place-facts .place-facts-note {
+  color: var(--muted);
+}
+html[data-text-size="large"] .place-facts dt,
+html[data-text-size="large"] .place-facts dd,
+html[data-text-size="large"] .place-facts p {
+  font-size: 1rem;
+}
+html[data-contrast="high"] .place-facts dl > div {
+  border-bottom-color: currentColor;
+}

@@ -1,0 +1,201 @@
+.saved-places {
+  margin: 20px 0;
+  border: 1px solid #d0dac5;
+  border-radius: 18px;
+  background: #fafbf4;
+  padding: 0 16px;
+}
+.saved-places summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  min-height: 56px;
+  font-size: 14px;
+  font-weight: 750;
+  list-style: none;
+}
+.saved-places summary::-webkit-details-marker {
+  display: none;
+}
+.saved-places summary small {
+  margin-left: auto;
+  font-size: 11px;
+  color: #53654b;
+  font-weight: 500;
+}
+.saved-places details[open] summary {
+  border-bottom: 1px solid #dce4d4;
+}
+.saved-place-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.saved-place-list li {
+  padding: 16px 0;
+  border-bottom: 1px solid #dce4d4;
+}
+.saved-place-name {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.saved-place-name svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.saved-place-name strong {
+  display: block;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.saved-place-name small {
+  font-size: 12px;
+  color: #53654b;
+  line-height: 1.6;
+  display: block;
+  overflow-wrap: anywhere;
+}
+.saved-place-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 9px;
+}
+.saved-place-actions > button:not(.icon-button),
+.favorite-presets button,
+.saved-place-delete button {
+  min-height: 44px;
+  border: 1px solid #c8d6b9;
+  background: white;
+  border-radius: 12px;
+  color: #173c32;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.saved-place-actions > button:hover,
+.favorite-presets button[aria-pressed="true"] {
+  background: #e4edce;
+}
+.saved-place-actions .icon-button {
+  margin-left: auto;
+}
+.saved-place-delete {
+  font-size: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #f0ede0;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 12px;
+}
+.saved-place-delete span {
+  flex-basis: 100%;
+}
+.saved-place-feedback {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #36532a;
+}
+.saved-place-feedback svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.favorite-dialog {
+  max-width: 480px;
+  width: calc(100% - 32px);
+  max-height: 85dvh;
+  overflow: auto;
+  padding: 32px;
+  border: 1px solid #bac8ad;
+  border-radius: 24px;
+  background: #fffef8;
+  color: #173c32;
+}
+.favorite-dialog::backdrop {
+  background: #12372dcc;
+  backdrop-filter: blur(3px);
+}
+.favorite-dialog h2 {
+  font-size: 26px;
+  line-height: 1.25;
+  letter-spacing: -1px;
+  max-width: 330px;
+}
+.favorite-dialog p {
+  font-size: 14px;
+  line-height: 1.65;
+}
+.favorite-close {
+  float: right;
+  margin: -16px -16px 0 0;
+}
+.favorite-dialog input:not(.address-input input) {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #a8b5a3;
+  border-radius: 12px;
+  font: inherit;
+  background: white;
+  color: #173c32;
+}
+.favorite-presets {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 22px;
+}
+.favorite-dialog .address-field {
+  margin: 14px 0;
+}
+.address-save {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  min-height: 40px;
+  border: 0;
+  background: none;
+  color: #36532a;
+  padding: 4px 0;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.address-save:hover {
+  text-decoration: underline;
+}
+.saved-option-label {
+  font-weight: 750;
+}
+.saved-option-label small {
+  font-weight: 400;
+}
+.address-suggestion-note {
+  font-size: 12px;
+  color: #53654b;
+}
+.favorite-dialog .button {
+  margin-top: 8px;
+}
+@media (max-width: 500px) {
+  .favorite-dialog {
+    padding: 24px;
+  }
+  .saved-places {
+    padding: 0 12px;
+  }
+  .saved-place-actions > button:not(.icon-button) {
+    padding: 8px;
+  }
+  .favorite-dialog h2 {
+    font-size: 24px;
+  }
+  .saved-places summary small {
+    font-size: 10px;
+  }
+}

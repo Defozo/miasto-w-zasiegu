@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import { randomUUID } from 'node:crypto';
+import { mkdirSync, writeFileSync } from 'node:fs';
+const base = 'http://127.0.0.1:4194';
+async function request(path, body, cookie, method) {
+  const r = await fetch(base + '/api' + path, { method: method || (body ? 'POST' : 'GET'), headers: { ...(body ? { 'Content-Type': 'application/json' } : {}), ...(cookie ? { Cookie: cookie } : {}) }, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(40000) });
+  return { status: r.status, data: await r.json(), cookie: r.headers.get('set-cookie')?.split(';')[0] };
+}
+assert.equal((await request('/test-environment')).data.isolated, true, 'Never write QA observations to a normal database');
+const health = await request('/health'); assert(health.data.accessibilityFeatures > 200000);
+const layer = await request('/accessibility?bbox=19.92,50.05,19.96,50.075&kinds=kerb');
+assert.equal(layer.status, 200); assert(layer.data.features.length > 10); assert.equal(layer.data.source.license, 'ODbL-1.0');
+assert(layer.data.features.some(f => f.properties.kerbHeightCm === null));
+const account = async () => request('/auth/register', { email: `access-${randomUUID()}@example.test`, password: randomUUID() + 'aA9!', displayName: 'Izolowany test' });
+const owner = await account(), other = await account(); assert.equal(owner.status, 201); assert.equal(other.status, 201);
+const payload = { kind: 'kerb', description: 'Syntetyczny odcinek wyłącznie w bazie pamięciowej QA', geometry: { type: 'LineString', coordinates: [[19.939,50.063],[19.9391,50.063]] }, duration: 'permanent', measurement: 'measured', heightCm: 8, locationAccuracy: 'precise' };
+const added = await request('/reports', payload, owner.cookie); assert.equal(added.status, 201); const id = added.data.id;
+assert.equal(added.data.isMine, true); assert.equal(added.data.geometry.type, 'LineString'); assert.equal(added.data.heightCm, 8); assert.equal(added.data.validUntil, null);
+assert.equal((await request(`/reports/${id}`, payload, other.cookie, 'PUT')).status, 403);
+assert.equal((await request(`/reports/${id}/feedback`, { action: 'confirm' })).status, 401);
+const confirmed = await request(`/reports/${id}/feedback`, { action: 'confirm' }, other.cookie); assert.equal(confirmed.status, 200); assert.equal(confirmed.data.confirmations, 1);
+assert.equal((await request(`/reports/${id}/feedback`, { action: 'confirm' }, other.cookie)).status, 429);
+const conflict = await request(`/reports/${id}/feedback`, { action: 'dispute', description: 'W izolowanym teście inny pomiar.' }, other.cookie); assert.equal(conflict.data.disputed, true);
+const edited = await request(`/reports/${id}`, { ...payload, heightCm: 4 }, owner.cookie, 'PUT'); assert.equal(edited.status, 200); assert.equal(edited.data.heightCm, 4); assert.equal(edited.data.disputed, false); assert(edited.data.history.length >= 3);
+await request(`/reports/${id}/resolve`, {}, owner.cookie);
+const route = await request('/route', { start: [19.93931,50.06218], end: [19.94123,50.06464] });
+assert.equal(route.status, 200, JSON.stringify(route.data));
+assert(route.data.source.osmWaySegments.length > 0, 'ORS must supply OSM IDs');
+assert(route.data.accessibility.events.length > 0, 'The route should have matched path facts');
+const events = route.data.accessibility.events; assert(events.every((e,i) => !i || e.distanceAlongM >= events[i-1].distanceAlongM));
+const result = { checkedAt: new Date().toISOString(), isolated: true, health: health.data, curbCountInView: layer.data.features.length, reportLifecycle: 'create, ownership, confirm, rate limit, conflict, edit, resolve passed', route: { distanceM: route.data.distanceM, waySegments: route.data.source.osmWaySegments.length, evidence: events.length, coverage: route.data.accessibility.coverage } };
+mkdirSync('artifacts/accessibility', { recursive: true }); writeFileSync('artifacts/accessibility/api-validation.json', JSON.stringify(result,null,2));
+console.log(JSON.stringify(result));

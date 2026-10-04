@@ -1,0 +1,67 @@
+.place-evidence {
+  margin: 22px 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--ink);
+  background: var(--paper, #fffdf8);
+  overflow-wrap: anywhere;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+.place-evidence h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+.place-evidence a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+.place-evidence-status {
+  margin: 10px 0 14px;
+}
+.place-evidence dl {
+  margin: 0;
+}
+.place-evidence dl > div {
+  margin-top: 10px;
+}
+.place-evidence dt {
+  color: var(--muted);
+}
+.place-evidence dd {
+  margin: 0;
+}
+.place-evidence-note {
+  color: var(--muted);
+}
+.place-evidence details {
+  border-top: 1px solid var(--line);
+  margin-top: 14px;
+  padding-top: 6px;
+}
+.place-evidence summary {
+  cursor: pointer;
+  padding: 8px 0;
+  font-weight: 700;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+.place-evidence-warning {
+  padding: 12px;
+  border-left: 3px solid currentColor;
+  font-weight: 700;
+}
+.place-source-tag {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 5px 0;
+}
+html[data-text-size="large"] .place-evidence,
+html[data-text-size="large"] .place-source-tag {
+  font-size: 1rem;
+}
+html[data-contrast="high"] .place-evidence {
+  border-color: currentColor;
+}

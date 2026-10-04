@@ -1,0 +1,17 @@
+{
+  "id": "/gra",
+  "name": "Iskry Miasta",
+  "short_name": "Iskry Miasta",
+  "description": "Rozwiązuj zagadki o dostępności, dodawaj obserwacje z miasta i wymieniaj iskry na ozdoby do ogrodu.",
+  "lang": "pl",
+  "start_url": "/gra",
+  "scope": "/gra",
+  "display": "standalone",
+  "background_color": "#fff9ed",
+  "theme_color": "#284b3f",
+  "icons": [
+    { "src": "/iskry-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/iskry-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/iskry-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

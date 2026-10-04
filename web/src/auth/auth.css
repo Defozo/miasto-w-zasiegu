@@ -1,0 +1,8 @@
+.auth-page { width: min(100% - 2rem, 460px); margin: 3rem auto; display: grid; gap: 1.25rem; }
+.auth-page h1, .auth-page p { margin: 0; }
+.auth-back { color: #173c32; text-decoration: underline; padding: .75rem 0; }
+.auth-page .cl-rootBox, .auth-page .cl-cardBox { width: 100%; max-width: 100%; }
+.auth-unavailable { display: grid; gap: 1rem; }
+.auth-unavailable p { line-height: 1.6; }
+.auth-page :focus-visible, .account-panel a:focus-visible { outline: 3px solid #173c32; outline-offset: 4px; }
+@media (max-width: 480px) { .auth-page { margin-block: 1.5rem; } }

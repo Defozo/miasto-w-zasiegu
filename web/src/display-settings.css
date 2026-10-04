@@ -1,0 +1,213 @@
+.display-settings {
+  border: 1px solid #cbd7c1;
+  border-radius: 18px;
+  background: #f9fbf4;
+  padding: 0 16px;
+  margin: 20px 0 26px;
+}
+.display-settings summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  min-height: 54px;
+  font-size: 14px;
+  font-weight: 700;
+  list-style: none;
+}
+.display-settings summary::-webkit-details-marker {
+  display: none;
+}
+.display-settings > p {
+  font-size: 13px;
+  line-height: 1.65;
+}
+.display-options {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+.display-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 80px;
+  background: white;
+  border: 1px solid #aebfa0;
+  border-radius: 14px;
+  padding: 14px;
+  text-align: left;
+  color: #173c32;
+}
+.display-option[aria-pressed="true"] {
+  background: #e5eecf;
+  border-color: #647d3c;
+}
+.display-option > span:first-of-type {
+  flex: 1;
+}
+.display-option strong {
+  font-size: 14px;
+  display: block;
+}
+.display-option small {
+  font-size: 12px;
+  display: block;
+  line-height: 1.6;
+  color: #455c40;
+  margin-top: 3px;
+}
+.display-toggle {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #71845f;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.display-option[aria-pressed="true"] .display-toggle {
+  background: #365929;
+  color: white;
+}
+.display-settings .field-help {
+  font-size: 12px;
+}
+html[data-text-size="large"]
+  .app-shell
+  :is(
+    p,
+    label,
+    input,
+    textarea,
+    select,
+    .text-button,
+    .button,
+    .address-suggestions button
+  ) {
+  font-size: 18px !important;
+  line-height: 1.65 !important;
+}
+html[data-text-size="large"]
+  .app-shell
+  :is(
+    small,
+    .field-help,
+    .privacy-note,
+    .route-steps li div span,
+    .model-parameter,
+    .saved-place-actions button,
+    .display-option strong
+  ) {
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+html[data-text-size="large"] .app-shell :is(.nav-item, .nav-item span) {
+  font-size: 13px;
+  line-height: 1.3;
+}
+html[data-text-size="large"] .app-shell :is(.check-row, .route-profile) {
+  align-items: flex-start;
+}
+html[data-text-size="large"]
+  .app-shell
+  :is(.route-profile span, .check-row span) {
+  font-size: 16px;
+  line-height: 1.6;
+}
+html[data-text-size="large"] .app-shell .profile-pill {
+  font-size: 14px;
+}
+html[data-text-size="large"] .app-shell .saved-place-actions {
+  flex-wrap: wrap;
+}
+html[data-text-size="large"] .app-shell .place-card p {
+  white-space: normal;
+  overflow: visible;
+}
+html[data-text-size="large"]
+  .ig-app
+  :is(p, label, input, textarea, .ig-small-print) {
+  font-size: 16px;
+  line-height: 1.6;
+}
+html[data-contrast="high"] {
+  --ink: #10291c;
+  --muted: #29442e;
+  --paper: #fff;
+  --line: #718470;
+  --white: #fff;
+}
+html[data-contrast="high"] .app-shell {
+  background: #fff;
+  color: #10291c;
+}
+html[data-contrast="high"] .ig-app {
+  --ig-ink: #153321;
+  --ig-muted: #324e31;
+  --ig-line: #788867;
+}
+html[data-contrast="high"]
+  .app-shell
+  :is(
+    .muted,
+    .field-help,
+    .privacy-note,
+    .route-steps li div span,
+    .place-card p,
+    .model-options small,
+    .good-time,
+    .saved-place-name small
+  ) {
+  color: #29442e !important;
+}
+html[data-contrast="high"]
+  .app-shell
+  :is(
+    .journey-fields,
+    .saved-places,
+    .display-settings,
+    .input-unit,
+    .address-input,
+    .place-card,
+    .good-discovery,
+    .model-result
+  ) {
+  border-color: #718470;
+}
+html[data-contrast="high"] .app-shell .button.primary {
+  color: #fff;
+  background: #10291c;
+}
+html[data-contrast="high"] .app-shell :is(input, select, textarea) {
+  color: #10291c;
+  border-color: #637757;
+}
+html[data-contrast="high"]
+  .app-shell
+  :is(
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    summary:focus-visible
+  ) {
+  outline: 3px solid #153800;
+  outline-offset: 4px;
+}
+html[data-motion="reduced"] :is(*, *::before, *::after) {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+@media (max-width: 500px) {
+  html[data-text-size="large"] .app-shell .nav-item span {
+    font-size: 11px;
+  }
+  html[data-text-size="large"] .app-shell .journey-fields {
+    padding: 14px;
+  }
+  html[data-text-size="large"] .app-shell .display-option {
+    padding: 12px;
+    gap: 8px;
+  }
+}

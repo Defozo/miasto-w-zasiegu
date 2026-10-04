@@ -1,0 +1,973 @@
+{
+  "duration": 756.6,
+  "chapters": [
+    {
+      "start": 0,
+      "title": "Poznaj platformę"
+    },
+    {
+      "start": 53.53333333333333,
+      "title": "Potrzeby i profil"
+    },
+    {
+      "start": 84.83333333333333,
+      "title": "AI rozpoznaje wózek"
+    },
+    {
+      "start": 143.36666666666667,
+      "title": "Mapa i miejsca"
+    },
+    {
+      "start": 208.03333333333333,
+      "title": "AI sprawdza dostępność"
+    },
+    {
+      "start": 266.73333333333335,
+      "title": "Trasy i odpoczynek"
+    },
+    {
+      "start": 357.7,
+      "title": "Twój plan i konto"
+    },
+    {
+      "start": 389.6,
+      "title": "Android i Wear OS"
+    },
+    {
+      "start": 426.73333333333335,
+      "title": "Zdjęcia i zgłoszenia"
+    },
+    {
+      "start": 492.3333333333333,
+      "title": "Gra Iskry Miasta"
+    },
+    {
+      "start": 581.8,
+      "title": "Trening i własny ogród"
+    },
+    {
+      "start": 610.4,
+      "title": "Paszporty miejsc"
+    },
+    {
+      "start": 643.5,
+      "title": "Model biznesowy"
+    },
+    {
+      "start": 674.5,
+      "title": "Stripe i płatności"
+    }
+  ],
+  "cues": [
+    {
+      "start": 0.5333333333333333,
+      "end": 6.2,
+      "text": "Masz ochotę wyjść do muzeum, spotkać się ze znajomymi albo po prostu załatwić coś w mieście."
+    },
+    {
+      "start": 6.2,
+      "end": 7.466666666666667,
+      "text": "Cel jest prosty."
+    },
+    {
+      "start": 7.466666666666667,
+      "end": 12.766666666666667,
+      "text": "Trudniej ustalić, czy po drodze będą schody, czy zmieścisz się w wejściu i gdzie odpoczniesz."
+    },
+    {
+      "start": 12.9,
+      "end": 15.466666666666667,
+      "text": "Właśnie po to powstało Miasto w zasięgu."
+    },
+    {
+      "start": 15.466666666666667,
+      "end": 22.2,
+      "text": "Zbudowaliśmy platformę, która łączy planowanie, informacje o miejscach, asystentów AI i społeczność."
+    },
+    {
+      "start": 22.266666666666666,
+      "end": 24.966666666666665,
+      "text": "Zobacz, jak te elementy pracują razem."
+    },
+    {
+      "start": 25.133333333333333,
+      "end": 27.9,
+      "text": "Na początek wystarczy telefon i przeglądarka."
+    },
+    {
+      "start": 28.0,
+      "end": 31.266666666666666,
+      "text": "Strona dopasowuje się do małego ekranu, więc skorzystasz z"
+    },
+    {
+      "start": 31.266666666666666,
+      "end": 35.333333333333336,
+      "text": "niej na Androidzie i na iPhonie, bez pobierania aplikacji."
+    },
+    {
+      "start": 35.43333333333333,
+      "end": 38.7,
+      "text": "Możesz od razu przeglądać miejsca i planować wyjście."
+    },
+    {
+      "start": 38.8,
+      "end": 45.36666666666667,
+      "text": "Do tego mamy aplikację na Androida, towarzyszącą aplikację na Wear OS oraz grę Iskry Miasta."
+    },
+    {
+      "start": 45.5,
+      "end": 49.53333333333333,
+      "text": "Każda część ma konkretną rolę: łatwo zacząć, wygodnie"
+    },
+    {
+      "start": 49.53333333333333,
+      "end": 53.03333333333333,
+      "text": "podróżować i wspólnie uzupełniać wiedzę o mieście."
+    },
+    {
+      "start": 53.63333333333333,
+      "end": 55.166666666666664,
+      "text": "Zaczynamy od Ciebie."
+    },
+    {
+      "start": 55.233333333333334,
+      "end": 62.56666666666667,
+      "text": "Wybierasz sposób poruszania się: wózek ręczny, elektryczny, balkonik, wózek dziecięcy albo spacer."
+    },
+    {
+      "start": 62.7,
+      "end": 65.6,
+      "text": "Możesz zaznaczyć, że korzystasz też z samochodu."
+    },
+    {
+      "start": 65.66666666666667,
+      "end": 70.53333333333333,
+      "text": "Ustawiasz szerokość sprzętu, wygodne nachylenie i wysokość krawężnika."
+    },
+    {
+      "start": 70.6,
+      "end": 73.9,
+      "text": "Zaznaczasz, czy chcesz unikać nieutwardzonej nawierzchni."
+    },
+    {
+      "start": 73.9,
+      "end": 76.73333333333333,
+      "text": "To konkretne potrzeby, bez pytania o diagnozę."
+    },
+    {
+      "start": 76.73333333333333,
+      "end": 79.0,
+      "text": "Zestawy można nazwać i przełączać."
+    },
+    {
+      "start": 79.0,
+      "end": 84.33333333333333,
+      "text": "Dzięki temu inne ustawienia masz na samodzielne wyjście, a inne na spacer z dzieckiem."
+    },
+    {
+      "start": 84.93333333333334,
+      "end": 87.4,
+      "text": "Nie każdy zna parametry swojego sprzętu."
+    },
+    {
+      "start": 87.43333333333334,
+      "end": 90.03333333333333,
+      "text": "I nie każdy ma ochotę przekopywać instrukcje."
+    },
+    {
+      "start": 90.06666666666666,
+      "end": 94.06666666666666,
+      "text": "Dlatego przygotowaliśmy asystenta, który robi to razem z użytkownikiem."
+    },
+    {
+      "start": 94.16666666666667,
+      "end": 99.3,
+      "text": "Możesz wpisać producenta i model albo zacząć od zdjęcia sprzętu lub jego oznaczenia."
+    },
+    {
+      "start": 99.36666666666666,
+      "end": 101.5,
+      "text": "Zdjęcie pomaga rozpoznać model."
+    },
+    {
+      "start": 101.5,
+      "end": 107.13333333333334,
+      "text": "Następnie agent szuka informacji w internecie, w dokumentacji producenta, i pokazuje źródła."
+    },
+    {
+      "start": 107.13333333333334,
+      "end": 109.0,
+      "text": "Wymiary pochodzą z dokumentów."
+    },
+    {
+      "start": 109.1,
+      "end": 112.2,
+      "text": "Nie próbujemy odgadywać centymetrów z fotografii."
+    },
+    {
+      "start": 112.76666666666667,
+      "end": 114.63333333333334,
+      "text": "Zobaczmy konkretny przykład."
+    },
+    {
+      "start": 114.63333333333334,
+      "end": 118.06666666666666,
+      "text": "Wpisujemy Cameleon i przyznajemy, że nie znamy rozmiaru."
+    },
+    {
+      "start": 118.1,
+      "end": 121.06666666666666,
+      "text": "Asystent znajduje kilka wariantów, więc dopytuje."
+    },
+    {
+      "start": 121.06666666666666,
+      "end": 123.46666666666667,
+      "text": "Podajemy osiemnaście cali z etykiety."
+    },
+    {
+      "start": 123.46666666666667,
+      "end": 127.76666666666667,
+      "text": "Teraz dostajemy szerokość całkowitą: sześćdziesiąt cztery centymetry."
+    },
+    {
+      "start": 127.76666666666667,
+      "end": 132.13333333333333,
+      "text": "To ważne, bo szerokość siedziska i szerokość całego wózka to różne rzeczy."
+    },
+    {
+      "start": 132.2,
+      "end": 135.0,
+      "text": "Jednym kliknięciem stosujemy znaleziony parametr."
+    },
+    {
+      "start": 135.0,
+      "end": 139.1,
+      "text": "Człowiek zachowuje kontrolę, a żmudne szukanie przejmuje asystent."
+    },
+    {
+      "start": 139.1,
+      "end": 142.03333333333333,
+      "text": "Własny pomiar nadal można wpisać samodzielnie."
+    },
+    {
+      "start": 143.46666666666667,
+      "end": 147.53333333333333,
+      "text": "Na mapie wyszukasz miejsce, ulicę lub konkretny adres."
+    },
+    {
+      "start": 147.6,
+      "end": 153.03333333333333,
+      "text": "Kategorie pozwalają szybko przejść do kultury, jedzenia, toalet, odpoczynku czy parkingów."
+    },
+    {
+      "start": 153.16666666666666,
+      "end": 156.7,
+      "text": "Filtry zawężają wyniki, na przykład do toalet z informacją"
+    },
+    {
+      "start": 156.7,
+      "end": 160.4,
+      "text": "o dostępności albo ławek z oparciem i podłokietnikami."
+    },
+    {
+      "start": 160.43333333333334,
+      "end": 165.7,
+      "text": "Możesz też włączyć warstwy schodów, wejść, wind i innych elementów infrastruktury."
+    },
+    {
+      "start": 165.7,
+      "end": 168.33333333333334,
+      "text": "A jeśli wolisz tekst, otwierasz listę."
+    },
+    {
+      "start": 168.46666666666667,
+      "end": 171.16666666666666,
+      "text": "Dużo informacji staje się użyteczne dopiero wtedy,"
+    },
+    {
+      "start": 171.16666666666666,
+      "end": 174.8,
+      "text": "gdy da się łatwo znaleźć to, czego akurat potrzebujesz."
+    },
+    {
+      "start": 175.4,
+      "end": 178.6,
+      "text": "Każde miejsce ma kartę z konkretnymi warunkami."
+    },
+    {
+      "start": 178.73333333333332,
+      "end": 182.2,
+      "text": "Przy przystanku Teatr Słowackiego zero trzy zobaczymy na przykład"
+    },
+    {
+      "start": 182.2,
+      "end": 187.13333333333333,
+      "text": "nawierzchnię peronu, krawężnik, ławki i wiatę z danych miejskich."
+    },
+    {
+      "start": 187.23333333333332,
+      "end": 191.2,
+      "text": "To pozwala ocenić więcej niż samą lokalizację pinezki."
+    },
+    {
+      "start": 191.4,
+      "end": 197.7,
+      "text": "Łączymy dane OpenStreetMap, zbiory miasta, informacje obiektów i obserwacje społeczności."
+    },
+    {
+      "start": 197.7,
+      "end": 201.26666666666668,
+      "text": "Pokazujemy, skąd pochodzi informacja i czego jeszcze brakuje."
+    },
+    {
+      "start": 201.26666666666668,
+      "end": 207.53333333333333,
+      "text": "Dzięki temu użytkownik może podjąć własną decyzję, zamiast polegać na jednym ogólnym znaczku."
+    },
+    {
+      "start": 208.13333333333333,
+      "end": 209.73333333333332,
+      "text": "A teraz drugi asystent."
+    },
+    {
+      "start": 209.73333333333332,
+      "end": 211.36666666666667,
+      "text": "Wybieramy Rynek Podziemny."
+    },
+    {
+      "start": 211.36666666666667,
+      "end": 216.36666666666667,
+      "text": "Agent sprawdza oficjalną stronę obiektu i szuka informacji o dostępności."
+    },
+    {
+      "start": 216.36666666666667,
+      "end": 221.1,
+      "text": "Znajduje opis windy, wymiary jej kabiny i informację o toalecie."
+    },
+    {
+      "start": 221.1,
+      "end": 223.96666666666667,
+      "text": "Układa je w czytelne fakty przy karcie muzeum."
+    },
+    {
+      "start": 223.96666666666667,
+      "end": 227.46666666666667,
+      "text": "Rozwijasz źródło i widzisz, na czym opiera się odpowiedź."
+    },
+    {
+      "start": 227.5,
+      "end": 229.96666666666667,
+      "text": "Informacje, których wcześniej trzeba było szukać w"
+    },
+    {
+      "start": 229.96666666666667,
+      "end": 233.66666666666666,
+      "text": "różnych zakładkach, trafiają tam, gdzie planujesz wizytę."
+    },
+    {
+      "start": 233.73333333333332,
+      "end": 237.33333333333334,
+      "text": "To właśnie oszczędność pracy, którą ma dawać AI."
+    },
+    {
+      "start": 238.76666666666668,
+      "end": 243.43333333333334,
+      "text": "W tym przykładzie kabina windy ma metr dziesięć na metr czterdzieści."
+    },
+    {
+      "start": 243.43333333333334,
+      "end": 247.36666666666667,
+      "text": "Muzeum opisuje też toaletę dla osób z niepełnosprawnościami."
+    },
+    {
+      "start": 247.36666666666667,
+      "end": 251.8,
+      "text": "Gdy brakuje szerokości wejścia, aplikacja zostawia tę niewiadomą widoczną."
+    },
+    {
+      "start": 251.8,
+      "end": 255.33333333333334,
+      "text": "Potrafi również pokazać, że źródła mówią coś innego."
+    },
+    {
+      "start": 255.4,
+      "end": 257.53333333333336,
+      "text": "Nie musisz ufać odpowiedzi w ciemno."
+    },
+    {
+      "start": 257.53333333333336,
+      "end": 261.3333333333333,
+      "text": "Masz fakt, jego pochodzenie i jasny punkt wyjścia do oceny."
+    },
+    {
+      "start": 261.43333333333334,
+      "end": 266.26666666666665,
+      "text": "Tak budujemy zaufanie: pomagając zrozumieć sytuację przed wyjściem."
+    },
+    {
+      "start": 266.8333333333333,
+      "end": 273.3333333333333,
+      "text": "Wybieramy start i cel, a aplikacja oblicza rzeczywistą trasę z uwzględnieniem ustawionych potrzeb."
+    },
+    {
+      "start": 273.46666666666664,
+      "end": 276.7,
+      "text": "Można dodać kilka przystanków, zmieniać ich kolejność i"
+    },
+    {
+      "start": 276.7,
+      "end": 280.26666666666665,
+      "text": "wybrać konkretne wejście, jeśli znamy jego położenie."
+    },
+    {
+      "start": 280.46666666666664,
+      "end": 285.2,
+      "text": "Oprócz linii na mapie dostajemy długość, przewidywany czas i instrukcje."
+    },
+    {
+      "start": 285.4,
+      "end": 289.8333333333333,
+      "text": "Sekcja warunków po drodze zbiera istotne informacje w kolejności przejścia."
+    },
+    {
+      "start": 289.9,
+      "end": 292.8333333333333,
+      "text": "Dzięki temu można przygotować całą podróż, a nie"
+    },
+    {
+      "start": 292.8333333333333,
+      "end": 296.3666666666667,
+      "text": "tylko sprawdzić, że punkt docelowy istnieje na mapie."
+    },
+    {
+      "start": 296.96666666666664,
+      "end": 299.46666666666664,
+      "text": "Dobra trasa uwzględnia także przerwę."
+    },
+    {
+      "start": 299.53333333333336,
+      "end": 304.7,
+      "text": "Aplikacja podpowiada ławki, toalety i miejsca odpoczynku w pobliżu wyliczonej drogi."
+    },
+    {
+      "start": 304.76666666666665,
+      "end": 308.06666666666666,
+      "text": "Zobacz różnicę: przy jednej ławce znamy oparcie i"
+    },
+    {
+      "start": 308.06666666666666,
+      "end": 311.5,
+      "text": "podłokietniki, przy drugiej nie znamy podłokietników."
+    },
+    {
+      "start": 311.6666666666667,
+      "end": 316.1,
+      "text": "Wybierasz potrzebny postój i przeliczasz trasę, zachowując swój cel."
+    },
+    {
+      "start": 316.1333333333333,
+      "end": 321.1666666666667,
+      "text": "Przy instrukcjach jest też podgląd Street View, pomocny w rozpoznaniu okolicy."
+    },
+    {
+      "start": 321.3,
+      "end": 324.1,
+      "text": "Warunki mogą się zmieniać, dlatego informacje o"
+    },
+    {
+      "start": 324.1,
+      "end": 327.9,
+      "text": "brakach i zgłoszonych przeszkodach towarzyszą planowi."
+    },
+    {
+      "start": 329.3333333333333,
+      "end": 333.8,
+      "text": "Jeśli dojeżdżasz autem, samo znalezienie parkingu nie kończy zadania."
+    },
+    {
+      "start": 333.8,
+      "end": 338.0,
+      "text": "Trzeba jeszcze wysiąść, mieć miejsce na rampę i dostać się do celu."
+    },
+    {
+      "start": 338.03333333333336,
+      "end": 344.23333333333335,
+      "text": "Dlatego plan łączy przejazd samochodem, parking oraz dalszy odcinek według Twoich potrzeb."
+    },
+    {
+      "start": 344.26666666666665,
+      "end": 347.03333333333336,
+      "text": "Pokazuje warianty i informacje o przesiadce."
+    },
+    {
+      "start": 347.1,
+      "end": 352.56666666666666,
+      "text": "Możesz otworzyć odcinek samochodowy w Google Maps, a po powrocie kontynuować przygotowany plan."
+    },
+    {
+      "start": 352.6,
+      "end": 357.2,
+      "text": "To jedna podróż, nawet jeśli po drodze zmieniasz sposób poruszania się."
+    },
+    {
+      "start": 357.8,
+      "end": 362.6666666666667,
+      "text": "Dom, pracę i inne miejsca zapiszesz pod własnymi nazwami."
+    },
+    {
+      "start": 362.76666666666665,
+      "end": 365.56666666666666,
+      "text": "Zapisany plan zachowuje także użyte potrzeby."
+    },
+    {
+      "start": 365.56666666666666,
+      "end": 368.73333333333335,
+      "text": "Nie zaczynasz wszystkiego od nowa przy kolejnym wyjściu."
+    },
+    {
+      "start": 368.73333333333335,
+      "end": 373.43333333333334,
+      "text": "Instrukcje można otworzyć bez internetu albo wydrukować i zapisać do PDF."
+    },
+    {
+      "start": 373.56666666666666,
+      "end": 376.56666666666666,
+      "text": "Nową trasę obliczamy po połączeniu z siecią."
+    },
+    {
+      "start": 376.6,
+      "end": 383.26666666666665,
+      "text": "Konto synchronizuje ustawienia i ulubione między urządzeniami, a tryb gościa pozwala zacząć od razu."
+    },
+    {
+      "start": 383.3333333333333,
+      "end": 389.1,
+      "text": "Większy tekst, mocniejszy kontrast i ograniczenie ruchu pomagają dopasować sam interfejs."
+    },
+    {
+      "start": 389.7,
+      "end": 394.3666666666667,
+      "text": "W otwartej, widocznej stronie działa również prowadzenie GPS."
+    },
+    {
+      "start": 394.43333333333334,
+      "end": 397.9,
+      "text": "Aplikacja na Androida dodaje natywne prowadzenie GPS,"
+    },
+    {
+      "start": 397.9,
+      "end": 401.76666666666665,
+      "text": "polskie komunikaty głosowe i działanie przy wygaszonym ekranie."
+    },
+    {
+      "start": 401.9,
+      "end": 407.06666666666666,
+      "text": "Na zegarku z Wear OS masz dużą strzałkę, odległość i najbliższy manewr."
+    },
+    {
+      "start": 407.1333333333333,
+      "end": 411.6333333333333,
+      "text": "Krótkie spojrzenie na nadgarstek może zastąpić kolejne wyciąganie telefonu."
+    },
+    {
+      "start": 411.7,
+      "end": 416.7,
+      "text": "Sprawdziliśmy przesyłanie podglądu instrukcji między fizycznym telefonem i zegarkiem."
+    },
+    {
+      "start": 416.8333333333333,
+      "end": 421.3,
+      "text": "Rozwijamy też indywidualny czas podróży: za zgodą użytkownika aplikacja"
+    },
+    {
+      "start": 421.3,
+      "end": 425.4,
+      "text": "korzysta z zapisanych przejazdów, żeby lepiej oszacować jego tempo."
+    },
+    {
+      "start": 426.8333333333333,
+      "end": 429.96666666666664,
+      "text": "Nawet dobra mapa potrzebuje nowych informacji."
+    },
+    {
+      "start": 430.0,
+      "end": 435.1333333333333,
+      "text": "Pojawia się remont, przejście zostaje zastawione, naprawiona winda znowu działa."
+    },
+    {
+      "start": 435.2,
+      "end": 441.8333333333333,
+      "text": "W aplikacji można opisać barierę, wskazać punkt, odcinek albo obszar i dodać własny pomiar."
+    },
+    {
+      "start": 441.96666666666664,
+      "end": 445.8,
+      "text": "Osobno zaznaczamy dobre odkrycia, na przykład miejsce odpoczynku."
+    },
+    {
+      "start": 445.96666666666664,
+      "end": 449.6666666666667,
+      "text": "Autor może poprawić wpis lub oznaczyć rozwiązanie problemu."
+    },
+    {
+      "start": 449.7,
+      "end": 453.26666666666665,
+      "text": "Inna osoba potwierdzi aktualność albo zgłosi zmianę."
+    },
+    {
+      "start": 453.3333333333333,
+      "end": 455.7,
+      "text": "To pozwala wiedzy o mieście dojrzewać razem z"
+    },
+    {
+      "start": 455.7,
+      "end": 459.43333333333334,
+      "text": "doświadczeniami ludzi, którzy naprawdę z niego korzystają."
+    },
+    {
+      "start": 460.03333333333336,
+      "end": 465.26666666666665,
+      "text": "Trzecie zastosowanie AI skraca drogę od zauważenia szczegółu do jego opisania."
+    },
+    {
+      "start": 465.3,
+      "end": 471.3666666666667,
+      "text": "Dodajesz zdjęcie, a asystent proponuje rodzaj obserwacji i pierwszą wersję opisu."
+    },
+    {
+      "start": 471.5,
+      "end": 475.8,
+      "text": "Tutaj rozpoznaje obniżony krawężnik i oznaczenia dotykowe."
+    },
+    {
+      "start": 476.06666666666666,
+      "end": 480.2,
+      "text": "Sprawdzasz tekst, wybierasz miejsce i uzupełniasz to, co wiesz."
+    },
+    {
+      "start": 480.26666666666665,
+      "end": 482.46666666666664,
+      "text": "Dopiero Ty decydujesz o zapisie."
+    },
+    {
+      "start": 482.46666666666664,
+      "end": 485.26666666666665,
+      "text": "To dużo łatwiejszy początek niż pusty formularz."
+    },
+    {
+      "start": 485.46666666666664,
+      "end": 491.0,
+      "text": "Zdjęcie pomaga opisać widoczną sytuację, a rzeczywiste wymiary nadal wymagają pomiaru."
+    },
+    {
+      "start": 492.43333333333334,
+      "end": 498.46666666666664,
+      "text": "Żeby ludzie wracali z kolejnymi informacjami, sama prośba o wypełnienie formularza to za mało."
+    },
+    {
+      "start": 498.56666666666666,
+      "end": 500.93333333333334,
+      "text": "Dlatego zbudowaliśmy Iskry Miasta."
+    },
+    {
+      "start": 500.93333333333334,
+      "end": 505.73333333333335,
+      "text": "To osobna gra, połączona z główną aplikacją i tym samym kontem."
+    },
+    {
+      "start": 505.8,
+      "end": 509.6333333333333,
+      "text": "Zamienia potrzebne działania w małe misje: odkryj wejście,"
+    },
+    {
+      "start": 509.6333333333333,
+      "end": 513.5333333333333,
+      "text": "opisz miejsce odpoczynku, sprawdź starszą obserwację."
+    },
+    {
+      "start": 513.5333333333333,
+      "end": 515.0666666666667,
+      "text": "Każda misja ma powód."
+    },
+    {
+      "start": 515.1,
+      "end": 518.7333333333333,
+      "text": "Gracz dostaje cel i satysfakcję z postępu, a kolejna osoba"
+    },
+    {
+      "start": 518.7333333333333,
+      "end": 522.5666666666667,
+      "text": "planująca wyjście może dostać bardziej użyteczną informację."
+    },
+    {
+      "start": 523.1666666666666,
+      "end": 525.0333333333333,
+      "text": "Tak wygląda pętla gry."
+    },
+    {
+      "start": 525.1333333333333,
+      "end": 530.0333333333333,
+      "text": "Wybierasz misję na mapie lub liście, sprawdzasz szczegół i zapisujesz obserwację."
+    },
+    {
+      "start": 530.0666666666667,
+      "end": 534.5333333333333,
+      "text": "Dostajesz doświadczenie, rozwijasz rangę i zdobywasz odznaki."
+    },
+    {
+      "start": 534.6,
+      "end": 538.0333333333333,
+      "text": "Pomiar daje więcej punktów niż zwykły opis, a potrzebne"
+    },
+    {
+      "start": 538.0333333333333,
+      "end": 540.9666666666667,
+      "text": "ponowne sprawdzenie jest szczególnie doceniane."
+    },
+    {
+      "start": 541.1666666666666,
+      "end": 546.5333333333333,
+      "text": "Co ważne, za potwierdzenie starego opisu i za zauważenie zmiany nagradzamy tak samo."
+    },
+    {
+      "start": 546.7333333333333,
+      "end": 548.9333333333333,
+      "text": "Chodzi o aktualną informację."
+    },
+    {
+      "start": 548.9333333333333,
+      "end": 553.0333333333333,
+      "text": "Powielanie tych samych wpisów nie jest drogą do kolejnych nagród."
+    },
+    {
+      "start": 554.4666666666667,
+      "end": 558.2666666666667,
+      "text": "Kolekcja pokazuje sześć serii odznak i kolejne poziomy."
+    },
+    {
+      "start": 558.3666666666667,
+      "end": 563.8666666666667,
+      "text": "Wybierasz swoje ulubione, odblokowujesz wygląd karty i zapisujesz wizytówkę osiągnięć."
+    },
+    {
+      "start": 563.9666666666667,
+      "end": 567.0,
+      "text": "Widać, co już zrobiłeś i jaki cel jest przed Tobą."
+    },
+    {
+      "start": 567.0,
+      "end": 570.8333333333334,
+      "text": "To nasz sposób na budowanie powrotów do platformy: małe zadanie,"
+    },
+    {
+      "start": 570.8333333333334,
+      "end": 574.8333333333334,
+      "text": "widoczny rezultat i własna kolekcja, do której chce się coś dołożyć."
+    },
+    {
+      "start": 574.9,
+      "end": 578.2666666666667,
+      "text": "Osiągnięcia zdobywasz także za działania w głównej aplikacji."
+    },
+    {
+      "start": 578.2666666666667,
+      "end": 581.3,
+      "text": "Nie musisz osobno powtarzać tej samej pracy w grze."
+    },
+    {
+      "start": 581.9,
+      "end": 585.2,
+      "text": "Jest też spokojniejszy sposób wejścia w ten świat."
+    },
+    {
+      "start": 585.3333333333334,
+      "end": 591.9,
+      "text": "Sześć krótkich zagadek uczy zauważać próg, szerokość przejścia, nawierzchnię czy brak informacji."
+    },
+    {
+      "start": 592.1,
+      "end": 598.3666666666667,
+      "text": "Za treningowe iskry rozwijasz własny ogród, odblokowujesz dekoracje i zachowujesz pocztówki."
+    },
+    {
+      "start": 598.4333333333333,
+      "end": 603.2,
+      "text": "To dodatkowy tryb, w którym można oswoić temat bez konta i bez presji."
+    },
+    {
+      "start": 603.2666666666667,
+      "end": 605.4666666666667,
+      "text": "Ćwiczenia pozostają ćwiczeniami."
+    },
+    {
+      "start": 605.5,
+      "end": 609.9,
+      "text": "Prawdziwa mapa otrzymuje dopiero świadomie dodane obserwacje z miasta."
+    },
+    {
+      "start": 610.5,
+      "end": 614.5333333333333,
+      "text": "Wiedzę mogą uzupełniać również osoby opiekujące się miejscami."
+    },
+    {
+      "start": 614.6,
+      "end": 618.1666666666666,
+      "text": "Paszport porządkuje informacje o obiekcie i jego poszczególnych"
+    },
+    {
+      "start": 618.1666666666666,
+      "end": 623.1333333333333,
+      "text": "wejściach: schodach, progach, szerokości, windzie czy toalecie."
+    },
+    {
+      "start": 623.2666666666667,
+      "end": 627.7333333333333,
+      "text": "Najpierw przygotowujesz szkic, sprawdzasz podgląd, potem publikujesz."
+    },
+    {
+      "start": 627.8666666666667,
+      "end": 631.5,
+      "text": "Ten sam opis można osadzić na stronie obiektu jako widget."
+    },
+    {
+      "start": 631.7,
+      "end": 636.6,
+      "text": "Gość hotelu lub muzeum dostaje więc informacje już podczas planowania wizyty."
+    },
+    {
+      "start": 636.9333333333333,
+      "end": 643.0,
+      "text": "Jedna aktualizacja może służyć odbiorcom w kilku miejscach, bez ręcznego przepisywania wszystkiego."
+    },
+    {
+      "start": 643.6,
+      "end": 646.3333333333334,
+      "text": "Pomyśleliśmy też o utrzymaniu platformy."
+    },
+    {
+      "start": 646.3666666666667,
+      "end": 651.4333333333333,
+      "text": "Mapa, planowanie i informacje o dostępności mają pozostać bezpłatne."
+    },
+    {
+      "start": 651.5333333333333,
+      "end": 654.8333333333334,
+      "text": "Premium za dziesięć złotych miesięcznie usuwa reklamy."
+    },
+    {
+      "start": 654.8666666666667,
+      "end": 660.6,
+      "text": "Obiekty mogą wybrać oznaczoną promocję na mapie albo pakiet z rekomendacjami sponsorowanymi."
+    },
+    {
+      "start": 660.6333333333333,
+      "end": 663.2666666666667,
+      "text": "Jest też jednorazowe wsparcie rozwoju."
+    },
+    {
+      "start": 663.2666666666667,
+      "end": 667.6666666666666,
+      "text": "Promocja zwiększa widoczność, nie zmienia faktów o dostępności miejsca."
+    },
+    {
+      "start": 667.8,
+      "end": 674.0,
+      "text": "Dzięki temu model finansowania może wspierać produkt, z którego podstawowych funkcji korzysta każdy."
+    },
+    {
+      "start": 674.6,
+      "end": 677.0333333333333,
+      "text": "Płatności są już połączone ze Stripe."
+    },
+    {
+      "start": 677.0333333333333,
+      "end": 681.1666666666666,
+      "text": "Z poziomu oferty przechodzimy do checkoutu, a później do panelu klienta,"
+    },
+    {
+      "start": 681.1666666666666,
+      "end": 685.2,
+      "text": "gdzie można zarządzać płatnościami i odnawianiem abonamentu."
+    },
+    {
+      "start": 685.3333333333334,
+      "end": 688.4333333333333,
+      "text": "Pokazujemy działającą integrację w trybie testowym."
+    },
+    {
+      "start": 688.4333333333333,
+      "end": 692.8333333333334,
+      "text": "Połączyliśmy wybór usługi, płatność i zarządzanie subskrypcją."
+    },
+    {
+      "start": 692.9,
+      "end": 698.4666666666667,
+      "text": "To konkretny fundament monetyzacji, gotowy do dalszego sprawdzania modelu biznesowego."
+    },
+    {
+      "start": 698.8,
+      "end": 704.6,
+      "text": "Kolejnym krokiem jest ustalenie, które usługi przynoszą odbiorcom największą wartość."
+    },
+    {
+      "start": 706.0333333333333,
+      "end": 711.6333333333333,
+      "text": "Zaczęliśmy od Krakowa, ale przygotowanie danych jest oddzielone od sposobu ich prezentacji."
+    },
+    {
+      "start": 711.8333333333334,
+      "end": 715.6666666666666,
+      "text": "Kolejne miasto oznacza nowe źródła, lokalne informacje i"
+    },
+    {
+      "start": 715.6666666666666,
+      "end": 719.6,
+      "text": "przygotowanie tras, a nie wymyślanie produktu od początku."
+    },
+    {
+      "start": 719.7333333333333,
+      "end": 725.7333333333333,
+      "text": "Utrzymanie obejmuje hosting, działanie asystentów, aktualizacje i obsługę zgłoszeń."
+    },
+    {
+      "start": 726.0,
+      "end": 730.4666666666667,
+      "text": "Najważniejszy następny etap to pilotaż z użytkownikami i obiektami."
+    },
+    {
+      "start": 730.5333333333333,
+      "end": 733.3,
+      "text": "Chcemy sprawdzić, jak platforma pomaga w rzeczywistych"
+    },
+    {
+      "start": 733.3,
+      "end": 737.5333333333333,
+      "text": "wyjściach i gdzie daje największą oszczędność wysiłku."
+    },
+    {
+      "start": 738.1,
+      "end": 740.0666666666667,
+      "text": "Zaczynasz od własnego wyjścia."
+    },
+    {
+      "start": 740.0666666666667,
+      "end": 743.7,
+      "text": "Twoja obserwacja może pomóc kolejnej osobie, a informacje"
+    },
+    {
+      "start": 743.7,
+      "end": 747.0,
+      "text": "obiektu trafiają tam, gdzie ktoś planuje wizytę."
+    },
+    {
+      "start": 747.2,
+      "end": 749.0,
+      "text": "Otwórz Miasto w zasięgu."
+    },
+    {
+      "start": 749.1,
+      "end": 753.6,
+      "text": "Znajdź swoje miejsce, sprawdź warunki i ruszaj po swojemu."
+    }
+  ]
+}

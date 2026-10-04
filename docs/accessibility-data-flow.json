@@ -1,0 +1,95 @@
+{
+  "scope": "Dane o przejazdach, obserwacje społeczności i automatyczny odczyt stron obiektów",
+  "sources": [
+    {
+      "name": "Google Street View przy krokach trasy",
+      "documentation": "https://developers.google.com/maps/documentation/embed/embedding-map#streetview_mode",
+      "termsContext": "https://cloud.google.com/terms/maps-platform/eea/maps-service-terms",
+      "pipeline": [
+        "Współrzędne początku kroku pochodzą z geometrii trasy openrouteservice, a kierunek kamery z kolejnego odrębnego punktu geometrii.",
+        "Dopiero kliknięcie przy danym kroku pobiera konfigurację /api/integrations/maps i otwiera iframe Maps Embed API w trybie streetview.",
+        "Jednocześnie otwarty jest jeden podgląd. Zmiana trasy zamyka poprzedni widok."
+      ],
+      "configuration": "Istniejący PRZEJSCIE_GOOGLE_MAPS_BROWSER_KEY w psst, ograniczony do miastowzasiegu.pl i www.miastowzasiegu.pl, wymaga dodatkowo maps-embed-backend.googleapis.com. scripts/enable-street-view.mjs dodaje wyłącznie tę usługę i zachowuje pozostałe ograniczenia oraz limity.",
+      "cost": "Maps Embed API jest bezpłatne według dokumentacji sprawdzonej 2026-10-03: https://developers.google.com/maps/documentation/embed/usage-and-billing. Nie używamy płatnego Dynamic Street View ani Street View Static API.",
+      "privacy": "Przed otwarciem opisujemy połączenie z Google i przekazanie wybranego punktu. Google otrzymuje współrzędne i kierunek podglądu oraz dane połączenia przeglądarki; nie przekazujemy profilu potrzeb ani danych konta. Zdjęcia są ładowane bezpośrednio w iframe Google; aplikacja ich nie pobiera, nie zapisuje i nie analizuje.",
+      "refresh": "Zdjęcia aktualizuje Google. Ich datę użytkownik sprawdza w panoramie; aplikacja nie zna daty audytu terenowego i nie nadaje zdjęciom statusu potwierdzonej dostępności.",
+      "presentation": "Osobna ramka z oznaczeniem Google Street View, zachowaną atrybucją dostawcy, opisem pochodzenia trasy i odnośnikami do warunków oraz prywatności Google. Wymaga sprawdzenia właściwego wariantu warunków Google przy przenoszeniu usługi poza konto rozliczeniowe EOG.",
+      "failure": "Brak punktu, klucza, internetu lub błąd konfiguracji pozostawia tekstową instrukcję. Podgląd ma zawsze link do Google Maps. Błędów i braku pokrycia wewnątrz obcej ramki nie traktujemy jako automatycznie wykrytego stanu; użytkownik może przejść do linku.",
+      "limitations": "Google dobiera najbliższą panoramę, która może przedstawiać sąsiedni punkt, wnętrze, jezdnię lub inną stronę ulicy. Data zdjęcia nie potwierdza obecnego stanu. Podgląd służy samodzielnej ocenie, nie wyznacza ani nie zmienia trasy.",
+      "validation": "2026-10-03 18:23 CEST: potwierdzono publiczny podgląd kroku trasy Długa 12 do Rynek Główny 1 przy szerokościach 1440 i 390 px. Szczegóły: artifacts/street-view/real-route-verification.json. Osobny punkt przy Sukiennicach pokazał wnętrze, co opisano jako ograniczenie."
+    },
+    {
+      "name": "Zdjęcie zgłaszającego i propozycja AI",
+      "pipeline": [
+        "Zdjęcie JPEG, PNG lub WebP do 20 MB i 40 megapikseli z aparatu albo galerii.",
+        "EXIF GPS odczytywany lokalnie przez exifr. Użytkownik decyduje o użyciu lokalizacji i sprawdza pinezkę. Alternatywnie jednorazowe geolocation.getCurrentPosition za zgodą przeglądarki.",
+        "Przeglądarka zmniejsza obraz do 1600 px i koduje ponownie bez metadanych. Serwer ponownie sprawdza format, limit pikseli i usuwa metadane.",
+        "POST /api/report-photos tworzy prywatną analizę OpenAI Responses; GET /api/report-photos/:id wymaga zgodności konta i losowego identyfikatora sesji formularza.",
+        "Użytkownik wybiera propozycję, poprawia opis i położenie oraz datę. Dopiero osobny POST /api/reports publikuje sprawdzoną obserwację."
+      ],
+      "privacy": "Zdjęcie bez EXIF trafia do OpenAI z store:false, bez współrzędnych, nazwy konta i profilu potrzeb. Nie zapisujemy zdjęć w bazie, na dysku ani w publicznym zgłoszeniu. Prywatny wynik tekstowy w pamięci jest udostępniany przez 30 minut; limity: 2 równoległe analizy, 10 na IP na godzinę i 100 łącznie na godzinę. Zasady retencji dostawcy AI są odrębne od retencji aplikacji.",
+      "provenance": "Zapisane zgłoszenie ma inputMethod=photo-ai, photoReviewed=true oraz locationSource=photo-gps, browser lub manual. Nadal ma status niezweryfikowany. Data obserwacji pochodzi od autora, nie z czasu przesłania pliku.",
+      "failure": "Brak EXIF, pozycja spoza Krakowa, odmowa lokalizacji, nieobsługiwany format, limit lub awaria AI nie blokują ręcznego formularza. Model może nie zwrócić żadnej propozycji.",
+      "limitations": "Model może błędnie rozpoznać element. Nie wyznacza współrzędnych, wymiarów ani geometrii bariery. Pozycja aparatu lub użytkownika jest orientacyjna. Odcinek lub obszar nadal wyznacza człowiek. Fotografia nie potwierdza, że warunki są aktualne.",
+      "dependencies": "exifr (MIT), sharp (Apache-2.0), OpenAI Responses API. Wybrano istniejące połączenie OpenAI, bez własnego serwera vLLM."
+    },
+    {
+      "name": "OpenStreetMap / Geofabrik Małopolskie",
+      "url": "https://download.geofabrik.de/europe/poland/malopolskie.html",
+      "terms": "https://www.openstreetmap.org/copyright",
+      "license": "ODbL-1.0, wymagane oznaczenie autorstwa i przestrzeganie warunków dla pochodnej bazy",
+      "snapshot": "2026-10-01T20:22:06Z",
+      "pipeline": [
+        "Pobrany plik PBF",
+        "scripts/import-accessibility.py",
+        "accessibility.json i indeks accessibility.sqlite",
+        "API /api/accessibility",
+        "Warstwa mapy i fakty uporządkowane wzdłuż trasy"
+      ],
+      "refresh": "Automatyczne pobranie i import OSM w niedzielę o 04:40 Europe/Warsaw. Wspólny zestaw warstw i indeks jest walidowany przed aktywacją; publiczne API jest restartowane i sprawdzane. Błąd aktywacji przywraca poprzednią generację. Grafy ORS są aktualizowane oddzielnie. Szczegóły: docs/DATA-IMPORT-SCHEDULE.md.",
+      "failure": "Nieudany import nie zastępuje ostatniego poprawnego pliku. API zgłasza brak warstwy, jeśli nie może jej otworzyć. Indeks i JSON zawierają osobne metadane źródła; wyświetlane metadane pochodzą z odczytywanego indeksu.",
+      "limitations": "Wybrany prostokąt Krakowa, bez relacji OSM. Obniżony krawężnik nie oznacza konkretnej wysokości. Parametry jezdni nie muszą opisywać chodnika. Data edycji obiektu nie oznacza daty audytu."
+    },
+    {
+      "name": "Obserwacje społeczności",
+      "pipeline": [
+        "Punkt, linia lub pojedynczy zamknięty obszar",
+        "Walidacja zakresu i pomiarów",
+        "reports + report_details + report_events w SQLite",
+        "Mapa, lista oraz sprawdzanie trasy"
+      ],
+      "refresh": "Zapis autora, ponowne potwierdzenie, zgłoszenie sprzeczności, poprawka autora, zamknięcie obserwacji.",
+      "routing": "Uwzględnienie zmierzonych ograniczeń dopasowanych do profilu i konkretnej geometrii. Punktowy krawężnik wymaga powiązanego przejścia OSM. Linia krawężnika wpływa na trasę przecinającą tę linię. Nie używamy kwadratów o szerokości 12 m.",
+      "timeliness": "Stały element nie wygasa po dobie; po 90 dniach wymaga ponownego sprawdzenia. Tymczasowy stan domyślnie ważny 24 h, awaria windy 4 h. Można podać koniec do 30 dni. Potwierdzenie odnawia okres, sprzeczność wyłącza automatyczne omijanie do poprawki. Historia pozostaje publiczna bez identyfikatorów kont.",
+      "limitations": "Pomiar i dokładność położenia są deklaracją zgłaszającego. Potwierdzenie społeczności nie jest formalnym audytem. Brak możliwości dokładnego przypisania do krawędzi pozostawia ostrzeżenie zamiast deklaracji ominięcia."
+    },
+    {
+      "name": "Publiczna strona obiektu",
+      "pipeline": [
+        "Wybór obiektu na mapie lub liście",
+        "OpenAI web_search: nazwa, adres, współrzędne, bez danych konta i profilu użytkownika",
+        "Do 5 prób pobrania publicznych stron HTTPS, maksymalnie 4 dokumenty HTML",
+        "Odczyt konkretnych faktów z kontrolą dopasowania obiektu i dosłownych cytatów",
+        "Oddzielna karta ze źródłami, datą odczytu i brakami danych"
+      ],
+      "cache": "Wynik z faktami: 7 dni; brak danych lub awaria: 1 minuta. Maksymalnie 2 równoległe wyszukiwania i 20 nowych wyszukiwań na IP na godzinę.",
+      "privacy": "Klucz API wyłącznie na serwerze, store:false. Pobieranie stron bez ciasteczek użytkownika, z walidacją publicznych adresów DNS przy każdym przekierowaniu. Treść stron jest niezaufanym materiałem, nie instrukcją.",
+      "usage": "Przechowywane są krótkie fakty, do 25 słów cytatów łącznie na źródło i odnośniki. Nie kopiujemy całych stron ani zdjęć. Nie jest to stwierdzenie jednolitych warunków licencji dla wszystkich witryn; przed rozwojem masowego importu należy ustalić warunki każdej domeny i obsługę żądań usunięcia.",
+      "limitations": "Automatyczna ekstrakcja może popełnić błąd; nie nadpisuje danych OSM i nie zmienia parametrów trasy. PDF, strony wymagające JavaScript i blokujące odczyt mają odnośnik do samodzielnego sprawdzenia."
+    },
+    {
+      "name": "Google Places UI Kit",
+      "documentation": "https://developers.google.com/maps/documentation/javascript/places-ui-kit/overview",
+      "termsContext": "https://developers.google.com/maps/comms/eea/places",
+      "configuration": "Osobny PRZEJSCIE_GOOGLE_MAPS_BROWSER_KEY w psst; tylko https://miastowzasiegu.pl/* i https://www.miastowzasiegu.pl/*; API maps-backend.googleapis.com oraz placewidgets.googleapis.com.",
+      "presentation": "Osadzony komponent Google uruchamiany przyciskiem. Użytkownik wybiera zgodny obiekt z wyników Google. Aplikacja nie zapisuje danych Google w swojej bazie i nie przetwarza Street View na zbiór krawężników.",
+      "failure": "Przy braku konfiguracji lub awarii dostępny jest zwykły odnośnik do Google Maps.",
+      "validation": "2026-10-03: na publicznej stronie sprawdzono wyszukanie Rynku Podziemnego, wybór zgodnego obiektu oraz informacje Google o wejściu, toalecie i miejscach dla osób na wózkach. Zrzut: artifacts/accessibility/google-accessibility.png.",
+      "project": "gen-lang-client-0911453279 (General). Nowy projekt miasto-w-zasiegu nie mógł zostać podłączony do rozliczeń z powodu limitu pięciu projektów na koncie. Przed konfiguracją usługi Maps w General były wyłączone.",
+      "limits": "100 zapytań Places UI Kit dziennie na projekt. Nieużywane sesje Autocomplete, zapytania Advanced, pełne mapy 2D/3D i Maps Grounding Widget mają limit 0. Nie zmieniano kluczy ani usług innych aplikacji."
+    }
+  ],
+  "expansion": "Nowe miasto wymaga nowych danych PBF, granic walidacji, przebudowy grafu ORS, licencji i pomiaru pokrycia. Nowa kategoria wymaga walidacji danych, opisu dla użytkownika oraz jawnej decyzji o wpływie na trasę. Nowe źródło powinno mieć oddzielny importer i metadane pochodzenia.",
+  "operations": "Operator aplikacji utrzymuje hosting i kopie SQLite, importy, obsługę konfliktów, klucze i limity kosztów. Nie zakładamy obsługi naszej bazy przez Miasto."
+}

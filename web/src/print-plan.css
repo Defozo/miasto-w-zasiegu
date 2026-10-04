@@ -1,0 +1,239 @@
+.print-plan-document {
+  display: none;
+}
+
+.print-plan-control {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.print-plan-control > button {
+  min-height: 48px;
+}
+
+.print-plan-control > small {
+  max-width: 230px;
+  color: var(--muted, #515c56);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm 16mm 17mm;
+  }
+
+  html:has(.print-plan-document),
+  body:has(.print-plan-document) {
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    color: #111 !important;
+  }
+
+  body:has(.print-plan-document) > :not(.print-plan-document) {
+    display: none !important;
+  }
+
+  .print-plan-document {
+    display: block !important;
+    position: static !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: white !important;
+    color: #111 !important;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11.5pt;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print-plan-document * {
+    box-sizing: border-box;
+    color: #111 !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .print-plan-document h1,
+  .print-plan-document h2,
+  .print-plan-document h3,
+  .print-plan-document p,
+  .print-plan-document dl,
+  .print-plan-document ol,
+  .print-plan-document ul {
+    margin: 0;
+    letter-spacing: normal;
+    text-wrap: wrap;
+  }
+
+  .print-plan-document h1 {
+    margin: 3mm 0 1mm;
+    font-size: 28pt;
+    line-height: 1.2;
+  }
+
+  .print-plan-document h2 {
+    margin: 0 0 3mm;
+    font-size: 15pt;
+    line-height: 1.3;
+    break-after: avoid-page;
+  }
+
+  .print-plan-document h3 {
+    font-size: 11.5pt;
+    line-height: 1.5;
+    break-after: avoid-page;
+  }
+
+  .print-plan-document p,
+  .print-plan-document li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .print-plan-document section,
+  .print-plan-footer {
+    margin-top: 7mm;
+  }
+
+  .print-plan-header,
+  .print-plan-caution,
+  .print-plan-profile,
+  .print-plan-footer,
+  .print-plan-point,
+  .print-plan-steps > li,
+  .print-plan-warnings > li {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  .print-plan-brand {
+    font-size: 10pt;
+    font-weight: 700;
+  }
+
+  .print-plan-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+    margin-top: 5mm !important;
+    padding: 3mm 0;
+    border-top: 1pt solid #111;
+    border-bottom: 1pt solid #111;
+  }
+
+  .print-plan-summary dt {
+    font-size: 10.5pt;
+  }
+
+  .print-plan-summary dd {
+    margin: 0;
+    font-size: 19pt;
+    font-weight: 700;
+  }
+
+  .print-plan-date,
+  .print-plan-saved {
+    margin-top: 3mm !important;
+    font-size: 10.5pt;
+  }
+
+  .print-plan-caution {
+    padding: 4mm;
+    border: 1.2pt solid #111;
+  }
+
+  .print-plan-caution h2 {
+    font-size: 13pt;
+    margin-bottom: 2mm;
+  }
+
+  .print-plan-caution p + p {
+    margin-top: 2mm;
+  }
+
+  .print-plan-points,
+  .print-plan-steps {
+    list-style: none;
+    padding: 0;
+  }
+
+  .print-plan-point,
+  .print-plan-steps > li {
+    display: flex;
+    align-items: flex-start;
+    gap: 3mm;
+    padding: 3mm 0;
+    border-bottom: 0.5pt solid #aaa;
+  }
+
+  .print-plan-point > div,
+  .print-plan-steps > li > div {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .print-plan-letter,
+  .print-plan-step-number {
+    display: inline-flex;
+    flex: 0 0 8mm;
+    min-height: 8mm;
+    align-items: center;
+    justify-content: center;
+    border: 1pt solid #111;
+    border-radius: 50%;
+    font-size: 10.5pt;
+    font-weight: 700;
+  }
+
+  .print-plan-point-detail,
+  .print-plan-step-distance,
+  .print-plan-profile > p,
+  .print-plan-footer {
+    font-size: 10pt;
+  }
+
+  .print-plan-profile dl > div {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 4mm;
+    padding: 1mm 0;
+  }
+
+  .print-plan-profile dd {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .print-plan-profile > p {
+    margin-top: 2mm;
+  }
+
+  .print-plan-warnings {
+    padding-left: 5mm;
+  }
+
+  .print-plan-warnings > li + li {
+    margin-top: 2mm;
+  }
+
+  .print-plan-footer {
+    border-top: 0.75pt solid #111;
+    padding-top: 3mm;
+  }
+}

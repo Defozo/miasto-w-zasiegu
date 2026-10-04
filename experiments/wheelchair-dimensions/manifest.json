@@ -1,0 +1,31 @@
+{
+  "source_url": "https://www.gkv-datenaustausch.de/media/dokumente/leistungserbringer_1/sonstige_leistungserbringer/positionsnummernverzeichnisse/20260928_HMV.zip",
+  "source_snapshot_date": "2026-09-28",
+  "zip_bytes": 5452196,
+  "xml_bytes": 84151506,
+  "zip_sha256": "86dafe814ce4948775d2a9c57534f28646c56cad776869649e56edd221c3d7f1",
+  "xml_sha256": "5a72080dfd743a2e3940326a30275dffa36c1fabe9710080beedddeea8c7d4cd",
+  "products_all": 66150,
+  "group_18_records": 2777,
+  "group_18_with_description": 1336,
+  "group_18_with_gesamtbreite_text": 848,
+  "selected_count": 13,
+  "selected_ids": [
+    "18.50.02.2128",
+    "18.46.06.0014",
+    "18.50.03.0211",
+    "18.50.03.0224",
+    "18.50.03.0257",
+    "18.50.03.5025",
+    "18.50.03.0160",
+    "18.99.06.1158",
+    "18.50.04.0193",
+    "18.50.04.0194",
+    "18.50.04.0192",
+    "18.50.04.0217",
+    "18.50.03.1089"
+  ],
+  "parsed_overall_width_count": 13,
+  "license_status": "Redistribution license not verified. Local research download only.",
+  "scope": "Purposive sample, not a random sample or population accuracy estimate."
+}

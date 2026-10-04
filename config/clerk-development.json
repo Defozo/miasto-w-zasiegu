@@ -1,0 +1,10 @@
+{
+  "auth_password": {
+    "enabled": false,
+    "required": false
+  },
+  "connection_oauth_google": {
+    "enabled": true,
+    "authenticatable": true
+  }
+}

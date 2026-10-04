@@ -1,0 +1,400 @@
+.ig-app .ig-album {
+  margin-top: 32px;
+  padding: 30px;
+  background: #f0eedc;
+  border: 1px solid var(--ig-line, #d1d6bc);
+  border-radius: 24px;
+  color: var(--ig-ink, #284b3f);
+  scroll-margin-top: 20px;
+}
+.ig-app .ig-album-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.ig-app .ig-album-heading .ig-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ig-app .ig-album h2 {
+  font-size: 30px;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin-top: 9px;
+}
+.ig-app .ig-album-count {
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 750;
+  background: #e0e5c8;
+  padding: 10px 13px;
+  border-radius: 30px;
+}
+.ig-app .ig-album-intro {
+  font-size: 15px;
+  line-height: 1.8;
+  margin-top: 15px;
+  max-width: 750px;
+}
+.ig-app .ig-album-local {
+  font-size: 12px;
+  line-height: 1.8;
+  max-width: 860px;
+  margin-top: 8px;
+  color: var(--ig-muted, #52634c);
+}
+.ig-app .ig-album-local strong {
+  color: var(--ig-ink, #284b3f);
+}
+.ig-app .ig-album-save {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+  margin-top: 23px;
+}
+.ig-app .ig-album-save > label {
+  flex: 1;
+  min-width: 220px;
+}
+.ig-app .ig-album label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 650;
+}
+.ig-app .ig-album input {
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid #879778;
+  border-radius: 10px;
+  background: #fffdf5;
+  padding: 11px 13px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ig-ink, #284b3f);
+}
+.ig-app .ig-album input:disabled {
+  background: #e6e7d8;
+  opacity: 1;
+  color: #52634c;
+}
+.ig-app .ig-album button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 48px;
+  border: 1px solid #a7b394;
+  border-radius: 10px;
+  background: #fffdf5;
+  color: var(--ig-ink, #284b3f);
+  padding: 10px 13px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+.ig-app .ig-album button:hover:not(:disabled) {
+  background: #e8edd6;
+}
+.ig-app .ig-album button:disabled {
+  cursor: not-allowed;
+  background: #e2e4d3;
+  color: #56604c;
+  border-color: #b7c0a7;
+}
+.ig-app .ig-album .ig-album-primary {
+  background: #365d43;
+  border-color: #365d43;
+  color: #fffbed;
+}
+.ig-app .ig-album .ig-album-primary:hover:not(:disabled) {
+  background: #284b36;
+}
+.ig-app .ig-album .ig-album-primary:disabled {
+  background: #dce2cb;
+  color: #52634c;
+  border-color: #a7b394;
+}
+.ig-app .ig-album button:focus-visible,
+.ig-app .ig-album input:focus-visible {
+  outline: 3px solid #7f4c22;
+  outline-offset: 3px;
+}
+.ig-app .ig-album-save > p {
+  flex-basis: 100%;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.ig-app .ig-album-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-block: 14px;
+  min-height: 0;
+}
+.ig-app .ig-album-notice:empty {
+  margin: 0;
+}
+.ig-app .ig-album-notice svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.ig-app .ig-album-error {
+  background: #fae8d8;
+  color: #773817;
+  border: 1px solid #c58b68;
+  font-size: 13px;
+  line-height: 1.8;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 14px;
+}
+.ig-app .ig-album-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+  align-items: start;
+}
+.ig-app .ig-postcard {
+  background: #fffdf5;
+  border: 1px solid #c1c8ad;
+  padding: 9px;
+  border-radius: 6px;
+  box-shadow: 0 4px 0 #d9dbc6;
+  min-width: 0;
+}
+.ig-app .ig-postcard-picture {
+  background: #e8ecd5;
+  border: 1px solid #d7dcc3;
+  overflow: hidden;
+}
+.ig-app .ig-postcard-picture svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.ig-app .ig-postcard-picture * {
+  animation: none !important;
+  transition: none !important;
+}
+.ig-app .ig-postcard-picture .ig-sprout-in {
+  opacity: 1;
+}
+.ig-app .ig-postcard-caption {
+  padding: 14px 8px 13px;
+}
+.ig-app .ig-postcard-caption > span {
+  display: block;
+  font-size: 10px;
+  color: var(--ig-muted, #52634c);
+}
+.ig-app .ig-postcard-caption h3 {
+  font-size: 18px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  margin-top: 6px;
+}
+.ig-app .ig-postcard time {
+  display: block;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--ig-muted, #52634c);
+  margin-top: 5px;
+}
+.ig-app .ig-postcard-actions {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.ig-app .ig-postcard-actions > button {
+  flex: 1;
+  padding-inline: 8px;
+  font-size: 11px;
+}
+.ig-app .ig-postcard-actions > button:first-child {
+  flex-basis: 100%;
+}
+.ig-app .ig-postcard-empty {
+  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border: 1px dashed #9aa987;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+  color: #57694c;
+  background: #ededdc;
+}
+.ig-app .ig-postcard-empty > span {
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+.ig-app .ig-postcard-empty p {
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 170px;
+}
+.ig-app .ig-postcard-confirm {
+  padding: 14px 9px;
+  background: #f0efdc;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+.ig-app .ig-postcard-confirm p {
+  font-size: 12px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  margin-bottom: 12px;
+}
+.ig-app .ig-postcard-confirm > div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.ig-app .ig-postcard-confirm > div > button:first-child {
+  flex: 1;
+}
+.ig-app .ig-postcard-confirm label {
+  font-size: 12px;
+}
+.ig-app .ig-postcard-dialog {
+  position: fixed;
+  inset: 0;
+  width: min(680px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  overflow: auto;
+  border: 1px solid #9ba887;
+  border-radius: 14px;
+  padding: 16px;
+  background: #fffdf5;
+  color: var(--ig-ink, #284b3f);
+}
+.ig-app .ig-postcard-dialog::backdrop {
+  background: rgb(24 42 30 / 0.65);
+}
+.ig-app .ig-postcard-dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.ig-app .ig-postcard-dialog-head > span {
+  font-size: 12px;
+  line-height: 1.7;
+}
+.ig-app .ig-postcard-dialog-head > button {
+  flex-shrink: 0;
+  width: 48px;
+  padding: 0;
+}
+.ig-app .ig-postcard-dialog-caption {
+  padding: 4px 10px 8px;
+}
+.ig-app .ig-postcard-dialog-caption h2 {
+  font-size: 28px;
+  overflow-wrap: anywhere;
+}
+.ig-app .ig-postcard-dialog-caption time {
+  font-size: 12px;
+  display: block;
+  margin-top: 7px;
+}
+.ig-app .ig-postcard-dialog-caption p {
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 16px;
+}
+@media (max-width: 850px) {
+  .ig-app .ig-album {
+    padding: 23px;
+  }
+  .ig-app .ig-album-grid {
+    gap: 12px;
+  }
+  .ig-app .ig-postcard-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .ig-app .ig-postcard-empty {
+    min-height: 270px;
+  }
+  .ig-app .ig-postcard-caption {
+    padding-inline: 4px;
+  }
+  .ig-app .ig-postcard-caption h3 {
+    font-size: 16px;
+  }
+}
+@media (max-width: 620px) {
+  .ig-app .ig-album {
+    padding: 22px 16px;
+    margin-top: 22px;
+    border-radius: 20px;
+  }
+  .ig-app .ig-album-heading {
+    display: block;
+  }
+  .ig-app .ig-album h2 {
+    font-size: 27px;
+  }
+  .ig-app .ig-album-count {
+    display: inline-block;
+    margin-top: 14px;
+  }
+  .ig-app .ig-album-intro {
+    font-size: 14px;
+  }
+  .ig-app .ig-album-local {
+    font-size: 12px;
+  }
+  .ig-app .ig-album-save {
+    display: block;
+  }
+  .ig-app .ig-album-save > button {
+    width: 100%;
+    margin-top: 12px;
+  }
+  .ig-app .ig-album-save > p {
+    margin-top: 12px;
+  }
+  .ig-app .ig-album-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .ig-app .ig-postcard-actions {
+    display: flex;
+  }
+  .ig-app .ig-postcard-actions > button:first-child {
+    flex-basis: 100%;
+  }
+  .ig-app .ig-postcard-empty {
+    min-height: 170px;
+    gap: 10px;
+  }
+  .ig-app .ig-postcard-empty p {
+    max-width: 230px;
+  }
+  .ig-app .ig-postcard-dialog {
+    padding: 12px;
+  }
+  .ig-app .ig-postcard-dialog-caption {
+    padding-inline: 4px;
+  }
+  .ig-app .ig-postcard-dialog-caption h2 {
+    font-size: 25px;
+  }
+}

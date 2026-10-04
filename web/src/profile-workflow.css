@@ -1,0 +1,46 @@
+.profile-panel .profile-draft-status {
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  border: 1px solid #cad3c1;
+  border-radius: 12px;
+  background: #f0f4e8;
+  color: #365440;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.profile-panel .profile-draft-status.is-dirty {
+  background: #fff0ca;
+  border-color: #cbb06b;
+  color: #654813;
+}
+.profile-panel .model-keyboard-note,
+.profile-panel .model-apply-note {
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 12px 0;
+  color: #365440;
+}
+.profile-panel .model-keyboard-note:empty,
+.profile-panel .model-apply-note:empty {
+  display: none;
+}
+.profile-panel .model-result .model-unusable-width {
+  padding: 10px 12px;
+  border: 1px solid #c3cba7;
+  border-radius: 9px;
+  background: #f7f7e9;
+  color: #415738;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.profile-panel .model-result .model-apply-note:not(:empty) {
+  padding: 12px;
+  border: 1px solid #b79850;
+  border-radius: 10px;
+  background: #fff0ca;
+  color: #654813;
+}
+.profile-panel .model-search input:disabled,
+.profile-panel .model-search button:disabled {
+  cursor: not-allowed;
+}

@@ -1,0 +1,21 @@
+# Wnioski z publicznych relacji użytkowników wózków
+
+Sprawdzenie: 3 października 2026. Przegląd pięciu publicznych wątków pomaga wybrać priorytety Miasta w zasięgu. Najważniejszy wniosek: dostępność zależy od konkretnego użytkownika, warunków i całej drogi, więc samo oznaczenie miejsca jako dostępnego nie wystarczy. Nie kontaktowano się z autorami.
+
+To mała, celowo dobrana, niereprezentatywna próbka publicznych wypowiedzi: dwa źródła polskojęzyczne i trzy z r/wheelchairs. Relacje pokazują możliwe problemy i pomagają formułować hipotezy UX. Nie określają częstości problemów ani obecnego stanu konkretnych miejsc w Krakowie. Wnioski projektowe poniżej są naszą interpretacją. Zakres MVP porównano z aktualną implementacją i dokumentacją weryfikacji.
+
+1. **Przeszkoda chwilowa wymaga aktualności i możliwości oznaczenia jej usunięcia.** Osoba poruszająca się na wózku opisuje objazdy oraz trudne lub niemożliwe przejście na drugą stronę ulicy przez hulajnogę zostawioną na chodniku. Źródło: [komentarz w r/Polska](https://www.reddit.com/r/Polska/comments/1olu0yy/comment/nmognoe/). MVP zapisuje zgłoszenia, pozwala oznaczyć rozwiązanie i uwzględnia świeże aktywne przeszkody podczas wyznaczania trasy. Router pomija obserwacje starsze niż 24 godziny; ten umowny limit nie dowodzi usunięcia bariery. Brakuje społecznego potwierdzania aktualności i moderacji przed publicznym udostępnieniem.
+
+2. **Informacja o obniżonym krawężniku powinna opisywać jego jakość.** W dyskusji z sierpnia 2021 użytkownicy opisują strome zjazdy i pozostawiony uskok, mimo istnienia obniżenia. Źródło: [Requirements for wheelchair routing](https://www.reddit.com/r/wheelchairs/comments/p4eqqr/). MVP ma limit krawężnika w profilu i typ zgłoszenia „Krawężnik lub schodek”. Brakuje potwierdzonych pomiarów wszystkich przejść i dokumentacji zdjęciowej; wynik ORS nie stanowi terenowego potwierdzenia przejezdności.
+
+3. **Pochylenie poprzeczne to osobny problem od jazdy pod górę.** Autorka relacji z lipca 2025 opisuje zmęczenie i bardzo powolny ruch na chodniku pochylonym w bok. Źródło: [Cambered Pavements](https://www.reddit.com/r/wheelchairs/comments/1mdwq1v/cambered_pavements/). MVP pozwala określić dopuszczalne nachylenie, ale nie przedstawia zweryfikowanego pochylenia poprzecznego odcinków. Brakuje jego osobnego opisu oraz oszacowania wysiłku zależnego od kierunku i sposobu poruszania się.
+
+4. **Działająca winda i plan awaryjny mają znaczenie czasowe.** W tym samym [wątku o chodnikach](https://www.reddit.com/r/wheelchairs/comments/1mdwq1v/cambered_pavements/) niedziałająca winda na stacji wymusiła powrót i objazd rampą, zostawiając niewiele czasu do odjazdu pociągu. MVP przyjmuje zgłoszenie awarii windy. Brakuje bieżącego źródła stanu wind, powiązania z podróżą transportem publicznym i automatycznego przeliczenia trasy podczas drogi.
+
+5. **Szerokie drzwi nie wystarczają do oceny toalety.** W relacji z sierpnia 2024 użytkowniczka nie może zamknąć drzwi kabiny po wjechaniu wózkiem. Źródło: [How do you use this accessible stall](https://www.reddit.com/r/wheelchairs/comments/1f205kk/). MVP pokazuje toalety i znane dane dostępności oraz niewiadome. Brakuje przestrzeni manewrowej, kierunku otwierania drzwi, miejsca do transferu i warunków samodzielnego skorzystania. Tego nie wolno wywnioskować z samego tagu dostępności.
+
+6. **Wygoda całego wyjścia obejmuje nawierzchnię i wysiłek osoby pomagającej.** Opiekunka szuka trasy bez wstrząsów na bruku, a później opisuje trudny podjazd z piaskiem. Źródło: [Gdzie na spacer na wózku, marzec 2015](https://mnd.pl/forum/index.php/topic,7364.0.html). To materiał historyczny, nie aktualna ocena miejsc. MVP ma profil potrzeb, informacje o nawierzchni i zgłoszenia jej stanu. Brakuje oceny drgań, wysiłku oraz sprawdzonych miejsc odpoczynku. Krótsza droga nie musi być mniej męcząca.
+
+## Ograniczenie wcześniejszego źródła
+
+Ponowne otwarcie [wcześniej wskazanego komentarza szkolnego](https://www.reddit.com/r/Polska/comments/1nzt5ld/comment/ni5geto/) nie odtworzyło relacji o platformie i kluczu do toalety. Nie wykorzystano jej w tej syntezie. Zebrane hipotezy wymagają rozmów i testów terenowych z użytkownikami różnych wózków; takie badanie nie zostało jeszcze wykonane.

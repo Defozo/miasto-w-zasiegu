@@ -1,0 +1,27 @@
+.lp-tour { border-bottom: 1px solid var(--lp-line); }
+.lp-tour .lp-section-heading h2 { max-width: 730px; }
+.lp-tour-player { overflow: hidden; border-radius: 24px; background: #173c32; color: #f5f4ed; }
+.lp-tour video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #122f28; }
+.lp-tour video:focus-visible { outline: 3px solid #d7f36b; outline-offset: -5px; }
+.lp-tour-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: center; margin: 12px 0 22px; font-size: 14px; color: var(--lp-muted); }
+.lp-tour-chapters { border: 1px solid var(--lp-line); border-radius: 14px; }
+.lp-tour-chapters > summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 20px; cursor: pointer; font-size: 17px; font-weight: 700; list-style: none; }
+.lp-tour-chapters > summary::-webkit-details-marker { display: none; }
+.lp-tour-chapters[open] > summary svg { transform: rotate(180deg); }
+.lp-tour-chapters nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 0 12px 12px; }
+.lp-tour-chapters button { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 12px; text-align: left; font: inherit; font-size: 14px; color: var(--lp-ink); background: #fff; border: 1px solid var(--lp-line); border-radius: 8px; cursor: pointer; }
+.lp-tour-chapters button:hover { background: #e9efdd; }
+.lp-tour-chapters button svg { flex-shrink: 0; }
+.lp-tour-chapters time { font-variant-numeric: tabular-nums; font-weight: 700; min-width: 40px; }
+.lp-tour-links { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 24px; margin: 24px 0 16px; }
+.lp-tour-links > a:not(.lp-button) { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; font-size: 14px; }
+.landing-page .lp-tour-credits { font-size: 12px; line-height: 1.6; color: var(--lp-muted); }
+.lp-tour-credits a { text-decoration: underline; text-underline-offset: 3px; }
+.landing-page .lp-tour-error { margin-top: 12px; padding: 14px; border: 1px solid currentColor; border-radius: 8px; }
+@media (max-width: 700px) {
+  .lp-tour-player { border-radius: 14px; }
+  .lp-tour-meta { align-items: flex-start; flex-direction: column; gap: 0; }
+  .lp-tour-chapters nav { grid-template-columns: minmax(0, 1fr); }
+  .lp-tour-links { gap: 6px 20px; }
+  .lp-tour-links .lp-button { margin-bottom: 8px; }
+}

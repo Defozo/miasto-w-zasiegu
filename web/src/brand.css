@@ -1,0 +1,46 @@
+.brand-name {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.1em;
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+}
+.brand-symbol {
+  display: block;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  color: #173c32;
+}
+.app-brand > .brand-symbol {
+  width: 46px;
+  height: 46px;
+}
+.mobile-brand > .brand-symbol {
+  width: 33px;
+  height: 33px;
+}
+.boot-screen > .brand-symbol {
+  width: 52px;
+  height: 52px;
+}
+.brand-name > span:last-child {
+  font-size: 0.68em;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+.mobile-brand > .brand-name {
+  color: inherit;
+  font-size: 23px;
+}
+.ig-back .brand-name {
+  font-size: 21px;
+}
+@media (max-width: 420px) {
+  .mobile-brand > .brand-name {
+    font-size: 21px;
+  }
+}

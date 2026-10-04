@@ -1,0 +1,14 @@
+server:
+  port: 8082
+ors:
+  engine:
+    init_threads: 1
+    profile_default:
+      enabled: false
+      graph_path: /home/ors/graphs
+      build:
+        source_file: /home/ors/files/malopolskie-latest.osm.pbf
+        elevation: false
+    profiles:
+      driving-car:
+        enabled: true

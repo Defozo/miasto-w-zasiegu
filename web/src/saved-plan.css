@@ -1,0 +1,48 @@
+.saved-plan {
+  margin-top: 24px;
+  padding: 18px;
+  border: 1px solid #c4d0bc;
+  border-radius: 18px;
+  background: #f6f8f0;
+  color: #273e2e;
+}
+.saved-plan-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.saved-plan-heading h2 {
+  margin: 0;
+  font-size: 17px;
+}
+.saved-plan p {
+  margin: 10px 0;
+  font-size: 13px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.saved-plan .saved-plan-destination {
+  font-weight: 700;
+  font-size: 14px;
+}
+.saved-plan-age {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+.saved-plan-age svg {
+  flex: none;
+  margin-top: 3px;
+}
+.saved-plan .field-help {
+  color: #445540;
+}
+.saved-plan-confirm {
+  border-top: 1px solid #c4d0bc;
+  margin-top: 12px;
+}
+.saved-plan-confirm > div {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}

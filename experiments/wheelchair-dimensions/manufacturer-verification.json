@@ -1,0 +1,634 @@
+{
+  "metadata": {
+    "accessed_date": "2026-10-03",
+    "purpose": "Niezależne porównanie szerokości całkowitej w 13 rekordach GKV z dokumentami producentów. Statusy nie obejmują wszystkich parametrów karty.",
+    "status_definitions": {
+      "match": "Dokładny HMV lub artykuł oraz znaczenie overall_width zgodne; nie potwierdza pozostałych pól ani egzemplarza.",
+      "conflict": "Dokładny HMV/artykuł i sprzeczne twierdzenia o overall_width.",
+      "insufficient": "Brak konfiguracji, wariantu, daty lub jednoznacznego overall_width; sama zgodność liczb nie wystarcza."
+    },
+    "method": "Ręczny odczyt dokumentacji producentów, lokalna ekstrakcja PDF (pypdf), wizualny odczyt tabel Ventus, Xenon, Q200 R i Q50 R. Daty i rewizje pochodzą z pobranych plików. Bez kontaktu z producentami i bez fizycznego pomiaru.",
+    "summary": {
+      "match": 4,
+      "conflict": 2,
+      "insufficient": 7
+    },
+    "reproduction": "manufacturer-sources-manifest.json i manufacturer_download.py. Pliki PDF oraz odczytany tekst lokalnie; download-log.json zawiera SHA-256.",
+    "units": "mm, o ile wskazano inaczej"
+  },
+  "records": [
+    {
+      "gkv_id": "18.46.06.0014",
+      "model": "Quickie Q50 R",
+      "status": "match",
+      "model_match": "exact_gkv",
+      "source_url": "https://www.sunrisedice.com/asset-bank/assetfile/76936.pdf",
+      "evidence_text": "Q50 R: Gesamtbreite 600 mm; Hilfsmittelverzeichnis POS.-Nr. 18.46.06.0014.",
+      "reasoning": "Producent podaje dokładny HMV i szerokość całkowitą 600 mm, zgodną z GKV. Dokument dotyczy Q50 R. Nie należy przenosić tego wymiaru na Q50 R Carbon.",
+      "sources": [
+        {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/76936.pdf",
+          "author": "manufacturer",
+          "host_type": "manufacturer_or_manufacturer_cdn",
+          "local_pdf": "manufacturer-sources/q50r-brochure.pdf",
+          "pdf_pages": [
+            4,
+            12
+          ],
+          "version": "Brak widocznej daty wydania w pobranej broszurze"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": {
+          "kind": "fixed",
+          "value": 600
+        },
+        "seat_width_mm": 430
+      },
+      "caveats": [
+        "Wartość katalogowa, nie pomiar egzemplarza z akcesoriami."
+      ]
+    },
+    {
+      "gkv_id": "18.50.02.2128",
+      "model": "Lexis light",
+      "status": "conflict",
+      "model_match": "exact_gkv",
+      "source_url": "https://www.trendmobil.com/lexis-light-sb-51.html",
+      "evidence_text": "HMV 18.50.02.2128; Gesamtbreite (cm): Sitzbreite + 22.",
+      "reasoning": "GKV podaje szerokość siedziska + 2,2 cm. Producent dla tego samego HMV podaje + 22 cm. Różnica wynosi 198 mm dla tej samej szerokości siedziska. Nie poprawiamy surowego GKV automatycznie.",
+      "sources": [
+        {
+          "url": "https://www.trendmobil.com/lexis-light-sb-51.html",
+          "author": "Trendmobil GmbH",
+          "host_type": "manufacturer",
+          "section": "Technische Daten; produkt LEXIS LIGHT SB 51, art.12000134",
+          "version": "Strona bez daty dokumentu"
+        },
+        {
+          "url": "https://www.careshop.de/media/pdf/2b/9e/1a/GA-Lexi-Light.pdf",
+          "author": "Trendmobil GmbH",
+          "host_type": "third_party",
+          "pdf_pages": [
+            13
+          ],
+          "version": "Stand Mai 2017",
+          "access_method": "Treść odczytana przez indeks web; bez lokalnej kopii, bezpośredni GET zwrócił 404"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": {
+          "kind": "formula",
+          "expression": "seat_width_mm + 220"
+        },
+        "seat_width_mm": {
+          "values": [
+            420,
+            450,
+            480,
+            510
+          ]
+        },
+        "gkv_formula": "seat_width_mm + 22"
+      },
+      "caveats": [
+        "Błąd jednostki lub przecinka jest prawdopodobny, ale źródła pozostają osobnymi twierdzeniami.",
+        "Wariant SB51 jest wskazany jawnie na stronie; pozostałe szerokości są w instrukcji maj2017."
+      ]
+    },
+    {
+      "gkv_id": "18.50.03.0160",
+      "model": "Eurochair Avanti 1.736-352/353",
+      "status": "insufficient",
+      "model_match": "exact_gkv_configuration_unresolved",
+      "source_url": "https://www.meyra.de/rollstuehle/produktdetails/avanti-1736",
+      "evidence_text": "Breite fahrbereit: Sitzbreite + 200 (mit Seitenteil Code 100 SB +180).",
+      "reasoning": "Strona producenta wiąże model 1.736 z tym HMV oraz ramami 352/353. GKV + 180 mm jest zgodne tylko dla osłon bocznych Code 100. GKV nie określa tego kodu, więc nie można zweryfikować bezwarunkowej formuły ani uznać wszystkich konfiguracji za błędne.",
+      "sources": [
+        {
+          "url": "https://www.meyra.de/rollstuehle/produktdetails/avanti-1736",
+          "author": "MEYRA",
+          "host_type": "manufacturer",
+          "section": "Technische Daten; HMV-Nr.",
+          "version": "Strona bez daty, odczyt2026-10-03"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": {
+          "kind": "conditional_formula",
+          "default_expression": "seat_width_mm + 200",
+          "cases": [
+            {
+              "if": "side_panel_code == 100",
+              "expression": "seat_width_mm + 180"
+            }
+          ]
+        },
+        "seat_width_mm": {
+          "min": 360,
+          "max": 580
+        }
+      },
+      "caveats": [
+        "Wpis GKV z2007, zmieniony2015; aktualna konfiguracja producenta może być szersza.",
+        "Dopasowanie HMV nie usuwa braku kodu osłon."
+      ]
+    },
+    {
+      "gkv_id": "18.50.03.0211",
+      "model": "Sopur Xenon², art.76800000",
+      "status": "insufficient",
+      "model_match": "family_only_historical_variant_unresolved",
+      "source_url": "https://www.sunrisedice.com/asset-bank/assetfile/83777.pdf",
+      "evidence_text": "24\": 0° SB+160; 2° SB+210; 4° SB+260 mm. 25\": +160/+220/+270 mm. Trommelbremse +20 mm.",
+      "reasoning": "GKV z 2015 roku podaje 570–750 mm przy siedzisku 320–500 mm. Formularz z 2025 roku pokazuje zależności od kół i pochylenia, ale nie potwierdza artykułu 76800000 ani historycznego wariantu. Nie przenosimy danych między odmianami FF, SA i Hybrid.",
+      "sources": [
+        {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/83777.pdf",
+          "author": "manufacturer",
+          "host_type": "manufacturer_or_manufacturer_cdn",
+          "local_pdf": "manufacturer-sources/xenon2-order.pdf",
+          "pdf_pages": [
+            1,
+            9
+          ],
+          "version": "BB-Xenon2-d.xlsx, 16.09.2025",
+          "section": "Technische Daten, Gesamtbreite"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": {
+          "kind": "configuration_formula",
+          "seat_width_variable": "SB",
+          "wheel_diameter_inches": {
+            "24": {
+              "camber0_add_mm": 160,
+              "camber2_add_mm": 210,
+              "camber4_add_mm": 260
+            },
+            "25": {
+              "camber0_add_mm": 160,
+              "camber2_add_mm": 220,
+              "camber4_add_mm": 270
+            }
+          },
+          "drum_brake_extra_mm": 20
+        },
+        "manufacturer_tolerance_mm": 10
+      },
+      "caveats": [
+        "Przykład formuły dla aktualnego formularza, bez certyfikacji match do rekordu GKV.",
+        "Data pobranego PDF różni się od daty w indeksie wyszukiwarki; użyto rzeczywistego16.09.2025."
+      ]
+    },
+    {
+      "gkv_id": "18.50.03.0224",
+      "model": "Avantgarde 4 DV, art.480F160=0_AA03_C",
+      "status": "match",
+      "model_match": "exact_article",
+      "source_url": "https://www.ottobock.com/de-de/product/480F160--0---C-61056",
+      "evidence_text": "480F160=0_AA03_C, Avantgarde 4 DV: Gesamtbreite 490-725 mm.",
+      "reasoning": "Tabela producenta identyfikuje dokładny artykuł i ten sam zakres szerokości całkowitej co GKV. Instrukcja potwierdza wpływ pochylenia kół. Match dotyczy zakresu szerokości całkowitej, a nie jednej szerokości każdego egzemplarza ani pozostałych parametrów.",
+      "sources": [
+        {
+          "url": "https://www.ottobock.com/de-de/product/480F160--0---C-61056",
+          "author": "Ottobock",
+          "host_type": "manufacturer",
+          "section": "Produktdaten",
+          "version": "Strona bez daty"
+        },
+        {
+          "url": "https://spa-prod-commerce.cep.ottobock.com/medias/4981927.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDc2MDUyNnxhcHBsaWNhdGlvbi9wZGZ8aDkzL2g0Zi85NDMzMDQyNjgxODg2LnBkZnw2MWY2Yzc2ZmU2NmIzYzdmMTdlZDg0OTFiM2E4NjU4NTMxMTA5OWY4MWI4NmIwY2Y4YjBiMWY1N2FkNGJjNGFl",
+          "author": "manufacturer",
+          "host_type": "manufacturer_or_manufacturer_cdn",
+          "local_pdf": "manufacturer-sources/avantgarde-manual.pdf",
+          "pdf_pages": [
+            37,
+            38
+          ],
+          "version": "647G1244=en_INT-06-2305",
+          "section": "Technical data"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": {
+          "kind": "range",
+          "min": 490,
+          "max": 725
+        },
+        "seat_width_mm": {
+          "min": 320,
+          "max": 520
+        },
+        "camber_increment_24inch_mm": {
+          "degrees0": 0,
+          "degrees2": 40,
+          "degrees3": 60,
+          "degrees4": 80
+        },
+        "manufacturer_tolerance_mm": 10
+      },
+      "caveats": [
+        "Obecne seatwidth320-520mm różni się od GKV320-500; weryfikacja obejmuje overall_width.",
+        "Nie dodawać przyrostu camber automatycznie do maksymalnej szerokości katalogowej, mogłoby to podwójnie policzyć konfigurację."
+      ]
+    },
+    {
+      "gkv_id": "18.50.03.0257",
+      "model": "Motus 2 CV, art.480F61=2_AB01_C",
+      "status": "match",
+      "model_match": "exact_gkv_and_article",
+      "source_url": "https://www.ottobock.com/de-de/product/480F61--2---C-106586",
+      "evidence_text": "Motus 2 CV, 480F61=2_AB01_C: Gesamtbreite 505-680 mm.",
+      "reasoning": "Strona i broszura producenta identyfikują Motus 2 CV, kod artykułu oraz HMV. Szerokość całkowita 505–680 mm zgadza się z GKV. Zakres szerokości siedziska różni się między źródłami i nie jest objęty oceną match.",
+      "sources": [
+        {
+          "url": "https://www.ottobock.com/de-de/product/480F61--2---C-106586",
+          "author": "Ottobock",
+          "host_type": "manufacturer",
+          "section": "Produktdaten, kolumna Motus2CV",
+          "version": "Strona bez daty"
+        },
+        {
+          "url": "https://assets.ctfassets.net/8ks1shyq5m87/4Qqlx6ygP3D5FYe86BIj1F/725d7cf6fba80fbf41fa452e88cf6071/646H53-de_DE-01-2107w.pdf",
+          "author": "manufacturer",
+          "host_type": "manufacturer_or_manufacturer_cdn",
+          "local_pdf": "manufacturer-sources/motus2-brochure.pdf",
+          "pdf_pages": [
+            6,
+            8,
+            9
+          ],
+          "version": "646H53-de_DE-01-2107",
+          "section": "Motus2CV"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": {
+          "kind": "range",
+          "min": 505,
+          "max": 680
+        },
+        "seat_width_mm": {
+          "min": 355,
+          "max": 480
+        },
+        "camber_degrees": {
+          "min": 0,
+          "max": 4
+        }
+      },
+      "caveats": [
+        "Osobna rozbieżność: GKV seatwidth355-555mm, producent355-480mm. Match oznacza wyłącznie poprawność pola overall_width, nie wszystkich pól rekordu.",
+        "Nie mieszać z Motus HEMI/XXL, które mają inne zakresy."
+      ]
+    },
+    {
+      "gkv_id": "18.50.03.1089",
+      "model": "Avantgarde 4 DV Teen, art.480F160=0_AC01_C",
+      "status": "insufficient",
+      "model_match": "exact_gkv_and_article_but_overall_missing",
+      "source_url": "https://assets.ctfassets.net/8ks1shyq5m87/NdBFc3THsyxau6u0V3Byq/871a9783a70c2159e2d59c1fb879341b/Avantgarde_DV_Teen_647F580de_DE-15-2411_e.pdf",
+      "evidence_text": "Avantgarde4 DV Teen; Art.-Nr.480F160=0_AC01_C; HMV18.50.03.1089. Sitzbreite32/34/36/38 cm.",
+      "reasoning": "Formularz dokładnego wariantu potwierdza HMV i szerokości siedziska, ale nie podaje zakresu szerokości całkowitej. Zakres 490–725 mm w ogólnej instrukcji rodziny nie jest jawnie przypisany do Teen, więc nie weryfikuje tego wpisu GKV.",
+      "sources": [
+        {
+          "url": "https://assets.ctfassets.net/8ks1shyq5m87/NdBFc3THsyxau6u0V3Byq/871a9783a70c2159e2d59c1fb879341b/Avantgarde_DV_Teen_647F580de_DE-15-2411_e.pdf",
+          "author": "manufacturer",
+          "host_type": "manufacturer_or_manufacturer_cdn",
+          "local_pdf": "manufacturer-sources/avantgarde-teen-order.pdf",
+          "pdf_pages": [
+            1,
+            4
+          ],
+          "version": "647F580=de_DE-15-2411; obowiązuje01.01-31.12.2025"
+        },
+        {
+          "url": "https://spa-prod-commerce.cep.ottobock.com/medias/4981927.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDc2MDUyNnxhcHBsaWNhdGlvbi9wZGZ8aDkzL2g0Zi85NDMzMDQyNjgxODg2LnBkZnw2MWY2Yzc2ZmU2NmIzYzdmMTdlZDg0OTFiM2E4NjU4NTMxMTA5OWY4MWI4NmIwY2Y4YjBiMWY1N2FkNGJjNGFl",
+          "author": "manufacturer",
+          "host_type": "manufacturer_or_manufacturer_cdn",
+          "local_pdf": "manufacturer-sources/avantgarde-manual.pdf",
+          "pdf_pages": [
+            37,
+            38
+          ],
+          "version": "647G1244=en_INT-06-2305",
+          "scope": "RodzinaDS/DV, bez osobnego oznaczeniaTeen"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": null,
+        "seat_width_mm": {
+          "values": [
+            320,
+            340,
+            360,
+            380
+          ]
+        }
+      },
+      "caveats": [
+        "Brak overall dla Teen pozostaje brakiem danych, mimo identycznego zakresu skopiowanego w GKV dla dorosłegoDV.",
+        "Nie utożsamiać z Avantgarde Teen2, inną rodziną."
+      ]
+    },
+    {
+      "gkv_id": "18.50.03.5025",
+      "model": "Ventus, art.480A25=00000_K",
+      "status": "match",
+      "model_match": "exact_article",
+      "source_url": "https://www.ottobock.com/de-ch/product/480A25--00000---K-106603",
+      "evidence_text": "480A25=00000_K: Gesamtbreite 450-850 mm; Sitzbreite 280-500 mm.",
+      "reasoning": "Dokładny kod artykułu i zakres szerokości całkowitej 450–850 mm zgadzają się z GKV. Formularz producenta pokazuje zależność od pochylenia kół i szerokości siedziska.",
+      "sources": [
+        {
+          "url": "https://www.ottobock.com/de-ch/product/480A25--00000---K-106603",
+          "author": "Ottobock",
+          "host_type": "manufacturer",
+          "section": "Produktdaten",
+          "version": "Strona bez daty"
+        },
+        {
+          "url": "https://assets.ctfassets.net/8ks1shyq5m87/6DTmF4I11C9E74TA6w23Uf/89a62d87219c4692bae162ebdb834042/Ventus_647F416de_DE-41-2512_e.pdf",
+          "author": "manufacturer",
+          "host_type": "manufacturer_or_manufacturer_cdn",
+          "local_pdf": "manufacturer-sources/ventus-order.pdf",
+          "pdf_pages": [
+            3,
+            4
+          ],
+          "version": "647F416=de_DE-41-2512",
+          "section": "Erhöhung der Gesamtbreite; Gesamtbreite bei Anbau Antriebsrad mit Hohlkammerfelge"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": {
+          "kind": "range",
+          "min": 450,
+          "max": 850
+        },
+        "seat_width_mm": {
+          "min": 280,
+          "max": 500
+        },
+        "conditional_table": {
+          "conditions": "Antriebsrad mit Hohlkammerfelge; zachować osobne przyrostycamber ze strony3",
+          "seat_width_mm": [
+            280,
+            300,
+            320,
+            340,
+            360,
+            380,
+            400,
+            420,
+            440
+          ],
+          "overall_width_mm": [
+            450,
+            470,
+            490,
+            510,
+            530,
+            550,
+            570,
+            590,
+            610
+          ],
+          "derived_pattern": "seat_width_mm + 170, tylko dla wymienionych wierszy i warunków tabeli"
+        },
+        "camber_increment_mm": {
+          "22inch": {
+            "3deg": "<60",
+            "6deg": "<120",
+            "9deg": "<180"
+          },
+          "24inch": {
+            "3deg": 60,
+            "6deg": 120,
+            "9deg": 180
+          },
+          "25inch": {
+            "3deg": ">60",
+            "6deg": ">120",
+            "9deg": ">180"
+          }
+        }
+      },
+      "caveats": [
+        "Tabela w pobranym formularzu kończy się na siedzisku440mm; nie ekstrapolowano do500mm.",
+        "Ogólnego zakresu450-850mm nie zamieniać na stałą450mm ani na automatyczny default850mm."
+      ]
+    },
+    {
+      "gkv_id": "18.50.04.0192",
+      "model": "Quickie Q700 M ohne Sitzlift, art.2250070M-100",
+      "status": "insufficient",
+      "model_match": "model_and_wheel_size_exact_subvariant_unconfirmed",
+      "source_url": "https://www.sunrisedice.com/asset-bank/assetfile/43539.pdf",
+      "evidence_text": "Q700 M, 14” Drive wheels: Total width622-660 mm.",
+      "reasoning": "Instrukcja producenta Rev. L z 2025 roku potwierdza zakres GKV dla Q700 M z kołami 14 cali. Nie wiąże go jednak z artykułem 2250070M-100 bez podnośnika z 2018 roku. Brakuje pełnego dopasowania wariantów.",
+      "sources": [
+        {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/43539.pdf",
+          "author": "manufacturer",
+          "host_type": "manufacturer",
+          "local_pdf": "manufacturer-sources/q700-manual.pdf",
+          "pdf_pages": [
+            46,
+            156
+          ],
+          "version": "OM_Q700 M-M HD-F-R-UP M-UP F_EU_EN_FR_NL_Rev.L_2025-01-27",
+          "section": "Technical specifications, Q700M"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": {
+          "kind": "range",
+          "min": 622,
+          "max": 660
+        },
+        "wheel_diameter_inches": 14
+      },
+      "caveats": [
+        "Nie użyto aktualnej amerykańskiej specyfikacji25cal szerokości, inny rynek.",
+        "Nie utożsamiono z Q700-UP ani Q700MHD; ich tabele są osobne."
+      ]
+    },
+    {
+      "gkv_id": "18.50.04.0193",
+      "model": "Quickie Q200 R, art.22600251",
+      "status": "insufficient",
+      "model_match": "family_only_generation_configuration_unresolved",
+      "source_url": "https://www.sunrisedice.com/asset-bank/assetfile/55075.pdf",
+      "evidence_text": "Q200R: Total bredd kraftenhet580mm; Total sittbredd48cm sits600-660mm, Armstöd in/ut.",
+      "reasoning": "GKV 580 mm może odpowiadać podstawie. Instrukcja Q200 R Configured, Rev. I z 2025 roku, rozdziela podstawę 580 mm i zewnętrzną szerokość siedziska z podłokietnikami, osiągającą 660 mm. Brak powiązania z artykułem 22600251, więc nie rozstrzygamy poprawności historycznego wpisu.",
+      "sources": [
+        {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/55075.pdf",
+          "author": "manufacturer",
+          "host_type": "manufacturer_or_manufacturer_cdn",
+          "local_pdf": "manufacturer-sources/q200r-manual.pdf",
+          "pdf_pages": [
+            62,
+            68
+          ],
+          "version": "000691020.SE; RevI_2025-11-24",
+          "section": "Modell:QuickieQ200R, ISO7176-15",
+          "language": "sv"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": null,
+        "base_width_mm": 580,
+        "seating_external_width_mm": [
+          {
+            "seat_width_mm": 420,
+            "min": 540,
+            "max": 580,
+            "condition": "podłokietniki wsunięte/wysunięte"
+          },
+          {
+            "seat_width_mm": 480,
+            "min": 600,
+            "max": 660,
+            "condition": "podłokietniki wsunięte/wysunięte"
+          }
+        ]
+      },
+      "caveats": [
+        "660mm nie jest szerokością samego siedziska, tylko zewnętrznym wymiarem części siedzącej.",
+        "Obwiednia co najmniejmax(base,seating), lecz akcesoria i joystick mogą wymagać dalszego pomiaru."
+      ]
+    },
+    {
+      "gkv_id": "18.50.04.0194",
+      "model": "Quickie Q500 M, art.2250050M-000",
+      "status": "insufficient",
+      "model_match": "model_only_wheel_size_mismatch",
+      "source_url": "https://dahlengineering.dk/media/260829/om_q500-m-f-r-h_eu_en_revk.pdf",
+      "evidence_text": "Q500 M, 13” Drive wheels: Total width610-620 mm.",
+      "reasoning": "GKV podaje 620 mm przy kołach 14 cali. Instrukcja producenta Rev. K podaje 610–620 mm przy kołach 13 cali. Zbieżność 620 mm nie wystarcza do zweryfikowania konfiguracji GKV.",
+      "sources": [
+        {
+          "url": "https://dahlengineering.dk/media/260829/om_q500-m-f-r-h_eu_en_revk.pdf",
+          "author": "Sunrise Medical",
+          "host_type": "third_party",
+          "local_pdf": "manufacturer-sources/q500-manual.pdf",
+          "pdf_pages": [
+            48
+          ],
+          "version": "OM_Q500-M-F-R-H_EU_EN_RevK",
+          "host_owner": "Dahl Engineering",
+          "section": "Technical specifications, Q500M"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": {
+          "kind": "range",
+          "min": 610,
+          "max": 620
+        },
+        "wheel_diameter_inches": 13
+      },
+      "caveats": [
+        "Dokument jest autorstwaSunriseMedical, lecz pobrany odDahlEngineering.",
+        "Nie zamieniamy kół14cal wGKV na13cal."
+      ]
+    },
+    {
+      "gkv_id": "18.50.04.0217",
+      "model": "Quickie Q300 M Mini, art.2280030M-000",
+      "status": "conflict",
+      "model_match": "exact_gkv",
+      "source_url": "https://www.sunrisedice.com/asset-bank/assetfile/59808.pdf",
+      "evidence_text": "HMV18.50.04.0217; Gesamtbreite520-570mm. Koła12/13/14cal:520/540/570mm.",
+      "reasoning": "Broszura producenta zawiera dokładny HMV i rozpisuje szerokość według średnicy kół. Dla kół 13 cali wymienionych w GKV podaje 540 mm, podczas gdy GKV podaje 610–620 mm. To potwierdzona rozbieżność źródeł. Profil użytkownika nadal wymaga potwierdzenia konfiguracji i pomiaru.",
+      "sources": [
+        {
+          "url": "https://www.sunrisedice.com/asset-bank/assetfile/59808.pdf",
+          "author": "manufacturer",
+          "host_type": "manufacturer_or_manufacturer_cdn",
+          "local_pdf": "manufacturer-sources/q300m-mini-brochure-gkv.pdf",
+          "pdf_pages": [
+            11,
+            20
+          ],
+          "version": "000690411/2000/Sonnendruck/1120",
+          "section": "Welche Radgröße passt zu Ihnen?; Technische Daten",
+          "date_note": "1120 jest kodem dokumentu, bez arbitralnego ustalenia pełnej daty"
+        },
+        {
+          "url": "https://www.bettermobility.co.uk/downloads/sunrisemedicalq300mmini_manual.pdf",
+          "author": "manufacturer",
+          "host_type": "third_party",
+          "local_pdf": "manufacturer-sources/q300m-mini-manual.pdf",
+          "pdf_pages": [
+            42
+          ],
+          "version": "Pobrana instrukcjaRevG",
+          "section": "Technical specifications"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": {
+          "kind": "range",
+          "min": 520,
+          "max": 570
+        },
+        "width_by_drive_wheel_mm": {
+          "12inch": 520,
+          "13inch": 540,
+          "14inch": 570
+        },
+        "gkv_overall_width_mm": {
+          "min": 610,
+          "max": 620
+        }
+      },
+      "caveats": [
+        "Statusconflict oznacza rozbieżnośćGKV i producenta, nie certyfikowany pomiar dowolnego egzemplarza.",
+        "Szerokie ustawienia podłokietników/akcesoria mogą wpływać na realną obwiednię."
+      ]
+    },
+    {
+      "gkv_id": "18.99.06.1158",
+      "model": "M3 Corpus(PPP) mit Sitzlift, art.109047-99-0 +107098-99-0",
+      "status": "insufficient",
+      "model_match": "family_only_ppp_version_unconfirmed",
+      "source_url": "https://hub.permobil.com/hubfs/M-series%20EMEA/UK/M3%20Corpus%20data%20sheet_UK_200917_WEB.pdf?hsLang=en-gb",
+      "evidence_text": "Base width615mm; Width incl.seat and armrest650-790mm.",
+      "reasoning": "Karta M3 Corpus UK z 2020 roku potwierdza zakres 650–790 mm zgodny z GKV z 2024 roku i oddziela podstawę 615 mm. Nie potwierdza jednak wariantu PPP ani obu kodów artykułów. Zgodność liczb nie wystarcza do pełnego match.",
+      "sources": [
+        {
+          "url": "https://hub.permobil.com/hubfs/M-series%20EMEA/UK/M3%20Corpus%20data%20sheet_UK_200917_WEB.pdf?hsLang=en-gb",
+          "author": "manufacturer",
+          "host_type": "manufacturer_or_manufacturer_cdn",
+          "local_pdf": "manufacturer-sources/m3-corpus-2020.pdf",
+          "pdf_pages": [
+            4
+          ],
+          "version": "M3DATASHEETUK200917",
+          "section": "M3 CorpusSpecifications",
+          "date_note": "200917 sugeruje2020-09-17, data wnioskowana z kodu"
+        }
+      ],
+      "measurements": {
+        "overall_width_mm": {
+          "kind": "range",
+          "min": 650,
+          "max": 790
+        },
+        "base_width_mm": 615,
+        "seat_width_mm": {
+          "min": 420,
+          "max": 570
+        }
+      },
+      "caveats": [
+        "615mm nie jest szerokością całego wózka wraz z siedzeniem i podłokietnikami.",
+        "Zakres650-790 zależy od konfiguracji; nie określa szerokości posiadanego egzemplarza."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+.route-steps li div span {
+  color: #526244;
+  font-size: 12px;
+}
+.welcome-card {
+  display: flex;
+  gap: 16px;
+  background: #e8efda;
+  border: 1px solid #d0dfb9;
+  border-radius: 24px;
+  padding: 22px;
+  margin: 24px 0;
+}
+.welcome-card h2 {
+  margin: 0;
+  font-size: 21px;
+}
+.welcome-card p {
+  font-size: 14px;
+  line-height: 1.65;
+}
+.welcome-icon {
+  font-size: 32px;
+  color: #385d36;
+}
+.welcome-card .text-button {
+  width: 100%;
+  justify-content: center;
+}
+.journey-fields {
+  margin: 28px 0 20px;
+  border: 1px solid #d3dacb;
+  border-radius: 24px;
+  padding: 20px;
+  background: #fffefa;
+}
+.journey-endpoint,
+.via-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.journey-endpoint > .endpoint-letter,
+.via-point > .endpoint-letter {
+  margin-top: 36px;
+  flex-shrink: 0;
+}
+.address-field {
+  width: 100%;
+  min-width: 0;
+  position: relative;
+}
+.address-input {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #a8b5a3;
+  border-radius: 13px;
+  min-height: 52px;
+  padding: 0 12px;
+}
+.address-input:focus-within {
+  outline: 3px solid #627d36;
+  outline-offset: 2px;
+}
+.address-input.is-chosen {
+  border-color: #517957;
+}
+.address-input input {
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  padding: 12px 0 !important;
+  width: 100%;
+  min-width: 0;
+  font-size: 15px;
+}
+.address-clear {
+  min-width: 36px;
+  min-height: 44px;
+  border: 0;
+  background: none;
+  display: grid;
+  place-items: center;
+  color: inherit;
+}
+.address-suggestions {
+  position: relative;
+  z-index: 3;
+  border-radius: 14px;
+  border: 1px solid #c2cdb8;
+  background: white;
+  box-shadow: 0 8px 20px #173c3210;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.address-suggestions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.address-suggestions li button {
+  display: flex;
+  gap: 10px;
+  text-align: left;
+  width: 100%;
+  min-height: 56px;
+  border: 0;
+  background: white;
+  padding: 12px;
+  font: inherit;
+  font-size: 14px;
+  color: #173c32;
+}
+.address-suggestions li button:hover,
+.address-suggestions li button.active {
+  background: #edf4df;
+}
+.address-suggestions svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.address-suggestions small {
+  display: block;
+  color: #5f6e59;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.address-suggestions p {
+  padding: 0 12px;
+  font-size: 13px;
+}
+.journey-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.journey-actions .text-button {
+  font-size: 12px;
+  padding: 4px;
+  min-height: 48px;
+}
+.journey-fields .locate-button {
+  margin: 8px 0 18px 30px;
+  font-size: 13px;
+}
+.via-point {
+  position: relative;
+  margin: 14px 0 22px;
+  flex-wrap: wrap;
+}
+.via-point > .address-field {
+  width: calc(100% - 40px);
+}
+.via-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 4px;
+}
+.via-actions .icon-button {
+  height: 36px;
+  width: 40px;
+  border: 1px solid #d1dbca;
+  border-radius: 9px;
+}
+.model-search {
+  border-top: 1px solid #d3dacb;
+  margin-top: 28px;
+  padding-top: 18px;
+}
+.model-search h2 {
+  font-size: 21px;
+}
+.model-options {
+  padding: 0;
+  margin: 8px 0;
+  list-style: none;
+  max-height: 240px;
+  overflow: auto;
+}
+.model-options button {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+  min-height: 56px;
+  padding: 12px;
+  background: #fffefa;
+  border: 0;
+  border-bottom: 1px solid #e5e8dd;
+  color: inherit;
+}
+.model-options button:hover {
+  background: #e8efda;
+}
+.model-options small {
+  display: block;
+  color: #55644c;
+  font-size: 12px;
+}
+.model-parameter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-bottom: 1px solid #d1dbca;
+  padding: 10px 0;
+  font-size: 13px;
+}
+.model-parameter span {
+  width: 100%;
+}
+.model-parameter a {
+  margin-left: auto;
+}
+.model-source {
+  display: block;
+  font-size: 12px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+.learning-panel {
+  border: 1px solid #d3dacb;
+  border-radius: 20px;
+  background: #eaf0e0;
+  padding: 20px;
+}
+.learning-panel h2 {
+  font-size: 21px;
+  margin-top: 0;
+}
+.learning-panel p {
+  font-size: 14px;
+  line-height: 1.65;
+}
+.account-panel input {
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid #a8b5a3;
+  border-radius: 12px;
+  padding: 12px;
+  background: white;
+  font: inherit;
+}
+.account-panel .button {
+  margin-top: 16px;
+}
+.account-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 24px 0;
+}
+.account-tabs button {
+  flex: 1;
+  border: 1px solid #a8b5a3;
+  border-radius: 12px;
+  min-height: 48px;
+  background: white;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+}
+.account-tabs button[aria-pressed="true"] {
+  background: #173c32;
+  color: white;
+}
+.account-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #e8efda;
+  border-radius: 20px;
+  padding: 24px;
+  margin: 24px 0;
+}
+.account-card p {
+  line-height: 1.7;
+}
+.nav-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  text-decoration: none;
+  color: #173c32;
+  margin-top: 20px;
+  padding: 12px;
+}
+.game-invite {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: #ddeeb6;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 18px 0 28px;
+  color: #173c32;
+  text-decoration: none;
+}
+.game-invite small {
+  display: block;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 5px;
+}
+.game-invite > svg {
+  flex-shrink: 0;
+}
+.route-panel > .muted {
+  line-height: 1.65;
+}
+.account-panel .field-label {
+  margin-top: 18px;
+}
+.model-result small {
+  display: block;
+}
+.model-result .check-row {
+  font-size: 13px;
+}
+.route-panel .route-profile {
+  margin-top: 20px;
+}
+.objects-view .content-panel {
+  width: 100%;
+  max-width: none;
+  flex: 1;
+}
+.objects-view .content-panel > .passport-panel {
+  max-width: 1100px;
+  margin-inline: auto;
+}
+.profile-pending-notice {
+  background: #fff3d3;
+  border: 1px solid #b49b57;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-top: 8px;
+}
+.profile-pending-notice p {
+  font-size: 13px;
+  line-height: 1.65;
+  margin: 0;
+}
+.profile-pending-notice .text-button {
+  min-height: 44px;
+}
+.route-panel .uncertainty p {
+  line-height: 1.6;
+}
+@media (max-width: 760px) {
+  .nav-game {
+    display: none;
+  }
+  .nav-rail nav {
+    display: flex !important;
+    justify-content: space-around !important;
+    width: 100%;
+  }
+  .nav-item {
+    min-width: 0 !important;
+    width: calc(100% / 6) !important;
+    padding: 8px 2px !important;
+  }
+  .nav-item span {
+    font-size: 10px;
+  }
+  .journey-fields {
+    padding: 16px;
+  }
+  .address-input input {
+    font-size: 16px;
+  }
+  .via-actions .icon-button {
+    min-height: 44px;
+  }
+  .welcome-card {
+    padding: 18px;
+  }
+  .welcome-icon {
+    display: none;
+  }
+  .model-options {
+    max-height: 200px;
+  }
+  .account-panel input {
+    font-size: 16px;
+  }
+}

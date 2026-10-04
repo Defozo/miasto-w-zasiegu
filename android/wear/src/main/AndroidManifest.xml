@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-feature android:name="android.hardware.type.watch" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <application android:label="Miasto w zasięgu" android:icon="@drawable/ic_launcher" android:theme="@android:style/Theme.Material.NoActionBar" android:allowBackup="false" android:dataExtractionRules="@xml/data_extraction_rules" android:supportsRtl="true">
+        <meta-data android:name="com.google.android.wearable.standalone" android:value="false" />
+        <activity android:name=".MainActivity" android:exported="true" android:taskAffinity="pl.przejscie.wear.MainActivity">
+            <intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter>
+        </activity>
+        <service android:name=".GuidanceListener" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/guidance" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>
