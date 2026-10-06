@@ -1,37 +1,53 @@
 # Miasto w zasięgu
 
-Miasto w zasięgu pomaga ocenić, czy miejsce i droga odpowiadają własnym potrzebom. Łączy mapę Krakowa, konkretne informacje o barierach i udogodnieniach, planowanie tras oraz obserwacje mieszkańców. Potrzeby można ustawić bez podawania diagnozy i bez konta.
+Sprawdź warunki miejsca i zaplanuj drogę pod własne potrzeby. Miasto w zasięgu łączy mapę Krakowa, informacje o wejściach i barierach, planowanie podróży oraz obserwacje mieszkańców. Szerokość przejścia, krawężnik, nachylenie czy miejsce odpoczynku można ocenić z myślą o konkretnej osobie. Ustawienie potrzeb nie wymaga diagnozy ani konta.
 
-Projekt na HackYeah 2026 obejmuje web/PWA, aplikację Android, towarzyszący widok Wear OS i grę Iskry Miasta.
+[Zobacz projekt i materiały](https://hackyeah-2026-projekty.defozo.chatgpt.site/#cracow-without-barriers) · [Uruchom lokalnie](#uruchomienie) · [Poznaj Iskry Miasta](docs/ISKRY-EXPLORER.md)
 
-- [Otwórz mapę](https://miastowzasiegu.pl/app)
-- [Pobierz Android / Wear OS](https://miastowzasiegu.pl/#aplikacje)
-- [Otwórz Iskry Miasta](https://miastowzasiegu.pl/gra)
-- [Zobacz cennik demonstracyjny](https://miastowzasiegu.pl/cennik)
+## Zaplanuj wyjście i zabierz plan ze sobą
 
-## Główny scenariusz
+1. **Ustaw swoje potrzeby.** Wybierz sposób poruszania się, dopuszczalny krawężnik, nachylenie i szerokość. Wymiary sprzętu wpisz ręcznie lub zatwierdź podpowiedź z dokumentacji producenta.
+2. **Sprawdź miejsce przed wyjściem.** Zobacz wejście, schody, próg, nawierzchnię, toaletę i odpoczynek. Karta pokazuje źródła, daty i rozbieżności, aby było wiadomo, co opisano i co wymaga sprawdzenia.
+3. **Ułóż podróż.** Dodaj do pięciu przystanków po drodze, zaplanuj przerwę albo połącz dojazd samochodem z parkingiem i dalszą drogą. Routing uwzględnia ustawione ograniczenia i aktualne zgłoszenia przeszkód na przebiegu trasy.
+4. **Zachowaj plan.** Zapisz go do późniejszego odczytu lub wydrukuj. Prywatne zapisane miejsca i zestawy potrzeb na koncie są dostępne w webie i na Androidzie.
 
-1. Wybierz sposób poruszania się i potrzebne ograniczenia albo pomiń konfigurację. Opcjonalne wymiary sprzętu można wpisać ręcznie; podpowiedzi z dokumentacji wymagają zatwierdzenia.
-2. Znajdź miejsce, adres lub trasę. Mapa ma tekstową listę wyników, kategorie i filtry. Przesunięcie widoku nie zmienia wyników bez wybrania „Szukaj w tym obszarze”.
-3. Sprawdź schody, progi, nawierzchnię, wejście, toaletę i odpoczynek wraz ze źródłami, datami i brakami danych. Brak pomiaru pozostaje niewiadomą.
-4. Wyznacz trasę zgodną z ustawionymi potrzebami. Możesz dodać do pięciu przystanków, wybrać przerwę po drodze albo podróż łączącą auto, parking i dalszą drogę.
-5. Zapisz lub wydrukuj plan. Android może prowadzić z GPS i głosem; Wear OS pokazuje przekazane instrukcje. Obliczona trasa nie jest gwarancją przejezdności.
+Źródła, daty i statusy informacji pomagają ocenić plan przed podróżą. Karta rozróżnia opisane warunki, rozbieżności i informacje do uzupełnienia. [Jak interpretować trasę](docs/ROUTING.md) i [zakres walidacji](docs/TESTING.md).
 
-## Funkcje
+## Jedna mapa, kilka sposobów korzystania
 
-- Wspólne konta Clerk, prywatne zapisane miejsca i kilka zestawów potrzeb. Gość ma oddzielne dane na urządzeniu; logowanie nie importuje ich automatycznie. Konflikt wersji nie nadpisuje nowszego profilu.
-- Warstwy OSM oraz przystanków i parkingów P+R ZTP. Fakty źródłowe, obserwacje społeczności i braki pomiarów mają odrębne znaczenie. Importy ZTP i OSM obsługuje [harmonogram](docs/DATA-IMPORT-SCHEDULE.md); grafy tras aktualizuje się osobno.
-- Zgłoszenia barier z punktem, linią lub obszarem, pomiarami, terminami ważności, potwierdzeniami i rozbieżnościami. Dobre odkrycia, np. miejsce odpoczynku, są oddzielone od przeszkód.
-- Paszporty obiektów: prywatny szkic, osobne wejścia, źródło i data każdej cechy, historia i publiczny widget. Sprzeczne informacje pozostają widoczne. Potwierdzenie kontroli domeny nie jest certyfikatem dostępności.
-- Opcjonalny asystent dokumentacji sprzętu, analiza zdjęcia zgłaszającego i odczyt publicznych stron obiektów. Użytkownik sprawdza propozycje; model nie potwierdza pomiaru ani położenia bariery.
-- Opcjonalne podglądy Google Places i Street View. Informacje Google pozostają w komponentach dostawcy; aplikacja nie buduje z panoram własnej bazy barier.
-- Większy tekst, mocniejszy kontrast, ograniczenie ruchu, obsługa klawiatury i tekstowe odpowiedniki informacji mapy. Cel rozwoju to WCAG 2.2 AA; pełna zgodność nie została potwierdzona.
+| Aplikacja | Co daje użytkownikowi |
+| --- | --- |
+| **Web i PWA** | Mapa z tekstową listą wyników, filtry, planowanie, zapisane miejsca, zgłoszenia i wydruk planu |
+| **Android** | Wspólny interfejs planowania oraz natywna mapa prowadzenia, GPS i instrukcje głosowe po polsku |
+| **Wear OS** | Towarzyszący widok bieżącej instrukcji z telefonu i stanu połączenia |
+| **Iskry Miasta** | Osobny widok gry z misjami uzupełniania danych, ponownego sprawdzania obserwacji, odznakami i kartą osiągnięć |
 
-## Iskry Miasta
+Telefon uruchamia prowadzenie po zgodzie na lokalizację. Zegarek wygasza nieaktualną instrukcję, a tekstowy plan pozostaje dostępny także przy problemie z podkładem mapy. [Instrukcja Androida i Wear OS](docs/ANDROID.md) opisuje instalację, wymagania urządzeń i zakres sprawdzonego działania.
 
-Główny widok `/gra` proponuje odkrywanie brakujących informacji i ponowne sprawdzanie zgłoszeń. Konkretne obserwacje pozwalają zdobywać XP, odznaki i własną kartę osiągnięć. Zgłoszenie zmiany i potwierdzenie poprzedniego opisu są nagradzane jednakowo. Nagroda oznacza wkład spełniający reguły zapisu, nie niezależną weryfikację terenową.
+## Informacje z mapy, miasta, mieszkańców i stron obiektów
 
-Trening, ogród i album są dostępne pod `/gra?tryb=ogrod`. Sześć fikcyjnych zagadek działa bez konta i nie tworzy zgłoszeń na prawdziwej mapie. Postęp treningu i pocztówki są przechowywane na urządzeniu. [Osiągnięcia i misje](docs/ISKRY-EXPLORER.md), [ogród i trening](docs/GAME.md).
+Miasto w zasięgu zestawia cztery uzupełniające się źródła:
+
+- **OpenStreetMap** dostarcza miejsca, parkingi, adresy, drogi i opisane bariery.
+- **Dane miejskie ZTP** uzupełniają przystanki i parkingi P+R. Jednoznacznie dopasowane rekordy są łączone z OSM z zachowaniem obu źródeł i różnic między nimi.
+- **Obserwacje użytkowników** zawierają lokalizację, czas, opis i pomiary. Można zgłosić punkt, odcinek lub obszar, potwierdzić poprzedni opis albo wskazać zmianę. Historia i okres ważności pomagają wracać do informacji, które wymagają aktualizacji.
+- **AI odczytuje publiczne strony obiektów** i deklaracje dostępności, wyszukując konkretne warunki wejścia, windy czy toalety. Wynik zachowuje link, krótki cytat i datę oraz odróżnia deklarację ze strony od obserwacji w terenie.
+
+**Paszport obiektu** porządkuje cechy i osobne wejścia, pozwala przygotować prywatny szkic oraz udostępnić opublikowane informacje w widgetcie. Źródło i historia pozostają przy każdej cesze. Opcjonalny asystent zdjęcia pomaga opisać zgłoszenie, a użytkownik sprawdza treść, miejsce i własne pomiary. Kontrola domeny potwierdza dostęp do strony; nie jest certyfikatem dostępności.
+
+Katalog ma [harmonogram importów](docs/DATA-IMPORT-SCHEDULE.md), a grafy tras aktualizuje się osobno. Opcjonalne podglądy Google Places i Street View pomagają obejrzeć otoczenie w komponentach dostawcy. Szczegóły pochodzenia, aktualizacji i warunków użycia: [źródła danych](docs/DATA-SOURCES.md).
+
+## Iskry Miasta: odkrywanie, które uzupełnia mapę
+
+Gra proponuje miejsca z brakującymi informacjami i zgłoszenia potrzebujące ponownego sprawdzenia. Konkretna obserwacja, pomiar lub aktualizacja pozwala zdobywać XP, odznaki i własną kartę osiągnięć. Potwierdzenie poprzedniego opisu i zgłoszenie zmiany są nagradzane jednakowo. Dzięki temu zadanie polega na opisaniu tego, co zastano na miejscu.
+
+Gra korzysta ze wspólnego przepływu zgłoszeń i asystenta zdjęć. Odznaki oznaczają wkład spełniający reguły zapisu, bez zastępowania niezależnej weryfikacji terenowej. [Misje i osiągnięcia](docs/ISKRY-EXPLORER.md).
+
+Pod `/gra?tryb=ogrod` czekają trening, ogród i album. Sześć fikcyjnych zagadek pozwala poznać zasady bez konta; postęp i pocztówki pozostają na urządzeniu, a trening nie zmienia prawdziwej mapy. [Ogród i trening](docs/GAME.md).
+
+## Interfejs dopasowany do użytkownika
+
+Większy tekst, mocniejszy kontrast, ograniczenie ruchu, obsługa klawiatury i tekstowe odpowiedniki mapy pozwalają wybrać wygodniejszy sposób korzystania. [Instrukcja testowania](docs/TESTING.md) opisuje sprawdzane scenariusze, technologie asystujące i zakres walidacji.
 
 ## Uruchomienie
 
@@ -80,7 +96,7 @@ Domyślny build Androida używa `http://10.0.2.2:3081`, czyli hosta emulatora. T
 
 Filmy, APK i PDF udostępnione w publicznym demo nie są częścią źródłowej kopii repozytorium. Ich lokalne odtwarzanie i pobieranie wymaga osobnego dołączenia materiałów.
 
-## Testy i ograniczenia
+## Testowanie i korzystanie z demonstracji
 
 ```powershell
 npm run build
@@ -88,11 +104,11 @@ npm test
 npm run test:e2e
 ```
 
-[Instrukcja testowania](docs/TESTING.md) opisuje izolowane bazy, testy ORS i urządzeń. Wynik kompilacji lub AXE nie zastępuje pełnego przebiegu czytnikiem ekranu ani rzeczywistej podróży.
+[Instrukcja testowania](docs/TESTING.md) opisuje izolowane bazy, testy ORS, sprawdzenie urządzeń i zakres walidacji dostępności.
 
-Web planuje trasę i udostępnia instrukcje; nie prowadzi GPS w tle. Android wymaga osobnej walidacji terenowej, w tym baterii, utraty sygnału i sparowanego zegarka. Podgląd Street View może pokazać sąsiedni punkt lub wnętrze. Zapisany plan zawiera historyczny wynik; nowe trasy i zgłoszenia wymagają internetu. Kafelki mapy nie są pobierane na zapas.
+Web służy do planowania i odczytu instrukcji, a prowadzenie GPS jest częścią aplikacji Android. Zapisany plan zachowuje wynik z chwili obliczenia; nowe trasy, zgłoszenia i podkład mapy wymagają internetu. Szczegółowe warunki korzystania opisują [routing](docs/ROUTING.md), [Android](docs/ANDROID.md) i [zapisane plany](docs/SAVED-PLANS.md).
 
-Płatności demonstracyjne korzystają z trybu testowego Stripe. Publiczny prototyp nie oznacza zatwierdzonej sprzedaży, pełnego audytu bezpieczeństwa ani umowy utrzymaniowej. [Utrzymanie i model biznesowy](docs/OPERATIONS-AND-BUSINESS.md) opisują obowiązki operatora, budżet pilotażu i warunki rozwoju.
+Płatności w [cenniku demonstracyjnym](https://miastowzasiegu.pl/cennik) korzystają z trybu testowego Stripe. [Utrzymanie i model biznesowy](docs/OPERATIONS-AND-BUSINESS.md) opisują przygotowanie stałego wdrożenia, odpowiedzialność operatora i budżet pilotażu; [konfiguracja płatności](docs/BILLING.md) określa warunki przejścia do sprzedaży.
 
 ## Dokumentacja
 
